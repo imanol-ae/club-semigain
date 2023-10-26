@@ -1,0 +1,69 @@
+<div class="player">
+    <div class="player-title">
+        <h1>Nueva reserva</h1>
+        <div class="user">
+            <a href="#" routerLink="/inicio-jugador"><span class="badge badge-primary"><i class="fas fa-circle-user"></i> Andere Pérez Ulzama</span></a>
+        </div>
+    </div>
+
+    <h4>Actividad deportiva</h4>
+
+          <form [formGroup]="form">
+            <mat-form-field>
+              <mat-select placeholder='Actividad deportiva' formControlName='b' [(ngModel)]="view">
+                <mat-option [value]="'tenis'">
+                   Tenis
+                </mat-option>
+                <mat-option  [value]="'fronton'">
+                  Frontón
+                </mat-option>
+              </mat-select>
+            </mat-form-field> 
+            
+            <br/><br/>
+
+            <mat-form-field *ngIf="view === 'tenis'">
+              <mat-select       
+                  placeholder='Pistas de tenis' 
+                  formControlName='tenis'
+                  >
+                <mat-option *ngFor="let item of tenis" [value]="item">
+                  {{item}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field> 
+            
+            <br/><br/>
+
+            <mat-form-field *ngIf="view === 'fronton'">
+              <mat-select
+                  placeholder='Frontón'
+                  formControlName='fronton'
+                  [hidden]="view === 'fronton'"
+                  [required]="view === 'fronton'"> 
+                <mat-option *ngFor="let item of fronton" [value]="item">
+                  {{item}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+
+            <h4>Selecciona una fecha</h4>
+            <mat-form-field>
+                <mat-label>Selecciona una fecha:</mat-label>
+                <input matInput [matDatepicker]="picker">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+
+            </form>
+            
+            <div> 
+              Form Valid? {{ form.valid }} 
+            </div>
+
+
+ 
+    
+</div>

@@ -1,0 +1,59 @@
+<!-- Navbar -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+    <!-- Container wrapper -->
+    <div class="container">
+      <!-- Navbar brand -->
+      <a class="navbar-brand me-2" routerLink="/inicio">
+        <img
+          src="assets/images/logo.png"
+          height="60"
+          alt="Club de Tenis Semigain"
+          loading="lazy"
+          style="margin-top: -1px;"
+        />
+      </a>
+  
+      <!-- Toggle button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        (click)="buttonsNav.toggle()"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+  
+      <!-- Collapsible wrapper -->
+      <div
+        class="collapse navbar-collapse"
+        id="navbarButtonsExample"
+        mdbCollapse
+        #buttonsNav="mdbCollapse"
+      >
+        <div class="d-flex align-items-center ms-auto">
+          <button type="button" class="btn btn-link px-3 me-2" routerLink="/inicio">
+            Inicio
+          </button>
+          <button type="button" class="btn btn-link px-3 me-2" routerLink="/quienes-somos">
+            Quienes somos
+          </button>
+          <button type="button" class="btn btn-link px-3 me-2" routerLink="/actividades" >
+            Actividades
+          </button>
+          <button type="button" class="btn btn-primary me-3" routerLink="/login">
+            Iniciar sesión
+          </button>
+          <a
+            class="btn btn-dark px-3 twitter"
+            href="https://twitter.com/CTSemigain"
+            role="button"
+            ><i class="fab fa-twitter"></i
+          ></a>
+        </div>
+      </div>
+      <!-- Collapsible wrapper -->
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar -->
