@@ -4,8 +4,130 @@
         <div class="user">
             <a href="#" routerLink="/inicio-administrador"><span class="badge badge-primary"><i class="fas fa-circle-user"></i> Antonio Martínez Uribe</span></a>
         </div>
+        <p class="reserve-info">Solo un administrador/a puede dar de alta un jugador/a en el club, para lo cual deberá solicitar los datos básicos obligatorios al nuevo jugador/a. Posteriormente, éste último puede darse de alta en la web y editar y/o añadir más datos en su perfil, además de realizar reservas.</p>
     </div>
 
-    <div>Formulario de alta de nuevo jugador/a</div>
+    <form [formGroup]="newPlayerForm" (ngSubmit)="saveData()" novalidate>
+
+      <div class="form-row">  
+        <mat-form-field>
+            <mat-label>Nombre</mat-label>
+            <input type="text" matInput formControlName="name" [errorStateMatcher]="matcher"
+            placeholder="Introduce tu nombre">
+            <mat-hint>Campo obligatorio</mat-hint>
+            <mat-error *ngIf="newPlayerForm.get('name')?.hasError('minlength')">
+              Debes introducir mínimo 2 carateres.
+            </mat-error>
+            <mat-error *ngIf="newPlayerForm.get('name')?.hasError('maxlength')">
+              Debes introducir máximo 30 carateres.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Apellidos</mat-label>
+            <input type="text" matInput formControlName="surname" [errorStateMatcher]="matcher"
+            placeholder="Introduce tus apellidos">
+            <mat-hint>Campo obligatorio</mat-hint>
+            <mat-error *ngIf="newPlayerForm.get('surname')?.hasError('minlength')">
+              Debes introducir mínimo 2 carateres.
+            </mat-error>
+            <mat-error *ngIf="newPlayerForm.get('surname')?.hasError('maxlength')">
+              Debes introducir máximo 40 carateres.
+            </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-row"> 
+        <mat-form-field class="calendar">
+            <mat-label>Fecha de nacimiento:</mat-label>
+            <input matInput [matDatepicker]="picker2" formControlName="birthdate" [errorStateMatcher]="matcher" placeholder="Selecciona fecha">
+            <mat-hint>MM/DD/YYYY (Campo opcional)</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker2" ></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="margin-top">
+          <mat-label>Correo electrónico</mat-label>
+          <input type="email" matInput formControlName="email" [errorStateMatcher]="matcher"
+                 placeholder="Ej. nombre@email.com">
+          <mat-hint>Campo obligatorio</mat-hint>
+          <mat-error *ngIf="newPlayerForm.get('email')?.hasError('email') && !newPlayerForm.get('email')?.hasError('required')">
+            Introduce una dirección de correo válida.
+          </mat-error>
+          <mat-error *ngIf="newPlayerForm.get('email')?.hasError('required')">
+            La dirección de correo es necesaria.
+          </mat-error>
+      </mat-form-field>
+      </div>
+        <mat-form-field>
+            <mat-label>Dirección Postal</mat-label>
+            <input type="text" matInput formControlName="direction" [errorStateMatcher]="matcher"
+            placeholder="Introduce tu dirección postal">
+            <mat-hint>Campo opcional</mat-hint>
+            <mat-error *ngIf="newPlayerForm.get('direction')?.hasError('minlength')">
+              Debes introducir mínimo 2 carateres.
+            </mat-error>
+            <mat-error *ngIf="newPlayerForm.get('direction')?.hasError('maxlength')">
+              Debes introducir máximo 60 carateres.
+            </mat-error>
+        </mat-form-field>
+      <div class="form-row">
+        <mat-form-field>
+            <mat-label>Municipio</mat-label>
+            <input type="text" matInput formControlName="municipality" [errorStateMatcher]="matcher"
+            placeholder="Introduce tu municipio">
+            <mat-hint>Campo opcional</mat-hint>
+            <mat-error *ngIf="newPlayerForm.get('municipality')?.hasError('minlength')">
+              Debes introducir mínimo 2 carateres.
+            </mat-error>
+            <mat-error *ngIf="newPlayerForm.get('municipality')?.hasError('maxlength')">
+              Debes introducir máximo 30 carateres.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Provincia</mat-label>
+            <input type="text" matInput formControlName="province" [errorStateMatcher]="matcher"
+            placeholder="Introduce tu provincia">
+            <mat-hint>Campo opcional</mat-hint>
+            <mat-error *ngIf="newPlayerForm.get('province')?.hasError('minlength')">
+              Debes introducir mínimo 2 carateres.
+            </mat-error>
+            <mat-error *ngIf="newPlayerForm.get('province')?.hasError('maxlength')">
+              Debes introducir máximo 30 carateres.
+            </mat-error>
+        </mat-form-field>
+      </div>
+
+
+      <div class="form-row">
+        <mat-form-field class="margin-top">
+            <mat-label>Número de socio</mat-label>
+            <input type="text" matInput formControlName="membershipId" [errorStateMatcher]="matcher"
+            placeholder="Ej. 083B">
+            <mat-hint>Campo obligatorio</mat-hint>
+            <mat-error *ngIf="newPlayerForm.get('membershipId')?.hasError('minlength') && !newPlayerForm.get('membershipId')?.hasError('required')">
+              El número de socio es como mínimo de 4 caracteres.
+            </mat-error>
+            <mat-error *ngIf="newPlayerForm.get('membershipId')?.hasError('maxlength') && !newPlayerForm.get('membershipId')?.hasError('required')">
+              El número de socio es como máximo de 4 caracteres.
+            </mat-error>
+            <mat-error *ngIf="newPlayerForm.get('membershipId')?.hasError('pattern') && !newPlayerForm.get('membershipId')?.hasError('required')">
+              El número de socio debe contener 3 números y una letra mayúscula.
+            </mat-error>
+            <mat-error *ngIf="newPlayerForm.get('membershipId')?.hasError('required')">
+              El número de socio es necesario.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="calendar">
+            <mat-label>Fecha de alta:</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="date" [errorStateMatcher]="matcher" placeholder="Selecciona fecha" [min]="todayDate">
+            <mat-hint>MM/DD/YYYY (Campo obligatorio)</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <button type="submit" [disabled]="newPlayerForm.invalid" class="btn btn-primary me-3">Enviar</button>
+
+    </form>
 
 </div>

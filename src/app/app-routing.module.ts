@@ -4,6 +4,8 @@ import { HomeComponent } from './layout/home/home.component';
 import { AboutUsComponent } from './layout/about-us/about-us.component';
 import { ActivitiesComponent } from './layout/activities/activities.component';
 import { LoginComponent } from './shared/login/login.component';
+import { NewWebUserComponent } from './shared/new-web-user/new-web-user.component';
+import { ForgottenPasswordComponent } from './shared/forgotten-password/forgotten-password.component';
 import { PlayerHomeComponent } from './player/player-home/player-home.component';
 import { PlayerReservesInPlayerComponent } from './player/player-reserves-in-player/player-reserves-in-player.component';
 import { NewReserveComponent } from './player/new-reserve/new-reserve.component';
@@ -21,6 +23,8 @@ const routes: Routes = [
   { path: 'quienes-somos', component: AboutUsComponent },
   { path: 'actividades', component: ActivitiesComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'nuevo-usuario', component: NewWebUserComponent },
+  { path: 'recuperar-contrasena', component: ForgottenPasswordComponent },
   { path: 'inicio-jugador', component: PlayerHomeComponent },
   { path: 'inicio-administrador', component: AdministratorHomeComponent },
   { path: 'reservas-jugador', component: PlayerReservesInPlayerComponent },
@@ -31,7 +35,6 @@ const routes: Routes = [
   { path: 'datos-personales-administrador', component: PersonalDataAdminComponent },
   { path: 'jugador', component: PlayerInAdminComponent },
   { path: 'nuevo-jugador', component: NewPlayerComponent }
-
 ];
 
 @NgModule({

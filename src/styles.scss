@@ -15,7 +15,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     font-size: 15px;
 }
 
-.activities, .about-us, .player, .admin, .home-under, .reserves { 
+.activities, .about-us, .player, .admin, .home-under, .reserves, .login { 
     margin-top: 9em;
     margin-right: auto;
     margin-left: auto;
@@ -26,8 +26,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     margin-top: 2em;
     margin-bottom: 2em;
 }
-@media (max-width: 1000px) {
-    .activities, .about-us, .player, .admin, .home-under, .reserves {
+@media (max-width: 1300px) {
+    .activities, .about-us, .player, .admin, .home-under, .reserves, .login {
         margin-right: 1em;
         margin-left: 1em;
     }

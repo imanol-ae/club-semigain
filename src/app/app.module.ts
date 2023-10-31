@@ -5,7 +5,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { FormsModule } from '@angular/forms';
+import { SelectService } from './services/select.service';
 //MDB Material Design for Bootstrap 5
 import { MdbAccordionModule } from 'mdb-angular-ui-kit/accordion';
 import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
@@ -42,6 +43,8 @@ import { PersonalDataAdminComponent } from './administrator/personal-data-admin/
 import { PersonalDataPlayerComponent } from './player/personal-data-player/personal-data-player.component';
 import { PlayerReservesInPlayerComponent } from './player/player-reserves-in-player/player-reserves-in-player.component';
 import { PlayerInAdminComponent } from './administrator/player-in-admin/player-in-admin.component';
+import { NewWebUserComponent } from './shared/new-web-user/new-web-user.component';
+import { ForgottenPasswordComponent } from './shared/forgotten-password/forgotten-password.component';
 
 @NgModule({
   declarations: [
@@ -63,12 +66,15 @@ import { PlayerInAdminComponent } from './administrator/player-in-admin/player-i
     PersonalDataAdminComponent,
     PersonalDataPlayerComponent,
     PlayerReservesInPlayerComponent,
-    PlayerInAdminComponent
+    PlayerInAdminComponent,
+    NewWebUserComponent,
+    ForgottenPasswordComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
     ReactiveFormsModule,
     MaterialModule,
     MdbAccordionModule,
@@ -87,7 +93,7 @@ import { PlayerInAdminComponent } from './administrator/player-in-admin/player-i
     MdbTooltipModule,
     MdbValidationModule
   ],
-  providers: [],
+  providers: [ SelectService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

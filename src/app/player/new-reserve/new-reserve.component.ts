@@ -1,60 +1,66 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, FormControl, FormGroupDirective, NgForm, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule} from '@angular/material/form-field';
+import { SelectService } from '../../services/select.service';
+import { Installation } from '../../models/installation';
+import { InstallationType } from '../../models/installation-type';
+import { ReservationHour } from '../../models/reservation-hours';
 
-
+/** Error when invalid control is dirty, touched, or submitted. */
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 @Component({
   selector: 'app-new-reserve',
   templateUrl: './new-reserve.component.html',
   styleUrls: ['./new-reserve.component.scss']
 })
-export class NewReserveComponent {
+export class NewReserveComponent implements OnInit{
 
-  name = 'Nueva reserva';
+  selectedInstallationType: InstallationType = new InstallationType(1, 'Tenis');
+  installationTypes: InstallationType[];
+  installations: Installation[];
+  hoursForReservation: ReservationHour[];
+  
+  todayDate:Date = new Date();
+  maxDate:Date = new Date(new Date().setDate(new Date().getDate() + 6));
 
-  view: string = 'Instalaciones';
-  tenis = [ '1', '2', '3', '4', '5', '6' ];
-  fronton = [ '1', '2' ];
-
-  form: FormGroup;
-
-  constructor(private formBuilder: FormBuilder) {
-    this.form = this.formBuilder.group({
-      'b' : null,
-      'one': null,
-      'two' : null,
+  newReserveForm: FormGroup;
+  
+  constructor(public fb: FormBuilder, private selectService: SelectService) {
+    this.newReserveForm = this.fb.group({
+      date: [this.todayDate, [Validators.required]],
+      initTime: ['', [
+        Validators.required
+        //Validators.minLength(5), 
+        //Validators.maxLength(5),
+        //Validators.pattern('^[0-2][0-9]:[0][0]$')
+      ]],
+      light:['', [Validators.required]],
+      paid:['', [Validators.required]],
+      installationType:['', [Validators.required]],
+      installation:['', [Validators.required]]
     });
+    this.installationTypes = this.selectService.getInstallationTypes();
+    this.hoursForReservation = this.selectService.getHoursForReservation();
+    //this.onSelect(this.selectedInstallationType.installationTypeId);
 
-    this.form.valueChanges.subscribe(value => {
-      console.log(this.form)
-      console.log(value)
-      if(value.b === 'tenis') {
-        this.form.controls['tenis'].setValidators(Validators.required)
-        this.form.controls['fronton'].clearValidators()
-        this.form.controls['fronton'].updateValueAndValidity({onlySelf:true})
-      } else {
-        this.form.controls['fronton'].setValidators(Validators.required)
-        this.form.controls['tenis'].clearValidators()
-        this.form.controls['tenis'].updateValueAndValidity({onlySelf:true})
-      }
-    })
   }
+  ngOnInit( ) { } 
 
-  test() {
-    console.log(this.form)
+  onSelect(installationTypeIdEvent: Event) {
+    const target = installationTypeIdEvent.target as HTMLSelectElement;
+    this.installations = this.selectService.getInstallations().filter((item) => item.installationTypeId == parseInt(target.value));
   }
+  matcher = new MyErrorStateMatcher();
 
-  setValidators(val: any) {
-    let c = this.form.controls['tenis'];
-    let d = this.form.controls['fronton'];
-
-    if (val === 'tenis') {
-      c.setValidators(Validators.required)
-      d.setValidators(null)
-    } else {      
-      c.setValidators(null);
-      d.setValidators(Validators.required)
-    }
+  saveData(){
+    console.log(this.newReserveForm.value);
   }
-
 
 }

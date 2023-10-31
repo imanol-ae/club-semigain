@@ -10,6 +10,9 @@
     width: 100%;
     min-width: 300px;
   }
+  mat-card {
+    background-color: whitesmoke;
+  }
 
   mat-card-title,
   mat-card-content {
@@ -23,8 +26,19 @@
     color: white;
     background-color: red;
   }
-
   .button {
     display: flex;
     justify-content: flex-end;
+  }
+  .under-login {
+    margin-top: 1em;
+    list-style: none;
+    margin-left:-1em;
+  }
+  .under-login li:hover {
+    text-decoration: underline;
+    color: #0e52c1;
+  }
+  .under-login li {
+    margin-bottom: 0.5em;
   }
