@@ -1,0 +1,33 @@
+form {
+    box-sizing: border-box;
+    padding: 2rem;
+    border-radius: 1rem;
+    background-color: hsl(0, 0%, 100%);
+    border: 4px solid hsl(0, 0%, 90%);
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2em;
+}
+@media (max-width: 900px) {
+  form {
+    width: 95%;
+  }
+}
+button, input {
+    grid-column: 1;
+}
+button {
+  justify-self: center;
+}
+.btn { 
+  width: 40%;
+}
+input::placeholder,
+textarea::placeholder {
+  opacity: 1; /* Firefox */
+  color: hsl(213, 73%, 50%);
+}

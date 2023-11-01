@@ -1,0 +1,64 @@
+<div class="login">
+    <h1>Alta de nuevo usuario/a de la web</h1>
+    <p>Para poder darte de alta en la web, primero debes contactar con el encargado del club para que un administrador te registre como jugador del club. El mismo encargado te proporcionará el número de socio con el que podrás darte de alta en la web y realizar las reservas de instalaciones.</p>
+
+
+    <form [formGroup]="createUserForm" (ngSubmit)="saveData()" novalidate>
+        <mat-form-field class="example-full-width">
+            <mat-label>Correo electrónico</mat-label>
+            <input type="email" matInput formControlName="email" [errorStateMatcher]="matcher"
+                   placeholder="Ej. nombre@email.com">
+            <mat-hint>Campo obligatorio</mat-hint>
+            <mat-error *ngIf="createUserForm.get('email')?.hasError('email') && !createUserForm.get('email')?.hasError('required')">
+              Introduce una dirección de correo válida.
+            </mat-error>
+            <mat-error *ngIf="createUserForm.get('email')?.hasError('required')">
+              La dirección de correo es necesaria.
+            </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field>
+            <mat-label>Número de socio</mat-label>
+            <input type="text" matInput formControlName="membershipId" [errorStateMatcher]="matcher"
+            placeholder="Ej. 083B">
+            <mat-hint>Campo obligatorio</mat-hint>
+            <mat-error *ngIf="createUserForm.get('membershipId')?.hasError('minlength') && !createUserForm.get('membershipId')?.hasError('required')">
+              El número de socio es como mínimo de 4 caracteres.
+            </mat-error>
+            <mat-error *ngIf="createUserForm.get('membershipId')?.hasError('maxlength') && !createUserForm.get('membershipId')?.hasError('required')">
+              El número de socio es como máximo de 4 caracteres.
+            </mat-error>
+            <mat-error *ngIf="createUserForm.get('membershipId')?.hasError('pattern') && !createUserForm.get('membershipId')?.hasError('required')">
+              El número de socio debe contener 3 números y una letra mayúscula.
+            </mat-error>
+            <mat-error *ngIf="createUserForm.get('membershipId')?.hasError('required')">
+              El número de socio es necesario.
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Contraseña</mat-label>
+          <input type="password" matInput formControlName="password1" [errorStateMatcher]="matcher" placeholder="Contraseña">
+          <mat-hint>Campo obligatorio</mat-hint>
+          <mat-error *ngIf="createUserForm.get('password1')?.hasError('minlength') && !createUserForm.get('password1')?.hasError('required')">
+            La contraseña debe contener como mínimo 6 caracteres.
+          </mat-error>
+          <mat-error *ngIf="createUserForm.get('password1')?.hasError('pattern') && !createUserForm.get('password1')?.hasError('required')">
+            La contraseña debe contener entre 8 y 16 caractéres, y al menos, una letra en minúscula, otra letra en mayúscula, un número y un caracter especial.
+          </mat-error>
+          <mat-error *ngIf="createUserForm.get('password1')?.hasError('matching')">
+            Las contraseñas no coinciden.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Repetir contraseña</mat-label>
+          <input type="password" matInput formControlName="password2" [errorStateMatcher]="matcher" placeholder="Repetir contraseña">
+          <mat-hint>Campo obligatorio</mat-hint>
+          <mat-error *ngIf="createUserForm.get('password2')?.hasError('matching')">
+            Las contraseñas no coinciden.
+            </mat-error>
+        </mat-form-field>
+      
+      <button type="submit" [disabled]="createUserForm.invalid" class="btn btn-primary me-3">Enviar</button>
+
+    </form>
+</div>
