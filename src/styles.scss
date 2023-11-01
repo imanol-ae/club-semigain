@@ -76,6 +76,12 @@ h1 {
 }
 
 @media (max-width: 600px) {
+    .activities, .about-us, .player, .admin, .home-under, .reserves, .login { 
+        margin-top: 11em;
+    }
+    .align-items-center {
+        flex-flow: column;
+    }
     .player-title, .admin-title {
         grid-template-columns: auto;
     }
