@@ -26,5 +26,9 @@
     .data {
         grid-column: 1;
         grid-row: 2;
+        width: 95%;
+    }
+    .align-items-center, .ms-3 {
+        width: 100%;
     }
   }

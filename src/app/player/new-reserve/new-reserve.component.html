@@ -8,34 +8,6 @@
   </div>
 
   <form [formGroup]="newReserveForm" (ngSubmit)="saveData()" novalidate>
-
-  <div class="reserve-date">
-    <mat-form-field class="calendar">
-        <mat-label>Fecha:</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="date" [errorStateMatcher]="matcher" placeholder="Selecciona fecha" [min]="todayDate" [max]="maxDate">
-        <mat-hint>MM/DD/YYYY (Campo obligatorio)</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-<!--
-    <mat-form-field class="time">
-      <mat-label>Hora de inicio (09:00 - 21:00)</mat-label>
-      <input type="text" matInput formControlName="initTime" [errorStateMatcher]="matcher" placeholder="Ej. 09:00">
-      <mat-hint>Campo obligatorio</mat-hint>
-      <mat-error *ngIf="newReserveForm.get('initTime')?.hasError('pattern') && !newReserveForm.get('initTime')?.hasError('required')">
-        El formato debe se HH:00.
-      </mat-error>
-    </mat-form-field>
-  -->
-    <mat-form-field class="time">
-      <mat-label>Hora de inicio (09:00 - 21:00):</mat-label>
-        <mat-select matNativeControl required formControlName="initTime" [errorStateMatcher]="matcher">
-          <mat-option value="1">--Selecciona--</mat-option>
-          <mat-option *ngFor="let hourForReservation of hoursForReservation" value={{hourForReservation.id}}>{{hourForReservation.name}}</mat-option>
-        </mat-select>
-        <mat-hint>Campo obligatorio</mat-hint>
-    </mat-form-field>
-  </div>
     <div class="installation">
       <mat-form-field>
         <mat-label>Tipo de instalación:</mat-label>
@@ -45,7 +17,6 @@
         </select>
         <mat-hint>Campo obligatorio</mat-hint>
       </mat-form-field>
-
       <mat-form-field>
         <mat-label>Pista número:</mat-label>
         <select matNativeControl required formControlName="installation" [errorStateMatcher]="matcher">
@@ -53,6 +24,24 @@
           <option *ngFor="let installation of installations" value= {{installation.id}}>{{installation.name}}</option>
         </select>
         <mat-hint>Campo obligatorio</mat-hint>
+      </mat-form-field>
+    </div>
+    
+    <div class="reserve-date">
+      <mat-form-field class="calendar">
+          <mat-label>Fecha:</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="date" [errorStateMatcher]="matcher" placeholder="Selecciona fecha" [min]="todayDate" [max]="maxDate">
+          <mat-hint>MM/DD/YYYY (Campo obligatorio)</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="time">
+        <mat-label>Hora de inicio (09:00 - 21:00):</mat-label>
+          <mat-select matNativeControl required formControlName="initTime" [errorStateMatcher]="matcher">
+            <mat-option value="1">--Selecciona--</mat-option>
+            <mat-option *ngFor="let hourForReservation of hoursForReservation" value={{hourForReservation.id}}>{{hourForReservation.name}}</mat-option>
+          </mat-select>
+          <mat-hint>Campo obligatorio</mat-hint>
       </mat-form-field>
     </div>
 
