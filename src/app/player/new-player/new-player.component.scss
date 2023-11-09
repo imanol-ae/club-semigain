@@ -34,7 +34,9 @@ textarea::placeholder {
   opacity: 1; /* Firefox */
   color: hsl(213, 73%, 50%);
 }
-
+.player-title h1 {
+  grid-column: 1/6;
+}
 .player-title p {
   grid-column: 1/6;
   grid-row: 2;

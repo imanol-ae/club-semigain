@@ -1,10 +1,7 @@
 <div class="admin">
     <div class="player-title">
         <h1>Nuevo jugador/a</h1>
-        <div class="user">
-            <a href="#" routerLink="/inicio-administrador"><span class="badge badge-primary"><i class="fas fa-circle-user"></i> Antonio Martínez Uribe</span></a>
-        </div>
-        <p class="reserve-info">Solo un administrador/a puede dar de alta un jugador/a en el club, para lo cual deberá solicitar los datos básicos obligatorios al nuevo jugador/a. Posteriormente, éste último puede darse de alta en la web y editar y/o añadir más datos en su perfil, además de realizar reservas.</p>
+        <p class="reserve-info">Para darte de alta como usuario de la web debes enviarnos la información requerida. Posteriormente un administrador validará tu solicitud y podrás utilizar los servicios de la web.</p>
     </div>
 
     <form [formGroup]="newPlayerForm" (ngSubmit)="saveData()" novalidate>
@@ -125,6 +122,30 @@
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </div>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Contraseña</mat-label>
+        <input type="password" matInput formControlName="password1" [errorStateMatcher]="matcher" placeholder="Contraseña">
+        <mat-hint>Campo obligatorio</mat-hint>
+        <mat-error *ngIf="newPlayerForm.get('password1')?.hasError('minlength') && !newPlayerForm.get('password1')?.hasError('required')">
+          La contraseña debe contener como mínimo 6 caracteres.
+        </mat-error>
+        <mat-error *ngIf="newPlayerForm.get('password1')?.hasError('pattern') && !newPlayerForm.get('password1')?.hasError('required')">
+          La contraseña debe contener entre 8 y 16 caractéres, y al menos, una letra en minúscula, otra letra en mayúscula, un número y un caracter especial.
+        </mat-error>
+        <mat-error *ngIf="newPlayerForm.get('password1')?.hasError('matching')">
+          Las contraseñas no coinciden.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Repetir contraseña</mat-label>
+        <input type="password" matInput formControlName="password2" [errorStateMatcher]="matcher" placeholder="Repetir contraseña">
+        <mat-hint>Campo obligatorio</mat-hint>
+        <mat-error *ngIf="newPlayerForm.get('password2')?.hasError('matching')">
+          Las contraseñas no coinciden.
+          </mat-error>
+      </mat-form-field>
+
       <button type="submit" [disabled]="newPlayerForm.invalid" class="btn btn-primary me-3">Enviar</button>
 
     </form>

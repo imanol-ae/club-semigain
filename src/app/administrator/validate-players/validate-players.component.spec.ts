@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NewWebUserComponent } from './new-web-user.component';
+import { ValidatePlayersComponent } from './validate-players.component';
 
-describe('NewWebUserComponent', () => {
-  let component: NewWebUserComponent;
-  let fixture: ComponentFixture<NewWebUserComponent>;
+describe('ValidatePlayersComponent', () => {
+  let component: ValidatePlayersComponent;
+  let fixture: ComponentFixture<ValidatePlayersComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NewWebUserComponent ]
+      declarations: [ ValidatePlayersComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NewWebUserComponent);
+    fixture = TestBed.createComponent(ValidatePlayersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

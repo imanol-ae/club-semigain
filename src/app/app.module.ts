@@ -7,6 +7,7 @@ import { MaterialModule } from './material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { SelectService } from './services/select.service';
+
 //MDB Material Design for Bootstrap 5
 import { MdbAccordionModule } from 'mdb-angular-ui-kit/accordion';
 import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
@@ -38,13 +39,14 @@ import { NewReserveComponent } from './player/new-reserve/new-reserve.component'
 import { PersonalDataComponent } from './shared/personal-data/personal-data.component';
 import { PlayersComponent } from './administrator/players/players.component';
 import { AdministratorReservesComponent } from './administrator/administrator-reserves/administrator-reserves.component';
-import { NewPlayerComponent } from './administrator/new-player/new-player.component';
+import { NewPlayerComponent } from './player/new-player/new-player.component';
 import { PersonalDataAdminComponent } from './administrator/personal-data-admin/personal-data-admin.component';
 import { PersonalDataPlayerComponent } from './player/personal-data-player/personal-data-player.component';
 import { PlayerReservesInPlayerComponent } from './player/player-reserves-in-player/player-reserves-in-player.component';
 import { PlayerInAdminComponent } from './administrator/player-in-admin/player-in-admin.component';
-import { NewWebUserComponent } from './shared/new-web-user/new-web-user.component';
 import { ForgottenPasswordComponent } from './shared/forgotten-password/forgotten-password.component';
+import { PersonalInfoComponent } from './shared/personal-info/personal-info.component';
+import { ValidatePlayersComponent } from './administrator/validate-players/validate-players.component';
 
 @NgModule({
   declarations: [
@@ -67,8 +69,9 @@ import { ForgottenPasswordComponent } from './shared/forgotten-password/forgotte
     PersonalDataPlayerComponent,
     PlayerReservesInPlayerComponent,
     PlayerInAdminComponent,
-    NewWebUserComponent,
-    ForgottenPasswordComponent
+    ForgottenPasswordComponent,
+    PersonalInfoComponent,
+    ValidatePlayersComponent
   ],
   imports: [
     BrowserModule,

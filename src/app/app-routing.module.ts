@@ -4,7 +4,7 @@ import { HomeComponent } from './layout/home/home.component';
 import { AboutUsComponent } from './layout/about-us/about-us.component';
 import { ActivitiesComponent } from './layout/activities/activities.component';
 import { LoginComponent } from './shared/login/login.component';
-import { NewWebUserComponent } from './shared/new-web-user/new-web-user.component';
+import { ValidatePlayersComponent } from './administrator/validate-players/validate-players.component';
 import { ForgottenPasswordComponent } from './shared/forgotten-password/forgotten-password.component';
 import { PlayerHomeComponent } from './player/player-home/player-home.component';
 import { PlayerReservesInPlayerComponent } from './player/player-reserves-in-player/player-reserves-in-player.component';
@@ -14,7 +14,7 @@ import { AdministratorHomeComponent } from './administrator/administrator-home/a
 import { PlayersComponent } from './administrator/players/players.component';
 import { AdministratorReservesComponent } from './administrator/administrator-reserves/administrator-reserves.component';
 import { PersonalDataAdminComponent } from './administrator/personal-data-admin/personal-data-admin.component';
-import { NewPlayerComponent } from './administrator/new-player/new-player.component';
+import { NewPlayerComponent } from './player/new-player/new-player.component';
 import { PlayerInAdminComponent } from './administrator/player-in-admin/player-in-admin.component';
 
 const routes: Routes = [
@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'quienes-somos', component: AboutUsComponent },
   { path: 'actividades', component: ActivitiesComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'nuevo-usuario', component: NewWebUserComponent },
+  { path: 'validar-jugadores', component: ValidatePlayersComponent },
   { path: 'recuperar-contrasena', component: ForgottenPasswordComponent },
   { path: 'inicio-jugador', component: PlayerHomeComponent },
   { path: 'inicio-administrador', component: AdministratorHomeComponent },

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, FormGroupDirective, NgForm, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material/core';
-import {NgIf} from '@angular/common';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { NgIf } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { matchValidator } from './confirm-password.validator';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -18,6 +19,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './new-player.component.html',
   styleUrls: ['./new-player.component.scss']
 })
+
 export class NewPlayerComponent implements OnInit {
 
     newPlayerForm: FormGroup;
@@ -58,6 +60,15 @@ export class NewPlayerComponent implements OnInit {
         ]],
         date: [this.todayDate, [Validators.required]],
         birthdate: ['', [Validators.required]],
+        password1: ['', [
+          Validators.required,
+          Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$'), 
+          matchValidator('password2', true)]],
+        password2: ['', [
+          Validators.required,
+          Validators.minLength(6), 
+          Validators.maxLength(10),  
+          matchValidator('password1')]]
       });
     }
     ngOnInit() { }
