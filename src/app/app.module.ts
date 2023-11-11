@@ -8,6 +8,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { SelectService } from './services/select.service';
 
+// Consultas
+import { HttpClientModule } from '@angular/common/http';
+
+
 //MDB Material Design for Bootstrap 5
 import { MdbAccordionModule } from 'mdb-angular-ui-kit/accordion';
 import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
@@ -94,7 +98,8 @@ import { ValidatePlayersComponent } from './administrator/validate-players/valid
     MdbScrollspyModule,
     MdbTabsModule,
     MdbTooltipModule,
-    MdbValidationModule
+    MdbValidationModule,
+    HttpClientModule
   ],
   providers: [ SelectService ],
   bootstrap: [AppComponent]

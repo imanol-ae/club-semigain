@@ -1,11 +1,40 @@
 import { Injectable } from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
 import { Installation } from '../models/installation';
 import { InstallationType } from '../models/installation-type';
 import { ReservationHour } from '../models/reservation-hours';
+import { NewPlayer } from '../models/new-player';
+
 
 
 @Injectable()
 export class SelectService {
+
+  constructor(public _http1 : HttpClient){
+        
+  }
+
+  // ADD USUARIOS
+  // creamos el usuario
+  Create(usuario : any): Observable<any>{
+    return this._http1.post('http://localhost:3000/usuarios/', usuario);
+  }
+
+// leemos el usuario
+  Read(): Observable<any>{
+      return this._http1.get('http://localhost:3000/usuarios/');
+  }
+
+  // modificamos el usuario
+  Update(ID_USUARIO: number, datos : any): Observable<any>{
+      return this._http1.put('http://localhost:3000/usuarios/' + ID_USUARIO, datos);
+  }
+
+  // borramos el suaurio
+  Delete(ID_USUARIO: number): Observable<any>{
+      return this._http1.delete('http://localhost:3000/usuarios/' + ID_USUARIO);
+  }
 
   getInstallationTypes() {
     return [
