@@ -51,6 +51,7 @@ import { PlayerInAdminComponent } from './administrator/player-in-admin/player-i
 import { ForgottenPasswordComponent } from './shared/forgotten-password/forgotten-password.component';
 import { PersonalInfoComponent } from './shared/personal-info/personal-info.component';
 import { ValidatePlayersComponent } from './administrator/validate-players/validate-players.component';
+import { YesNoPipe } from './shared/yes-no.pipe';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { ValidatePlayersComponent } from './administrator/validate-players/valid
     PlayerInAdminComponent,
     ForgottenPasswordComponent,
     PersonalInfoComponent,
-    ValidatePlayersComponent
+    ValidatePlayersComponent,
+    YesNoPipe
   ],
   imports: [
     BrowserModule,

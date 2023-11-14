@@ -1,412 +1,78 @@
+
 <div class="container">
-    <img src="assets/images/tennis-player-profile.jpg" class="img-fluid rounded-circle profile" alt="" />
-    
-    <div class="data">
-        <h2 class="bg-light p-2 border-top border-bottom">Datos personales HHH</h2>
-
-        <ul class="list-group list-group-light mb-4">
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center">
-              <div class="ms-3">
-                <p class="text-muted mb-0">Nombre y Apellidos:</p>
-                <p class="fw mb-1">Alex González Roquero</p>
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center">
-              <div class="ms-3">
-                <p class="text-muted mb-0">Año de nacimiento:</p>
-                <p class="fw mb-1">1988</p>
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center">
-              <div class="ms-3">
-                <p class="text-muted mb-0">Sexo:</p>
-                <p class="fw mb-1">Masculino</p>
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center">
-              <div class="ms-3">
-                <p class="text-muted mb-0">Número de socio:</p>
-                <p class="fw mb-1">124A</p>
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center">
-              <div class="ms-3">
-                <p class="text-muted mb-0">Fecha de alta:</p>
-                <p class="fw mb-1">12/12/1999</p>
-              </div>
-            </div>
-          </li>
-        </ul>
-
-        <h2 class="bg-light p-2 border-top border-bottom">Datos de contacto</h2>
-
-        <ul class="list-group list-group-light">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <div class="ms-3">
-                            <p class="text-muted mb-0">Dirección:</p>
-                            <p class="fw mb-1">C/ Ramón y Cajal, 3 5ºB</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <div class="ms-3">
-                            <p class="text-muted mb-0">Municipio:</p>
-                            <p class="fw mb-1">Zamudio</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <div class="ms-3">
-                            <p class="text-muted mb-0">Provincia:</p>
-                            <p class="fw mb-1">Bizkaia</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <div class="ms-3">
-                            <p class="text-muted mb-0">Correo electrónico:</p>
-                            <p class="fw mb-1">agonroq@gmail.com</p>
-                        </div>
-                    </div>
-                </li>
-        </ul>
-    </div>
-
+    <img src="{{this.personalImage}}" class="img-fluid rounded-circle profile" alt="" />
 
     <div class="data-editable">
-      <h2 class="bg-light p-2 border-top border-bottom">Datos personales HHH</h2>
-      <ul class="list-group list-group-light mb-4" mat-cell *matCellDef="let element">
-
-      <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema">
-        
-        <div [ngSwitch]="col.type" *ngIf="!element.isEdit">
-          <div class="btn-edit" *ngSwitchCase="'isEdit'">
-            <button mat-button (click)="element.isEdit = !element.isEdit">
-              Edit
-            </button>
-          </div>
-          <span *ngSwitchCase="'date'">
-            {{ element[col.key] | date: 'mediumDate' }}
-          </span>
-          <span *ngSwitchDefault>
-            {{ element[col.key] }}
-          </span>
-        </div>
-        <div [ngSwitch]="col.type" *ngIf="element.isEdit">
-          <div class="btn-edit" *ngSwitchCase="'isEdit'">
-            <button mat-button (click)="element.isEdit = !element.isEdit">
-              Done
-            </button>
-          </div>
-          <mat-form-field class="form-input" *ngSwitchCase="'date'" appearance="fill">
-            <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="picker" [(ngModel)]="element[col.key]"/>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field class="form-input" *ngSwitchCase="'number'">
-            <input type="number" matInput (ngModelChange)="element[col.key] = $event" [ngModel]="element[col.key]"/>
-          </mat-form-field>
-          <mat-form-field class="form-input" *ngSwitchDefault>
-            <input [type]="col.type" matInput [(ngModel)]="element[col.key]" />
-          </mat-form-field>
-        </div>
-
-    </ng-container>
-    <li mat-header-row *matHeaderRowDef="displayedColumns"></li>
-    <li mat-row *matRowDef="let row; columns: displayedColumns"></li>
-<!--
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          <div class="d-flex align-items-center">
-            <div class="ms-3">
-              <p class="text-muted mb-0" mat-header-cell *matHeaderCellDef>{{ col.label }}</p>
-              <p class="fw mb-1">Alex González Roquero</p>
+      <h2 class="bg-light p-2 border-top border-bottom">Datos personales</h2> 
+      <table mat-table [dataSource]="dataSource">
+        <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema">
+          <th mat-header-cell *matHeaderCellDef>
+            {{ col.label }}
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div [ngSwitch]="col.type" *ngIf="!element.isEdit">
+              <div class="btn-edit" *ngSwitchCase="'isEdit'">
+                <button mat-button (click)="element.isEdit = !element.isEdit" class="btn btn-primary">Editar</button>
+              </div>
+              <span *ngSwitchCase="'date'">{{ element[col.key] | date: 'mediumDate' }}</span>
+              <span *ngSwitchDefault>{{ element[col.key] }}</span>
             </div>
-          </div>
-        </li>
-      -->
-      </ul>
-
+            <div [ngSwitch]="col.type" *ngIf="element.isEdit">
+              <div class="btn-edit" *ngSwitchCase="'isEdit'">
+                <button mat-button (click)="element.isEdit = !element.isEdit" class="btn btn-primary">Guardar</button>
+              </div>
+              <mat-form-field class="form-input" *ngSwitchCase="'date'" appearance="fill">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="element[col.key]"/>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field class="form-input" *ngSwitchCase="'number'">
+                <input type="number" matInput (ngModelChange)="element[col.key] = $event" [ngModel]="element[col.key]"/>
+              </mat-form-field>
+              <mat-form-field class="form-input" *ngSwitchDefault>
+                <input [type]="col.type" matInput [(ngModel)]="element[col.key]" />
+              </mat-form-field>
+            </div>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
     </div>
 
-    <!--
     <div class="data-editable">
-    <table mat-table [dataSource]="dataSource">
-      <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema">
-        <th mat-header-cell *matHeaderCellDef>
-          {{ col.label }}
-        </th>
-        <td mat-cell *matCellDef="let element">
-          <div [ngSwitch]="col.type" *ngIf="!element.isEdit">
-            <div class="btn-edit" *ngSwitchCase="'isEdit'">
-              <button mat-button (click)="element.isEdit = !element.isEdit">
-                Edit
-              </button>
+      <h2 class="bg-light p-2 border-top border-bottom">Datos de contacto</h2> 
+      <table mat-table [dataSource]="dataSource">
+        <ng-container [matColumnDef]="col.key" *ngFor="let col of contactColumnsSchema">
+          <th mat-header-cell *matHeaderCellDef>
+            {{ col.label }}
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div [ngSwitch]="col.type" *ngIf="!element.isEdit">
+              <div class="btn-edit" *ngSwitchCase="'isEdit'">
+                <button mat-button (click)="element.isEdit = !element.isEdit" class="btn btn-primary">Editar</button>
+              </div>
+              <span *ngSwitchDefault>{{ element[col.key] }}</span>
             </div>
-            <span *ngSwitchCase="'date'">
-              {{ element[col.key] | date: 'mediumDate' }}
-            </span>
-            <span *ngSwitchDefault>
-              {{ element[col.key] }}
-            </span>
-          </div>
-          <div [ngSwitch]="col.type" *ngIf="element.isEdit">
-            <div class="btn-edit" *ngSwitchCase="'isEdit'">
-              <button mat-button (click)="element.isEdit = !element.isEdit">
-                Done
-              </button>
+            <div [ngSwitch]="col.type" *ngIf="element.isEdit">
+              <div class="btn-edit" *ngSwitchCase="'isEdit'">
+                <button mat-button (click)="element.isEdit = !element.isEdit" class="btn btn-primary">Guardar</button>
+              </div>
+              <mat-form-field class="form-input" *ngSwitchCase="'number'">
+                <input type="number" matInput (ngModelChange)="element[col.key] = $event" [ngModel]="element[col.key]"/>
+              </mat-form-field>
+              <mat-form-field class="form-input" *ngSwitchDefault>
+                <input [type]="col.type" matInput [(ngModel)]="element[col.key]" />
+              </mat-form-field>
             </div>
-            <mat-form-field class="form-input" *ngSwitchCase="'date'" appearance="fill">
-              <mat-label>Choose a date</mat-label>
-              <input matInput [matDatepicker]="picker" [(ngModel)]="element[col.key]"/>
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-            <mat-form-field class="form-input" *ngSwitchCase="'number'">
-              <input type="number" matInput (ngModelChange)="element[col.key] = $event" [ngModel]="element[col.key]"/>
-            </mat-form-field>
-            <mat-form-field class="form-input" *ngSwitchDefault>
-              <input [type]="col.type" matInput [(ngModel)]="element[col.key]" />
-            </mat-form-field>
-          </div>
-        </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
-</div>
--->
-
-<!--
-<div class="personal-info">
-    <form [formGroup]="userTable">
-        <table class="table table-border">
-          <thead class="text-nowrap">
-            <th>Name <span class="ui-column-resizer"> </span></th>
-            <th>Email<span class="ui-column-resizer"> </span></th>
-            <th>Date Of Birth<span class="ui-column-resizer"> </span></th>
-            <th>Blood Group<span class="ui-column-resizer"> </span></th>
-            <th>Mobile Number</th>
-            <th></th>
-          </thead>
-          <tbody>
-            
-            <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls.controls; let i=index">
-              <tr *ngIf="group.get('isEditable')?.value" [formGroupName]="i">
-                <td>
-                  <mat-form-field>
-                    <input matInput type="text" formControlName="name">
-                  </mat-form-field>
-                </td>
-                <td>
-                  <mat-form-field>
-                    <input matInput type="tetx" formControlName="email">
-                  </mat-form-field>
-                </td>
-                <td>
-                  <mat-form-field>
-                    <input matInput matInput [matDatepicker]="picker" formControlName="dob">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                  </mat-form-field>
-                </td>
-                <td>
-                  <mat-form-field>
-                    <mat-select formControlName="bloodGroup">
-                      <mat-option value="O+">O</mat-option>
-                      <mat-option value="A">A</mat-option>
-                      <mat-option value="B">B</mat-option>
-                      <mat-option value="AB">AB</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </td>
-                <td>
-                  <mat-form-field>
-                    <input matInput type="text" formControlName="mobNumber">
-                  </mat-form-field>
-                </td>
-                <td>
-                  <mat-icon class="done" (click)="doneRow(group)">done</mat-icon>
-                </td>
-              </tr>
-              <tr *ngIf="!group.get('isEditable')?.value" >
-                <td>
-                  {{group.get('name')?.value}}
-                </td>
-                <td>
-                  {{group.get('email')?.value}}
-                </td>
-                <td>
-                    {{group.get('email')?.value}}
-                </td>
-                <td>
-                    {{group.get('bloodGroup')?.value}}
-                </td>
-                <td>
-                  {{group.get('mobNumber')?.value}}
-                </td>
-                <td>
-                  <mat-icon class="edit" (click)="editRow(group)">edit</mat-icon>
-                </td>
-              </tr>
-            </ng-container>
-          </tbody>
-        </table>
-        <div class="action-container">
-          <button mat-raised-button type="submit" (click)="addRow()">Add row</button>
-          <button mat-raised-button [disabled]="userTable.invalid" type="submit" (click)="submitForm()">Submit</button>
-        </div>
-      </form>
-      <div class="output">
-          <p>Form Data:  {{userTable.value | json}}</p>
-          <p>Is Valid: {{userTable.valid}}</p>
-      </div>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedContactColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedContactColumns"></tr>
+      </table>
     </div>
-  -->
-
-  <!--
-    <div class="personal-info">
-      <form [formGroup]="userTable">
-        <div class="data">
-          <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls.controls; let i=index">
-            <h2 class="bg-light p-2 border-top border-bottom">Datos personales HHH</h2>
-            <ul *ngIf="group.get('isEditable')?.value" [formGroupName]="i" class="list-group list-group-light mb-4">              
-                <mat-icon class="done" (click)="doneRow(group)">done</mat-icon>
-                <mat-icon class="edit" (click)="editRow(group)">edit</mat-icon>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <div class="d-flex align-items-center">
-                    <div class="ms-3">
-                      <p class="text-muted mb-0">Nombre y Apellidos:</p>
-                      <mat-form-field class="fw mb-1">
-                        <input matInput type="text" formControlName="name">
-                      </mat-form-field>
-                    </div>
-                  </div>
-                </li>
-
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <div class="d-flex align-items-center">
-                    <div class="ms-3">
-                      <p class="text-muted mb-0">Nacimiento:</p>
-                      <mat-form-field class="fw mb-1">
-                        <input matInput matInput [matDatepicker]="picker" formControlName="dob">
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                </li>
-
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <div class="d-flex align-items-center">
-                    <div class="ms-3">
-                      <p class="text-muted mb-0">Sexo:</p>
-                      <mat-form-field class="fw mb-1">
-                        <input matInput type="text" formControlName="gender">
-                      </mat-form-field>
-                    </div>
-                  </div>
-                </li>
-
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <div class="d-flex align-items-center">
-                    <div class="ms-3">
-                      <p class="text-muted mb-0">Número de socio:</p>
-                      <mat-form-field>
-                        <input matInput type="text" formControlName="mobNumber">
-                      </mat-form-field>
-                    </div>
-                  </div>
-                </li>
-
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <div class="d-flex align-items-center">
-                    <div class="ms-3">
-                      <p class="text-muted mb-0">Fecha de alta:</p>
-                      <mat-form-field class="fw mb-1">
-                        <input matInput matInput [matDatepicker]="picker" formControlName="entrydate">
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-
-              
-              <ul *ngIf="!group.get('isEditable')?.value" class="list-group list-group-light mb-4">
-                <mat-icon class="done" (click)="doneRow(group)">done</mat-icon>
-                <mat-icon class="edit" (click)="editRow(group)">edit</mat-icon>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <div class="d-flex align-items-center">
-                    <div class="ms-3">
-                      <p class="text-muted mb-0">Nombre y Apellidos:</p>
-                      <p class="fw mb-1">{{group.get('name')?.value}}</p>
-                    </div>
-                  </div>
-                </li>
-
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <div class="d-flex align-items-center">
-                    <div class="ms-3">
-                      <p class="text-muted mb-0">Nacimiento:</p>
-                      <p class="fw mb-1">{{group.get('dob')?.value}}</p>
-                    </div>
-                  </div>
-                </li>
-
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <div class="d-flex align-items-center">
-                    <div class="ms-3">
-                      <p class="text-muted mb-0">Sexo:</p>
-                      <p class="fw mb-1">{{group.get('gender')?.value}}</p>
-                    </div>
-                  </div>
-                </li>
-
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <div class="d-flex align-items-center">
-                    <div class="ms-3">
-                      <p class="text-muted mb-0">Número de socio:</p>
-                      <p class="fw mb-1">{{group.get('mobNumber')?.value}}</p>
-                    </div>
-                  </div>
-                </li>
-
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <div class="d-flex align-items-center">
-                    <div class="ms-3">
-                      <p class="text-muted mb-0">Fecha de alta:</p>
-                      <p class="fw mb-1">{{group.get('entrydate')?.value}}</p>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-
-          </ng-container>
-        </div>
-          <div class="action-container">
-            <button mat-raised-button type="submit" (click)="addRow()">Add row</button>
-            <button mat-raised-button [disabled]="userTable.invalid" type="submit" (click)="submitForm()">Submit</button>
-          </div>
-      </form>
-        <div class="output">
-            <p>Form Data:  {{userTable.value | json}}</p>
-            <p>Is Valid: {{userTable.valid}}</p>
-        </div>
-      </div>
--->
+    <div class="button">
+      <button type="submit" value="enviar" class="btn btn-primary me-3">Enviar</button>
+    </div>
 </div>
