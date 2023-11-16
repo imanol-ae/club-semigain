@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
-import { COLUMNS_SCHEMA, CONTACT_COLUMNS_SCHEMA } from './personal-info-schema';
-import { USER_DATA } from './players';
+import { Component } from '@angular/core';
+import { COLUMNS_SCHEMA, CONTACT_COLUMNS_SCHEMA } from '../../models/personal-info-schema';
+import { USER_DATA } from '../../mockup_data/players';
 
 @Component({
   selector: 'app-personal-info',

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, FormGroupDirective, NgForm, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { MatSelectModule } from '@angular/material/select';
-import { MatFormFieldModule} from '@angular/material/form-field';
 import { SelectService } from '../../services/select.service';
 import { Installation } from '../../models/installation';
 import { InstallationType } from '../../models/installation-type';
@@ -35,12 +33,7 @@ export class NewReserveComponent implements OnInit{
   constructor(public fb: FormBuilder, private selectService: SelectService) {
     this.newReserveForm = this.fb.group({
       date: [this.todayDate, [Validators.required]],
-      initTime: ['', [
-        Validators.required
-        //Validators.minLength(5), 
-        //Validators.maxLength(5),
-        //Validators.pattern('^[0-2][0-9]:[0][0]$')
-      ]],
+      initTime: ['', [Validators.required]],
       light:['', [Validators.required]],
       paid:['', [Validators.required]],
       installationType:['', [Validators.required]],
@@ -48,8 +41,6 @@ export class NewReserveComponent implements OnInit{
     });
     this.installationTypes = this.selectService.getInstallationTypes();
     this.hoursForReservation = this.selectService.getHoursForReservation();
-    //this.onSelect(this.selectedInstallationType.installationTypeId);
-
   }
   ngOnInit( ) { } 
 

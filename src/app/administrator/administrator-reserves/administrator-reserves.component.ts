@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { RESERVES_COLUMNS_SCHEMA } from './reserves_schema';
-import { RESERVE_DATA } from './reserves';
+import { RESERVES_COLUMNS_SCHEMA } from '../../models/reserves_schema';
+import { RESERVE_DATA } from '../../mockup_data/reserves';
 
 @Component({
   selector: 'app-administrator-reserves',
@@ -15,7 +15,6 @@ export class AdministratorReservesComponent implements OnInit{
   displayedColumns: string[] = RESERVES_COLUMNS_SCHEMA.slice(1).map((col) => col.key);
   columnsSchema: any = RESERVES_COLUMNS_SCHEMA;
   
-
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator,{static:true}) paginator:MatPaginator;
   dataSource = new MatTableDataSource(RESERVE_DATA);
@@ -32,12 +31,9 @@ export class AdministratorReservesComponent implements OnInit{
       this.dataSource.paginator.firstPage();
     }
   }
-
-  debt = RESERVE_DATA.reduce((acc, element) => {
-    if (element.paid !== true) return acc + element.price;
-    return acc;
-  }, 0);
 }
+
+
 
 
 

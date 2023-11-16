@@ -3,7 +3,8 @@
     <img src="{{this.personalImage}}" class="img-fluid rounded-circle profile" alt="" />
 
     <div class="data-editable">
-      <h2 class="bg-light p-2 border-top border-bottom">Datos personales</h2> 
+      <h2 class="bg-light p-2 border-top border-bottom">Datos personales</h2>
+
       <table mat-table [dataSource]="dataSource">
         <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema">
           <th mat-header-cell *matHeaderCellDef>
@@ -19,7 +20,7 @@
             </div>
             <div [ngSwitch]="col.type" *ngIf="element.isEdit">
               <div class="btn-edit" *ngSwitchCase="'isEdit'">
-                <button mat-button (click)="element.isEdit = !element.isEdit" class="btn btn-primary">Guardar</button>
+                <button type="submit" mat-button (click)="element.isEdit = !element.isEdit" class="btn btn-primary">Guardar</button>
               </div>
               <mat-form-field class="form-input" *ngSwitchCase="'date'" appearance="fill">
                 <mat-label>Choose a date</mat-label>
@@ -31,7 +32,7 @@
                 <input type="number" matInput (ngModelChange)="element[col.key] = $event" [ngModel]="element[col.key]"/>
               </mat-form-field>
               <mat-form-field class="form-input" *ngSwitchDefault>
-                <input [type]="col.type" matInput [(ngModel)]="element[col.key]" />
+                <input [type]="col.type" matInput [(ngModel)]="element[col.key]"/>
               </mat-form-field>
             </div>
           </td>
@@ -71,8 +72,5 @@
         <tr mat-header-row *matHeaderRowDef="displayedContactColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedContactColumns"></tr>
       </table>
-    </div>
-    <div class="button">
-      <button type="submit" value="enviar" class="btn btn-primary me-3">Enviar</button>
     </div>
 </div>

@@ -19,21 +19,21 @@
                 <div class="btn-edit" *ngSwitchCase="'isEdit'">
                   <button mat-button (click)="element.isEdit = !element.isEdit" class="btn btn-primary">Editar</button>
                 </div>
-                <ng-template [ngSwitchDefault]>{{ element[col.key]}}</ng-template>
                 <span *ngSwitchCase="'boolean'">{{ element[col.key] | yesNo }}</span>
+                <ng-template [ngSwitchDefault]>{{ element[col.key]}}</ng-template>
               </div>
               <div [ngSwitch]="col.type" *ngIf="element.isEdit">
                 <div class="btn-edit" *ngSwitchCase="'isEdit'">
                   <button mat-button (click)="element.isEdit = !element.isEdit" class="btn btn-primary">Guardar</button>
                 </div>
                 <mat-form-field class="form-input" *ngSwitchCase="'boolean'">
-                    <select matNativeControl required (ngModelChange)="element[col.key] = $event" [(ngModel)]="element[col.key]">
-                        <option value="true">Sí</option>
-                        <option value="false">No</option>
-                      </select>
-                  </mat-form-field>
-                  <span *ngSwitchDefault>{{ element[col.key] }}</span>
-              </div>
+                  <select matNativeControl required (ngModelChange)="element[col.key] = $event" [ngModel]="element[col.key]">
+                    <option value="true">Si</option>
+                    <option value="">No</option>
+                  </select>
+                </mat-form-field>
+                <ng-template [ngSwitchDefault]>{{ element[col.key]}}</ng-template>
+              </div>         
             </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
@@ -41,7 +41,6 @@
         </table>
         <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
       </div>
-      <span class="badge badge-danger">DEUDA DE TODOS LOS JUGADORES: {{ this.debt }} €</span>
 </div>
 
 
