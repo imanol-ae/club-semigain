@@ -12,7 +12,7 @@ import { RESERVE_DATA } from '../../mockup_data/reserves';
   styleUrls: ['./administrator-reserves.component.scss']
 })
 export class AdministratorReservesComponent implements OnInit{
-  displayedColumns: string[] = RESERVES_COLUMNS_SCHEMA.slice(1).map((col) => col.key);
+  displayedColumns: string[] = RESERVES_COLUMNS_SCHEMA.slice(1,11).map((col) => col.key);
   columnsSchema: any = RESERVES_COLUMNS_SCHEMA;
   
   @ViewChild(MatSort, {static: true}) sort: MatSort;
