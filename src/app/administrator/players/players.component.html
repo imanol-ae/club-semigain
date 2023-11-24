@@ -6,126 +6,27 @@
         </div>
     </div>  
     <div class="row">
-        <div class="col-xl-4 col-lg-6 mb-4">
-          <div class="card">
-            <div class="card-body">
-              <div class="d-flex">
-                <a href="#" class="profile-image"><img
-                  src="assets/images/6.jpg"
-                  alt=""
-                  style="width: 45px; height: 45px"
-                  class="rounded-circle" routerLink="/jugador"
-                /></a>
-                <div class="ms-3">
-                  <a href="#" class="fw-bold mb-1" routerLink="/jugador">Andere Pérez Ulzama</a>
-                  <p class="text-muted mb-0">andere.perez.ulzama@gmail.com</p>
-                  <button type="button" class="btn btn-primary" routerLink="/jugador">Entrar</button>
-                  <button type="button" class="btn btn-outline-primary" mdbRipple rippleColor="dark" mdbRipple>Eliminar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-4 col-lg-6 mb-4">
-          <div class="card">
-            <div class="card-body">
-              <div class="d-flex">
-                <a href="#"><img
-                  src="assets/images/8.jpg"
-                  alt=""
-                  style="width: 45px; height: 45px"
-                  class="rounded-circle" routerLink="/jugador"
-                /></a>
-                <div class="ms-3">
-                  <a href="#" class="fw-bold mb-1" routerLink="/jugador">Alex González Roquero</a>
-                  <p class="text-muted mb-0">agonroq@gmail.com</p>
-                  <button type="button" class="btn btn-primary" routerLink="/jugador">Entrar</button>
-                  <button type="button" class="btn btn-outline-primary" mdbRipple rippleColor="dark" mdbRipple>Eliminar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-4 col-lg-6 mb-4">
-          <div class="card">
-            <div class="card-body">
-              <div class="d-flex">
-                <a href="#"><img
-                  src="assets/images/7.jpg"
-                  alt=""
-                  style="width: 45px; height: 45px"
-                  class="rounded-circle" routerLink="/jugador"
-                /></a>
-                <div class="ms-3">
-                    <a href="#" class="fw-bold mb-1" routerLink="/jugador">María Martínez Uriarte</a>
-                  <p class="text-muted mb-0">uriarte.maria@hotmail.com</p>
-                  <button type="button" class="btn btn-primary" routerLink="/jugador">Entrar</button>
-                  <button type="button" class="btn btn-outline-primary" mdbRipple rippleColor="dark" mdbRipple>Eliminar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-4 col-lg-6 mb-4">
-          <div class="card">
-            <div class="card-body">
-              <div class="d-flex">
-                <a href="#"><img
-                  src="assets/images/9.jpg"
-                  alt=""
-                  style="width: 45px; height: 45px"
-                  class="rounded-circle" routerLink="/jugador"
-                /></a>
-                <div class="ms-3">
-                    <a href="#" class="fw-bold mb-1" routerLink="/jugador">Soraya Letto</a>
-                  <p class="text-muted mb-0">soraya.letto@gmail.com</p>
-                  <button type="button" class="btn btn-primary" routerLink="/jugador">Entrar</button>
-                  <button type="button" class="btn btn-outline-primary" mdbRipple rippleColor="dark" mdbRipple>Eliminar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-4 col-lg-6 mb-4">
-          <div class="card">
-            <div class="card-body">
-              <div class="d-flex">
-                <a href="#"><img
-                  src="assets/images/3.jpg"
-                  alt=""
-                  style="width: 45px; height: 45px"
-                  class="rounded-circle" routerLink="/jugador"
-                /></a>
-                <div class="ms-3">
-                    <a href="#" class="fw-bold mb-1" routerLink="/jugador">Iñaki Lakarra Dudley</a>
-                  <p class="text-muted mb-0">inaki.lakarra@gmail.com</p>
-                  <button type="button" class="btn btn-primary" routerLink="/jugador">Entrar</button>
-                  <button type="button" class="btn btn-outline-primary" mdbRipple rippleColor="dark" mdbRipple>Eliminar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-4 col-lg-6 mb-4">
-          <div class="card">
-            <div class="card-body">
-              <div class="d-flex">
-                <a href="#"><img
-                  src="assets/images/15.jpg"
-                  alt=""
-                  style="width: 45px; height: 45px"
-                  class="rounded-circle" routerLink="/jugador"
-                /></a>
-                <div class="ms-3">
-                    <a href="#" class="fw-bold mb-1" routerLink="/jugador">Ayat Fernández Isasi</a>
-                  <p class="text-muted mb-0">ayat.fernandez.isasi@gmail.com</p>
-                  <button type="button" class="btn btn-primary" routerLink="/jugador">Entrar</button>
-                  <button type="button" class="btn btn-outline-primary" mdbRipple rippleColor="dark" mdbRipple>Eliminar</button>
-                </div>
+      <div class="col-xl-4 col-lg-6 mb-4" *ngFor = "let usuario of this.arrayBuscarUsuario">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex">
+              <a href="#" class="profile-image"><img
+                src="assets/images/6.jpg"
+                alt=""
+                style="width: 45px; height: 45px"
+                class="rounded-circle" routerLink="/jugador"
+              /></a>
+              <div class="ms-3">
+                <a href="#" class="fw-bold mb-1" routerLink="/jugador">{{usuario.NOMBRE}}</a>
+                <p class="text-muted mb-0">{{usuario.EMAIL}}</p>
+                <button type="button" class="btn btn-primary" routerLink="/jugador">Entrar</button>
+                <button type="button" class="btn btn-outline-primary" (click)="eliminar(usuario.id)" mdbRipple rippleColor="dark" mdbRipple>Eliminar</button>
               </div>
             </div>
           </div>
         </div>
       </div>
+        
+    </div>
 
 </div>

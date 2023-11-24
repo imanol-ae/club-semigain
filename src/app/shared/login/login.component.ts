@@ -53,11 +53,11 @@ export class LoginComponent implements OnInit{
       console.log(name);
       const pass: string = this.formLogin.controls["password"].value as string;
       console.log(pass);
-
       // Si el formulario es valido
       if (this.formLogin.valid) {
-        
+        console.log("DENTRO FORM");
         for (let i = 0; i < this.arrayBuscarUsuario.length; i++) {
+          console.log("DENTRO for");
           if (this.arrayBuscarUsuario[i].ES_ADMIN == true && this.arrayBuscarUsuario[i].NOMBRE == name && this.arrayBuscarUsuario[i].PASS == pass){
            console.log("ADMIN");
            this.router.navigate(["/inicio-administrador"]);
@@ -81,5 +81,5 @@ export class LoginComponent implements OnInit{
   }
   //@Input() error: string | null;
 
-  @Output() submitEM = new EventEmitter();
+  //@Output() submitEM = new EventEmitter();
 }

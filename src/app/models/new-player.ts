@@ -1,6 +1,7 @@
 export class NewPlayer{
 
     // Atributos
+    public ID_USUARIO: Number;
     public NOMBRE : string;
     public APELLIDOS: string;
     public FECHA_NACIMIENTO : string;
@@ -18,7 +19,8 @@ export class NewPlayer{
 
 
     // Contructor
-    constructor(NOMBRE : string, APELLIDOS: string, FECHA_NACIMIENTO : string, SEXO: string, DIRECCION_POSTAL: string, MUNICIPIO: string, PROVINCIA: string, IMAGEN_PERFIL : string,EMAIL: string, NUMERO_SOCIO:string,FECHA_ALTA: string, FECHA_BAJA: string, ES_ADMIN: boolean, PASS:string){
+    constructor( ID_USUARIO: Number,NOMBRE : string, APELLIDOS: string, FECHA_NACIMIENTO : string, SEXO: string, DIRECCION_POSTAL: string, MUNICIPIO: string, PROVINCIA: string, IMAGEN_PERFIL : string,EMAIL: string, NUMERO_SOCIO:string,FECHA_ALTA: string, FECHA_BAJA: string, ES_ADMIN: boolean, PASS:string){
+        this.ID_USUARIO = ID_USUARIO;
         this.NOMBRE = NOMBRE;
         this.APELLIDOS = APELLIDOS;
         this.FECHA_NACIMIENTO = FECHA_NACIMIENTO;

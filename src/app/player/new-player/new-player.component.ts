@@ -34,6 +34,7 @@ export class NewPlayerComponent implements OnInit {
     todayDate:Date = new Date();
 
     public crearUsuario : NewPlayer;
+    public ID_USUARIO:number;
     
     public fb: FormBuilder;
 
@@ -58,7 +59,7 @@ export class NewPlayerComponent implements OnInit {
 
     /*Constructor con el servicio y iniciacios el atributo de la clase reserva*/
     constructor(private _crearUsuario : SelectService) {
-      this.crearUsuario = new NewPlayer('','','','','','','','','','','','',false,'');
+      this.crearUsuario = new NewPlayer(0,'','','','','','','','','','','','',false,'');
     }
     
     ngOnInit() { 
@@ -70,7 +71,7 @@ export class NewPlayerComponent implements OnInit {
     
     this._crearUsuario.Read().subscribe({
       next :usuarios=>{
-        //this.ID_USUARIO = usuarios.length +1;
+        this.ID_USUARIO = usuarios.length +1;
         console.log("Read", usuarios);
       },
       error : error=>{
@@ -101,7 +102,7 @@ export class NewPlayerComponent implements OnInit {
       if (this.newPlayerForm.valid) {
   
         // Los metemos en el una Reserva
-        this.crearUsuario = new NewPlayer (name, surname, birthdate,sex, direccion, municipality, province,'', email, membershipId, this.currentDate, '', false, password2);
+        this.crearUsuario = new NewPlayer (this.ID_USUARIO,name, surname, birthdate,sex, direccion, municipality, province,'', email, membershipId, this.currentDate, '', false, password2);
         console.log(this.crearUsuario, " valido");
         // Creamos la reserva
         this.create();

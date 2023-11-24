@@ -15,7 +15,7 @@ export class SelectService {
         
   }
 
-  // ADD USUARIOS
+  //  USUARIOS
   // creamos el usuario
   Create(usuario : any): Observable<any>{
     return this._http1.post('http://localhost:3000/usuarios/', usuario);
