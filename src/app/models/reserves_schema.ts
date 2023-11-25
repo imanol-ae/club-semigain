@@ -1,53 +1,33 @@
 export const RESERVES_COLUMNS_SCHEMA = [
   {
-    key: 'id',
+    key: 'ID_RESERVA',
     type: 'number',
     label: '',
   },
   {
-    key: 'reserve_date',
+    key: 'FECHA_RESERVA',
     type: 'date',
     label: 'Fecha',
   },
   {
-    key: 'reserve_time',
+    key: 'HORA_RESERVA',
     type: 'text',
     label: 'Hora',
   },
   {
-    key: 'name',
-    type: 'text',
-    label: 'Nombre',
-  },
-  {
-    key: 'surname',
-    type: 'text',
-    label: 'Apellidos',
-  },
-  {
-    key: 'installation',
+    key: 'TIPO_PISTA',
     type: 'text',
     label: 'Instalación',
   },
   {
-    key: 'court',
+    key: 'NUM_PISTA',
     type: 'text',
     label: 'Pista',
   },
   {
-    key: 'light',
+    key: 'TIENE_LUZ',
     type: 'text',
     label: 'Luz',
-  },
-  {
-    key: 'price',
-    type: 'number',
-    label: 'Precio',
-  },
-  {
-    key: 'paid',
-    type: 'boolean',
-    label: 'Pagado',
   },
   {
     key: 'isEdit',

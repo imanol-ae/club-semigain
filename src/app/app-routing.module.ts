@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: 'reservas-total', component: AdministratorReservesComponent },
   { path: 'datos-personales-jugador', component: PersonalDataPlayerComponent },
   { path: 'datos-personales-administrador', component: PersonalDataAdminComponent },
-  { path: 'jugador', component: PlayerInAdminComponent },
+  { path: 'jugador/:id', component: PlayerInAdminComponent },
   { path: 'nuevo-jugador', component: NewPlayerComponent }
 ];
 

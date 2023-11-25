@@ -1,3 +1,5 @@
 export class Installation {
-    constructor(public id: number, public installationTypeId: number, public name: string) { }
+    constructor(public ID_PISTA: number, public TIPO_PISTA: string, public NUM_PISTA:number) { 
+      
+    }
   }

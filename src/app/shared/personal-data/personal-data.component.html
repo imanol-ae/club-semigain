@@ -9,7 +9,7 @@
                 <div class="d-flex align-items-center">
                     <div class="ms-3">
                         <p class="text-muted mb-0">Nombre y Apellidos:</p>
-                        <p class="fw mb-1">Alex González Roquero</p>
+                        <p class="fw mb-1">{{this.jugador.NOMBRE+' '+ this.jugador.APELLIDOS}}</p>
                     </div>
                 </div>
             </li>
@@ -17,7 +17,7 @@
                 <div class="d-flex align-items-center">
                     <div class="ms-3">
                         <p class="text-muted mb-0">Año de nacimiento:</p>
-                        <p class="fw mb-1">1988</p>
+                        <p class="fw mb-1">{{this.jugador.FECHA_NACIMIENTO}}</p>
                     </div>
                 </div>
             </li>
@@ -25,7 +25,7 @@
                 <div class="d-flex align-items-center">
                     <div class="ms-3">
                         <p class="text-muted mb-0">Sexo:</p>
-                        <p class="fw mb-1">Masculino</p>
+                        <p class="fw mb-1">{{this.jugador.SEXO}}</p>
                     </div>
                 </div>
             </li>
@@ -33,7 +33,7 @@
                 <div class="d-flex align-items-center">
                     <div class="ms-3">
                         <p class="text-muted mb-0">Número de socio:</p>
-                        <p class="fw mb-1">124A</p>
+                        <p class="fw mb-1">{{this.jugador.NUMERO_SOCIO}}</p>
                     </div>
                 </div>
             </li>
@@ -41,7 +41,7 @@
                 <div class="d-flex align-items-center">
                     <div class="ms-3">
                         <p class="text-muted mb-0">Fecha de alta:</p>
-                        <p class="fw mb-1">12/12/1999</p>
+                        <p class="fw mb-1">{{this.jugador.FECHA_ALTA}}</p>
                     </div>
                 </div>
             </li>
@@ -54,7 +54,7 @@
                     <div class="d-flex align-items-center">
                         <div class="ms-3">
                             <p class="text-muted mb-0">Dirección:</p>
-                            <p class="fw mb-1">C/ Ramón y Cajal, 3 5ºB</p>
+                            <p class="fw mb-1">{{this.jugador.DIRECCION_POSTAL}}</p>
                         </div>
                     </div>
                 </li>
@@ -62,7 +62,7 @@
                     <div class="d-flex align-items-center">
                         <div class="ms-3">
                             <p class="text-muted mb-0">Municipio:</p>
-                            <p class="fw mb-1">Zamudio</p>
+                            <p class="fw mb-1">{{this.jugador.MUNICIPIO}}</p>
                         </div>
                     </div>
                 </li>
@@ -70,7 +70,7 @@
                     <div class="d-flex align-items-center">
                         <div class="ms-3">
                             <p class="text-muted mb-0">Provincia:</p>
-                            <p class="fw mb-1">Bizkaia</p>
+                            <p class="fw mb-1">{{this.jugador.PROVINCIA}}</p>
                         </div>
                     </div>
                 </li>
@@ -78,7 +78,7 @@
                     <div class="d-flex align-items-center">
                         <div class="ms-3">
                             <p class="text-muted mb-0">Correo electrónico:</p>
-                            <p class="fw mb-1">agonroq@gmail.com</p>
+                            <p class="fw mb-1">{{this.jugador.EMAIL}}</p>
                         </div>
                     </div>
                 </li>

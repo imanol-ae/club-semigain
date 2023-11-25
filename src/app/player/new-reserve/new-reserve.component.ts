@@ -46,7 +46,7 @@ export class NewReserveComponent implements OnInit{
 
   onSelect(installationTypeIdEvent: Event) {
     const target = installationTypeIdEvent.target as HTMLSelectElement;
-    this.installations = this.selectService.getInstallations().filter((item) => item.installationTypeId == parseInt(target.value));
+   // this.installations = this.selectService.getInstallations().filter((item) => item.installationTypeId == parseInt(target.value));
   }
   matcher = new MyErrorStateMatcher();
 

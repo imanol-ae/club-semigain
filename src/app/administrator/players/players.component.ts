@@ -6,6 +6,7 @@ import { SelectService } from 'src/app/services/select.service';
 
 // Model new-player
 import { NewPlayer } from 'src/app/models/new-player'; 
+
 @Component({
   selector: 'app-players',
   templateUrl: './players.component.html',
@@ -17,7 +18,7 @@ export class PlayersComponent implements OnInit {
   public arrayBuscarUsuario : Array<NewPlayer> =[];
   public id_eliminar:number;
 
-   /*Constructor con el servicio y iniciacios el atributo de la clase reserva*/
+   /*Constructor con el servicio y Router*/
    constructor(private _usuario : SelectService, public router: Router) {
   }
 

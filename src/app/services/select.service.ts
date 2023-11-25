@@ -10,7 +10,7 @@ import { NewPlayer } from '../models/new-player';
 
 @Injectable()
 export class SelectService {
-
+  
   constructor(public _http1 : HttpClient){
         
   }
@@ -26,6 +26,11 @@ export class SelectService {
       return this._http1.get('http://localhost:3000/usuarios/');
   }
 
+  // leemos un usuario
+  Read_one(ID_USUARIO: number): Observable<any>{
+    return this._http1.get('http://localhost:3000/usuarios/'+ ID_USUARIO);
+}
+
   // modificamos el usuario
   Update(ID_USUARIO: number, datos : any): Observable<any>{
       return this._http1.put('http://localhost:3000/usuarios/' + ID_USUARIO, datos);
@@ -36,6 +41,28 @@ export class SelectService {
       return this._http1.delete('http://localhost:3000/usuarios/' + ID_USUARIO);
   }
 
+  //RESERVAS
+  // leemos un usuario
+  Read_reservas(): Observable<any>{
+    return this._http1.get('http://localhost:3000/reservas/');
+  }
+
+  // leemos un usuario
+  Read_una_reserva(ID_USUARIO: number): Observable<any>{
+    return this._http1.get('http://localhost:3000/reservas/'+ ID_USUARIO);
+  }
+
+  // PISTAS
+  //leemps un id de instalacion
+  Read_una_instalacion(ID_PISTA: number): Observable<any>{
+    return this._http1.get('http://localhost:3000/pistas/'+ ID_PISTA);
+  }
+
+    //leemps un id de instalacion
+    Read_instalaciones(): Observable<any>{
+      return this._http1.get('http://localhost:3000/pistas/');
+    }
+
   getInstallationTypes() {
     return [
      new InstallationType(1, 'Tenis' ),
@@ -45,14 +72,14 @@ export class SelectService {
   }
   getInstallations() {
    return [
-     new Installation(1, 1, '1' ),
-     new Installation(2, 1, '2' ),
-     new Installation(3, 1, '3'),
-     new Installation(4, 1, '4'),
-     new Installation(5, 1, '5' ),
-     new Installation(6, 1, '6'),
-     new Installation(7, 2, '1' ),
-     new Installation(8, 3, '1')
+     new Installation(1,  '1',1),
+     new Installation(2,  '2',1 ),
+     new Installation(3, '3',1),
+     new Installation(4, '4',2),
+     new Installation(5,  '5',3 ),
+     new Installation(6,  '6',1),
+     new Installation(7,  '1',2 ),
+     new Installation(8,  '1',6)
     ];
   }
   getHoursForReservation() {

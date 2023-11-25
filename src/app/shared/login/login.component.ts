@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit{
   public buscarUsuario : NewPlayer;
   public arrayBuscarUsuario : Array<NewPlayer> =[];
 
-   /*Constructor con el servicio y iniciacios el atributo de la clase reserva*/
+   /*Constructor con el servicio, y la ruta*/
    constructor(private _buscarUsuario : SelectService, public router: Router) {
   }
   
