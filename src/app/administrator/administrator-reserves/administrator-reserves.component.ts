@@ -133,7 +133,7 @@ export class AdministratorReservesComponent implements OnInit{
         }
       });
     }
-
+    
     meterReservas(reservas: any, id:any){
       for (let i = 0; i < reservas.length; i++) {
         for (let y = 0; y < this.arrayBuscarPista.length; y++){
@@ -155,6 +155,8 @@ export class AdministratorReservesComponent implements OnInit{
       }
       console.log("Array Pistas",this.arrayBuscarPista);
     }
+
+    
 }
 
 

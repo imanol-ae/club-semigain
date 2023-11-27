@@ -2,7 +2,7 @@
         <div class="admin-title">
             <h1>Administrador/a del Club de Tenis Semigain</h1>
             <div class="user">
-              <span class="badge badge-primary"><i class="fas fa-circle-user"></i> Antonio Martínez Uribe</span>
+              <span class="badge badge-primary"><i class="fas fa-circle-user"></i> {{ this.administrador.NOMBRE +' '+ this.administrador.APELLIDOS }}</span>
             </div>
         </div>  
     
@@ -19,7 +19,7 @@
                     <div class="card-body">
                       <h2 class="card-title">Nuevos jugadores</h2>
                       <p class="card-text">Para que un jugador pueda empezar a utilizar los servicios de la web, un administrador debe validar su solicitud.</p>
-                      <a href="#!" class="btn btn-primary" routerLink="/validar-jugadores">Validar solicitudes</a>
+                      <a href="#!" class="btn btn-primary" [routerLink]="['/validar-jugadores', this.id]">Validar solicitudes</a>
                     </div>
                   </div>
               </div>
@@ -64,7 +64,7 @@
                     <div class="card-body">
                       <h2 class="card-title">Datos personales</h2>
                       <p class="card-text">Puedes modificar los datos personales de que disponemos, incluidos los datos de contacto.</p>
-                      <a href="#!" class="btn btn-primary" routerLink="/datos-personales-administrador">Datos personales</a>
+                      <a href="#!" class="btn btn-primary" [routerLink]="['/datos-personales-administrador', this.id]">Datos personales</a>
                     </div>
                   </div>
               </div>

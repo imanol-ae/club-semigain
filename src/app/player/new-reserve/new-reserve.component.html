@@ -21,7 +21,7 @@
         <mat-label>Pista número:</mat-label>
         <select matNativeControl required formControlName="installation" [errorStateMatcher]="matcher">
           <option value="0">--Selecciona--</option>
-          <option *ngFor="let installation of installations" value= {{installation.id}}>{{installation.name}}</option>
+          <option *ngFor="let installation of installations" value= {{installation.ID_PISTA}}>{{installation.NUM_PISTA}}</option>
         </select>
         <mat-hint>Campo obligatorio</mat-hint>
       </mat-form-field>

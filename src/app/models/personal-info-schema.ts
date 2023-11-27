@@ -1,26 +1,26 @@
 export const COLUMNS_SCHEMA = [
   {
-    key: 'name',
+    key: 'NOMBRE',
     type: 'text',
     label: 'Nombre',
   },
   {
-    key: 'surname',
+    key: 'APELLIDOS',
     type: 'text',
     label: 'Apellidos',
   },
   {
-    key: 'birthdate',
+    key: 'FECHA_NACIMIENTO',
     type: 'date',
     label: 'Nacimiento',
   },
   {
-    key: 'gender',
+    key: 'SEXO',
     type: 'text',
     label: 'Sexo',
   },
   {
-    key: 'id',
+    key: 'NUMERO_SOCIO',
     type: 'text',
     label: 'Número de socio',
   },

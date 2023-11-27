@@ -2,6 +2,7 @@ import { Input, Component, Output, EventEmitter } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
+import { ActivatedRoute, Params } from '@angular/router';
 
 // Servicio
 import { SelectService } from 'src/app/services/select.service'; 
@@ -16,6 +17,8 @@ import { NewPlayer } from 'src/app/models/new-player';
   providers:[SelectService]
 })
 export class LoginComponent implements OnInit{
+
+  public mensaje : String;
   
   formLogin = new FormGroup({
     username: new FormControl('', [Validators.required]),
@@ -33,9 +36,8 @@ export class LoginComponent implements OnInit{
     this.read();
   }
 
-   /*Leemos todos los usuarios y sumamos uno a la longitud*/ 
+   /*Leemos todos los usuarios*/ 
    read():void{
-    
     this._buscarUsuario.Read().subscribe({
       next :usuarios=>{
         console.log("Read", usuarios);
@@ -48,6 +50,7 @@ export class LoginComponent implements OnInit{
   }
 
   submit() {
+    this.mensaje="";
       // Recogemos los datos
       const name: string = this.formLogin.controls["username"].value as string;
       console.log(name);
@@ -57,15 +60,23 @@ export class LoginComponent implements OnInit{
       if (this.formLogin.valid) {
         console.log("DENTRO FORM");
         for (let i = 0; i < this.arrayBuscarUsuario.length; i++) {
-          console.log("DENTRO for");
           if (this.arrayBuscarUsuario[i].ES_ADMIN == true && this.arrayBuscarUsuario[i].NOMBRE == name && this.arrayBuscarUsuario[i].PASS == pass){
+            const id= this.arrayBuscarUsuario[i].ID_USUARIO;
            console.log("ADMIN");
-           this.router.navigate(["/inicio-administrador"]);
+           this.router.navigate(['/inicio-administrador/', id]);
+           //this.router.navigate(["/inicio-administrador/this.arrayBuscarUsuario[i].ID_USUARIO"]);
           }
-          if (this.arrayBuscarUsuario[i].ES_ADMIN == false && this.arrayBuscarUsuario[i].NOMBRE == name && this.arrayBuscarUsuario[i].PASS == pass){
+          if (this.arrayBuscarUsuario[i].ES_ADMIN == false && this.arrayBuscarUsuario[i].NOMBRE == name && this.arrayBuscarUsuario[i].PASS == pass && this.arrayBuscarUsuario[i].FECHA_ALTA){
+            const id= this.arrayBuscarUsuario[i].ID_USUARIO;
             console.log("JUGADOR");
-            this.router.navigate(["/inicio-jugador"]);
+            this.router.navigate(['/inicio-jugador/', id]);
+           } 
+
+           if(!this.arrayBuscarUsuario[i].FECHA_ALTA){
+            this.mensaje="Tu solicitud no esta validada por un administrador";
            }
+            
+          
         }
       }
       else{

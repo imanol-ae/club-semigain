@@ -2,11 +2,11 @@
     <div class="admin-title">
         <h1>Validar las solicitudes de nuevos jugadores/as</h1>
         <div class="user">
-            <a href="#" routerLink="/inicio-administrador"><span class="badge badge-primary"><i class="fas fa-circle-user"></i> Antonio Martínez Uribe</span></a>
+            <a href="#" routerLink="/inicio-administrador"><span class="badge badge-primary"><i class="fas fa-circle-user"></i> {{this.nombre +' '+ this.apellidos}}</span></a>
         </div>
     </div>  
-    <div class="row">
-        <div class="col-xl-4 col-lg-6 mb-4">
+    <div class="row" >
+        <div class="col-xl-4 col-lg-6 mb-4" *ngFor="let item of arrayBuscarUsuario">
           <div class="card">
             <div class="card-body">
               <div class="d-flex">
@@ -16,66 +16,22 @@
                   style="width: 45px; height: 45px"
                   class="rounded-circle"/>
                 <div class="ms-3">
-                  <h2>Andere Pérez Ulzama</h2>
+                  <h2>{{item.NOMBRE + ' ' + item.APELLIDOS}}</h2>
                   <div class="more-info">
-                    <p class="text-muted mb-0">Nº Socio: 124B</p>
-                    <p class="text-muted mb-0">Zamudio (Bizkaia)</p>
-                    <a class="text-muted mb-0" mailto="andere.perez.ulzama@gmail.com">andere.perez.ulzama@gmail.com</a>
+                    <p class="text-muted mb-0">{{item.NUMERO_SOCIO}}</p>
+                    <p class="text-muted mb-0">{{item.MUNICIPIO + ' (' + item.PROVINCIA + ')'}}</p>
+                    <a class="text-muted mb-0" mailto="andere.perez.ulzama@gmail.com">{{item.EMAIL}}</a>
                   </div>
-                  <button type="button" class="btn btn-primary">Validar</button>
-                  <button type="button" class="btn btn-outline-primary" mdbRipple rippleColor="dark" mdbRipple>Eliminar</button>
+                  <button type="button" class="btn btn-primary" (click)="validar(item.ID_USUARIO)" >Validar</button>
+                  <button type="button" class="btn btn-outline-primary" (click)="Eliminar(item.ID_USUARIO)" mdbRipple rippleColor="dark" mdbRipple>Eliminar</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-xl-4 col-lg-6 mb-4">
-          <div class="card">
-            <div class="card-body">
-              <div class="d-flex">
-                <img
-                  src="assets/images/8.jpg"
-                  alt=""
-                  style="width: 45px; height: 45px"
-                  class="rounded-circle"/>
-                <div class="ms-3">
-                  <h2>Alex González Roquero</h2>
-                  <div class="more-info">
-                    <p class="text-muted mb-0">Nº Socio: 104A</p>
-                    <p class="text-muted mb-0">Azkoitia (Gipuzkoa)</p>
-                    <p class="text-muted mb-0">agonroq@gmail.com</p>
-                  </div>
-                  <button type="button" class="btn btn-primary">Validar</button>
-                  <button type="button" class="btn btn-outline-primary" mdbRipple rippleColor="dark" mdbRipple>Eliminar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-4 col-lg-6 mb-4">
-          <div class="card">
-            <div class="card-body">
-              <div class="d-flex">
-                <img
-                  src="assets/images/7.jpg"
-                  alt=""
-                  style="width: 45px; height: 45px"
-                  class="rounded-circle"/>
-                <div class="ms-3">
-                    <h2>María Martínez Uriarte</h2>
-                  <div class="more-info">
-                    <p class="text-muted mb-0">Nº Socio: 043C</p>
-                    <p class="text-muted mb-0">Labastida (Álava)</p>
-                    <p class="text-muted mb-0">uriarte.maria@hotmail.com</p>
-                  </div>
-                    <button type="button" class="btn btn-primary">Validar</button>
-                  <button type="button" class="btn btn-outline-primary" mdbRipple rippleColor="dark" mdbRipple>Eliminar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+       
       </div>
+      
 
 </div>
 

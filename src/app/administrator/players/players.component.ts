@@ -60,7 +60,7 @@ export class PlayersComponent implements OnInit {
       this._usuario.Delete(this.id_eliminar).subscribe({
         next :data=>{
           console.log("Delete", data, this.id_eliminar);
-
+          window.location.reload();
         },
         error : error=>{
           console.log("Delete Error", error);

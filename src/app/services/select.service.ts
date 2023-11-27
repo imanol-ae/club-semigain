@@ -79,7 +79,7 @@ export class SelectService {
      new Installation(5,  '5',3 ),
      new Installation(6,  '6',1),
      new Installation(7,  '1',2 ),
-     new Installation(8,  '1',6)
+     new Installation(8,  '1',3)
     ];
   }
   getHoursForReservation() {

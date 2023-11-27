@@ -1,76 +1,99 @@
 
 <div class="container">
-    <img src="{{this.personalImage}}" class="img-fluid rounded-circle profile" alt="" />
+   <!--<img src="{{this.personalImage}}" class="img-fluid rounded-circle profile" alt="" />--> 
 
     <div class="data-editable">
       <h2 class="bg-light p-2 border-top border-bottom">Datos personales</h2>
-
-      <table mat-table [dataSource]="dataSource">
-        <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema">
-          <th mat-header-cell *matHeaderCellDef>
-            {{ col.label }}
-          </th>
-          <td mat-cell *matCellDef="let element">
-            <div [ngSwitch]="col.type" *ngIf="!element.isEdit">
-              <div class="btn-edit" *ngSwitchCase="'isEdit'">
-                <button mat-button (click)="element.isEdit = !element.isEdit" class="btn btn-primary">Editar</button>
-              </div>
-              <span *ngSwitchCase="'date'">{{ element[col.key] | date: 'mediumDate' }}</span>
-              <span *ngSwitchDefault>{{ element[col.key] }}</span>
-            </div>
-            <div [ngSwitch]="col.type" *ngIf="element.isEdit">
-              <div class="btn-edit" *ngSwitchCase="'isEdit'">
-                <button type="submit" mat-button (click)="element.isEdit = !element.isEdit" class="btn btn-primary">Guardar</button>
-              </div>
-              <mat-form-field class="form-input" *ngSwitchCase="'date'" appearance="fill">
-                <mat-label>Choose a date</mat-label>
-                <input matInput [matDatepicker]="picker" [(ngModel)]="element[col.key]"/>
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-              </mat-form-field>
-              <mat-form-field class="form-input" *ngSwitchCase="'number'">
-                <input type="number" matInput (ngModelChange)="element[col.key] = $event" [ngModel]="element[col.key]"/>
-              </mat-form-field>
-              <mat-form-field class="form-input" *ngSwitchDefault>
-                <input [type]="col.type" matInput [(ngModel)]="element[col.key]"/>
-              </mat-form-field>
-            </div>
-          </td>
+      <form #form="ngForm" name="myForm">
+      <table>
+      <tr>
+        <ng-container *ngFor="let item of arrayLabelsPersonales"> 
+            <td>{{item}}</td>
         </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>
-    </div>
+      </tr>
+      <tr *ngFor="let jugador of arrayJugadores">
+       <!-- <td contenteditable formControlName="nombre">{{jugador.NOMBRE}}</td>
+        <td><input type="text" placeholder="{{jugador.NOMBRE}}" value="q" formControlName="nombre" required></td>
+        <td><input type="text" value="{{jugador.APELLIDOS}}" formControlName="apellidos" required></td>
+        <td><input type="text" value="{{jugador.FECHA_NACIMIENTO}}" formControlName="fecha_nacimiento" required></td>
+        <td><input type="text" value="{{jugador.SEXO}}" formControlName="sexo" required></td>
+        <td><input type="text" value="{{jugador.NUMERO_SOCIO}}" formControlName="numero_socio" required></td>
+        <td><button type="button" class="btn btn-outline-primary" (click)="editar(jugador.ID_USUARIO)" mdbRipple rippleColor="dark" mdbRipple>EDITAR</button></td>-->
 
-    <div class="data-editable">
-      <h2 class="bg-light p-2 border-top border-bottom">Datos de contacto</h2> 
-      <table mat-table [dataSource]="dataSource">
-        <ng-container [matColumnDef]="col.key" *ngFor="let col of contactColumnsSchema">
-          <th mat-header-cell *matHeaderCellDef>
-            {{ col.label }}
-          </th>
-          <td mat-cell *matCellDef="let element">
-            <div [ngSwitch]="col.type" *ngIf="!element.isEdit">
-              <div class="btn-edit" *ngSwitchCase="'isEdit'">
-                <button mat-button (click)="element.isEdit = !element.isEdit" class="btn btn-primary">Editar</button>
-              </div>
-              <span *ngSwitchDefault>{{ element[col.key] }}</span>
-            </div>
-            <div [ngSwitch]="col.type" *ngIf="element.isEdit">
-              <div class="btn-edit" *ngSwitchCase="'isEdit'">
-                <button mat-button (click)="element.isEdit = !element.isEdit" class="btn btn-primary">Guardar</button>
-              </div>
-              <mat-form-field class="form-input" *ngSwitchCase="'number'">
-                <input type="number" matInput (ngModelChange)="element[col.key] = $event" [ngModel]="element[col.key]"/>
-              </mat-form-field>
-              <mat-form-field class="form-input" *ngSwitchDefault>
-                <input [type]="col.type" matInput [(ngModel)]="element[col.key]" />
-              </mat-form-field>
-            </div>
-          </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedContactColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedContactColumns"></tr>
-      </table>
-    </div>
+        
+        <!-- <td><input matInput placeholder="{{jugador.NOMBRE}}" value="{{jugador.NOMBRE}}" formControlName="nombre" ></td>
+        <td><input matInput placeholder="{{jugador.APELLIDOS}}" value="{{jugador.APELLIDOS}}" formControlName="apellidos" ></td>
+        <td><input matInput placeholder="{{jugador.FECHA_NACIMIENTO}}" value="{{jugador.FECHA_NACIMIENTO}}" formControlName="fecha_nacimiento" ></td>
+        <td><input matInput placeholder="{{jugador.SEXO}}" value="{{jugador.SEXO}}" formControlName="sexo" ></td>
+        <td><input matInput placeholder="{{jugador.NUMERO_SOCIO}}" value="{{jugador.NUMERO_SOCIO}}" formControlName="numero_socio"></td>
+        <td><button type="button" class="btn btn-outline-primary" (click)="editar(jugador.ID_USUARIO)" mdbRipple rippleColor="dark" mdbRipple>EDITAR</button></td>-->
+
+        <td><input  type="text" [(ngModel)]="jugador.NOMBRE" name="nombre"  [ngModelOptions]="{standalone: true}" required minlength="4"/></td>
+        <td><input  type="text" [(ngModel)]="jugador.APELLIDOS"  [ngModelOptions]="{standalone: true}" required/></td>
+        <td><input  type="date" min="jugador.FECHA_NACIMIENTO" [(ngModel)]="jugador.FECHA_NACIMIENTO"  [ngModelOptions]="{standalone: true}" required/></td>
+        <td><input  type="text" [(ngModel)]="jugador.SEXO"  [ngModelOptions]="{standalone: true}" /></td>
+        <td><input name="num_socio"  type="text" [(ngModel)]="jugador.NUMERO_SOCIO" [ngModelOptions]="{standalone: true}" required/>
+        <input  type="hidden" [(ngModel)]="jugador.DIRECCION_POSTAL" [ngModelOptions]="{standalone: true}" required />
+        <input  type="hidden" [(ngModel)]="jugador.MUNICIPIO" [ngModelOptions]="{standalone: true}" required />
+        <input  type="hidden"[(ngModel)]="jugador.PROVINCIA" [ngModelOptions]="{standalone: true}" required />
+        <input  type="hidden" [(ngModel)]="jugador.EMAIL" [ngModelOptions]="{standalone: true}" required />
+        <input type="hidden" [(ngModel)]="jugador.FECHA_ALTA" [ngModelOptions]="{standalone: true}" required />
+        <input type="hidden" [(ngModel)]="jugador.FECHA_BAJA" [ngModelOptions]="{standalone: true}" required />
+        <input type="hidden" [(ngModel)]="jugador.PASS" [ngModelOptions]="{standalone: true}" required />
+        <input type="hidden" [(ngModel)]="jugador.ES_ADMIN" [ngModelOptions]="{standalone: true}" required />
+
+        <td><button type="button" class="btn btn-outline-primary" (click)="editar(jugador.ID_USUARIO, jugador.NOMBRE, jugador.APELLIDOS, jugador.FECHA_NACIMIENTO, jugador.SEXO, jugador.NUMERO_SOCIO, jugador.DIRECCION_POSTAL, jugador.MUNICIPIO, jugador.PROVINCIA, jugador.EMAIL, jugador.FECHA_ALTA, jugador.FECHA_BAJA, jugador.PASS, jugador.ES_ADMIN)" mdbRipple rippleColor="dark" mdbRipple>EDITAR</button></td>
+  
+      </tr>
+      <p style="white-space: pre">{{this.mensaje}}</p>
+    
+    </table>
+
+  </form>
+
+  <div class="data-editable">
+    <h2 class="bg-light p-2 border-top border-bottom">Datos Contacto</h2>
+    <form #form="ngForm">
+    <table>
+    <tr>
+      <ng-container *ngFor="let item of arrayLabelsContacto"> 
+          <td>{{item}}</td>
+      </ng-container>
+    </tr>
+    <tr *ngFor="let jugador of arrayJugadores">
+
+      <input  type="hidden" [(ngModel)]="jugador.NOMBRE"  [ngModelOptions]="{standalone: true}" required minlength="4"/>
+      <input  type="hidden" [(ngModel)]="jugador.APELLIDOS"  [ngModelOptions]="{standalone: true}" required/>
+      <input  type="hidden" min="jugador.FECHA_NACIMIENTO" [(ngModel)]="jugador.FECHA_NACIMIENTO"  [ngModelOptions]="{standalone: true}" required/>
+      <input  type="hidden" [(ngModel)]="jugador.SEXO"  [ngModelOptions]="{standalone: true}" />
+      <input  type="hidden" [(ngModel)]="jugador.NUMERO_SOCIO" [ngModelOptions]="{standalone: true}" required />
+      <td><input  type="text" [(ngModel)]="jugador.DIRECCION_POSTAL" [ngModelOptions]="{standalone: true}" required /></td>
+      <td><input  type="text" [(ngModel)]="jugador.MUNICIPIO" [ngModelOptions]="{standalone: true}" required /></td>
+      <td><input  type="text" [(ngModel)]="jugador.PROVINCIA" [ngModelOptions]="{standalone: true}" required /></td>
+      <td><input  type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" [(ngModel)]="jugador.EMAIL"  ngModel #emailref="ngModel" required [ngModelOptions]="{standalone: true}"  /></td>
+      <input type="hidden" [(ngModel)]="jugador.FECHA_ALTA" [ngModelOptions]="{standalone: true}" required />
+      <input type="hidden" [(ngModel)]="jugador.FECHA_BAJA" [ngModelOptions]="{standalone: true}" required />
+      <input type="hidden" [(ngModel)]="jugador.PASS" [ngModelOptions]="{standalone: true}" required />
+      <input type="hidden" [(ngModel)]="jugador.ES_ADMIN" [ngModelOptions]="{standalone: true}" required />
+
+      
+      <div [hidden]="!emailref.errors?.pattern"><!--mejorable-->
+        Invalid pattern
+      </div> 
+
+      <td><button type="button" class="btn btn-outline-primary" (click)="editar(jugador.ID_USUARIO, jugador.NOMBRE, jugador.APELLIDOS, jugador.FECHA_NACIMIENTO, jugador.SEXO, jugador.NUMERO_SOCIO, jugador.DIRECCION_POSTAL, jugador.MUNICIPIO, jugador.PROVINCIA, jugador.EMAIL, jugador.FECHA_ALTA, jugador.FECHA_BAJA, jugador.PASS, jugador.ES_ADMIN)" mdbRipple rippleColor="dark" mdbRipple>EDITAR</button></td>
+      
+    </tr>
+    
+    <p style="white-space: pre">{{this.mensaje}}</p>
+    
+    
+  </table>
+
+</form>
+
+
+
+
+   
 </div>

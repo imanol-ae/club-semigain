@@ -1,11 +1,9 @@
 
 export const RESERVE_DATA = [
   {
-    id: 1,
-    reserve_date: '2023/10/26',
+    ID_RESERVA: 1,
+    FECHA_RESERVA: '2023/10/26',
     reserve_time: "18:00",
-    name: 'Iñaki',
-    surname: 'Lakarra Dudley',
     light: 'Sí',
     installation: 'Tenis',
     court: "Pista 1",

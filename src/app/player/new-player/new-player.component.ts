@@ -102,7 +102,7 @@ export class NewPlayerComponent implements OnInit {
       if (this.newPlayerForm.valid) {
   
         // Los metemos en el una Reserva
-        this.crearUsuario = new NewPlayer (this.ID_USUARIO,name, surname, birthdate,sex, direccion, municipality, province,'', email, membershipId, this.currentDate, '', false, password2);
+        this.crearUsuario = new NewPlayer (this.ID_USUARIO,name, surname, birthdate,sex, direccion, municipality, province,'', email, membershipId, '', '', false, password2);
         console.log(this.crearUsuario, " valido");
         // Creamos la reserva
         this.create();

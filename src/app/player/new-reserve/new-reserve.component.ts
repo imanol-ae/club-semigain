@@ -6,6 +6,8 @@ import { Installation } from '../../models/installation';
 import { InstallationType } from '../../models/installation-type';
 import { ReservationHour } from '../../models/reservation-hours';
 
+import { ActivatedRoute, Params } from '@angular/router';
+
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -30,7 +32,7 @@ export class NewReserveComponent implements OnInit{
 
   newReserveForm: FormGroup;
   
-  constructor(public fb: FormBuilder, private selectService: SelectService) {
+  constructor(public fb: FormBuilder, private selectService: SelectService, private rutaActiva: ActivatedRoute) {
     this.newReserveForm = this.fb.group({
       date: [this.todayDate, [Validators.required]],
       initTime: ['', [Validators.required]],
@@ -42,7 +44,9 @@ export class NewReserveComponent implements OnInit{
     this.installationTypes = this.selectService.getInstallationTypes();
     this.hoursForReservation = this.selectService.getHoursForReservation();
   }
-  ngOnInit( ) { } 
+  ngOnInit( ) {
+    let id = this.rutaActiva.snapshot.paramMap.get('id'); // id del usuario de la reserva
+   } 
 
   onSelect(installationTypeIdEvent: Event) {
     const target = installationTypeIdEvent.target as HTMLSelectElement;
@@ -52,6 +56,15 @@ export class NewReserveComponent implements OnInit{
 
   saveData(){
     console.log(this.newReserveForm.value);
+    const nombre: string = this.newReserveForm.controls["installationType"].value as string;
+    const apellido: string = this.newReserveForm.controls["apellido"].value as string;
+    const correo: string = this.newReserveForm.controls["correo"].value as string;
+    const fecha: string = this.newReserveForm.controls["fecha"].value as string;
+    const hora: string = this.newReserveForm.controls["hora"].value as string;
+
+    if(this.newReserveForm.valid){
+      
+    }
   }
 
 }
