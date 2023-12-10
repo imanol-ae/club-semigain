@@ -2,7 +2,7 @@ export class NewPlayer{
 
     // Atributos
     public ID_USUARIO: Number;
-    public NOMBRE : string;
+    public NAME : string;
     public APELLIDOS: string;
     public FECHA_NACIMIENTO : string;
     public SEXO: string;
@@ -15,13 +15,13 @@ export class NewPlayer{
     public FECHA_ALTA: string;
     public FECHA_BAJA: string;
     public ES_ADMIN: boolean;
-    public PASS: string;
+    public PASSWORD: string;
 
 
     // Contructor
-    constructor( ID_USUARIO: Number,NOMBRE : string, APELLIDOS: string, FECHA_NACIMIENTO : string, SEXO: string, DIRECCION_POSTAL: string, MUNICIPIO: string, PROVINCIA: string, IMAGEN_PERFIL : string,EMAIL: string, NUMERO_SOCIO:string,FECHA_ALTA: string, FECHA_BAJA: string, ES_ADMIN: boolean, PASS:string){
+    constructor( ID_USUARIO: Number,NAME : string, APELLIDOS: string, FECHA_NACIMIENTO : string, SEXO: string, DIRECCION_POSTAL: string, MUNICIPIO: string, PROVINCIA: string, IMAGEN_PERFIL : string,EMAIL: string, NUMERO_SOCIO:string,FECHA_ALTA: string, FECHA_BAJA: string, ES_ADMIN: boolean, PASSWORD:string){
         this.ID_USUARIO = ID_USUARIO;
-        this.NOMBRE = NOMBRE;
+        this.NAME = NAME;
         this.APELLIDOS = APELLIDOS;
         this.FECHA_NACIMIENTO = FECHA_NACIMIENTO;
         this.SEXO = SEXO;
@@ -34,7 +34,7 @@ export class NewPlayer{
         this.FECHA_ALTA = FECHA_ALTA;
         this.FECHA_BAJA = FECHA_BAJA;
         this.ES_ADMIN = ES_ADMIN;
-        this.PASS = PASS;
+        this.PASSWORD = PASSWORD;
     }
 
     // Metodos

@@ -32,7 +32,7 @@ export class AdministratorHomeComponent implements OnInit {
     this._buscarAdmin.Read_one(id).subscribe({
       next :data=>{
         console.log("Buscar un juagor", data);
-        this.administrador = new NewPlayer(data.ID_USUARIO,data.NOMBRE,data.APELLIDOS,data.FECHA_NACIMIENTO,data.SEXO, data.DIRECCION_POSTAL,data.MUNICIPIO,data.PROVINCIA,data.IMAGEN_PERFIL, data.EMAIL, data.NUMERO_SOCIO, data.FECHA_BAJA, data.FECHA_ALTA, data.ES_ADMIN, data.PASS);
+        this.administrador = new NewPlayer(data.ID_USUARIO,data.NAME,data.APELLIDOS,data.FECHA_NACIMIENTO,data.SEXO, data.DIRECCION_POSTAL,data.MUNICIPIO,data.PROVINCIA,data.IMAGEN_PERFIL, data.EMAIL, data.NUMERO_SOCIO, data.FECHA_BAJA, data.FECHA_ALTA, data.ES_ADMIN, data.PASSWORD);
        // this.id= this.administrador.ID_USUARIO;
       },
       error : error=>{

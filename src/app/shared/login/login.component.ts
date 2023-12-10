@@ -58,15 +58,14 @@ export class LoginComponent implements OnInit{
       console.log(pass);
       // Si el formulario es valido
       if (this.formLogin.valid) {
-        console.log("DENTRO FORM");
         for (let i = 0; i < this.arrayBuscarUsuario.length; i++) {
-          if (this.arrayBuscarUsuario[i].ES_ADMIN == true && this.arrayBuscarUsuario[i].NOMBRE == name && this.arrayBuscarUsuario[i].PASS == pass){
+          if (this.arrayBuscarUsuario[i].ES_ADMIN == true && this.arrayBuscarUsuario[i].NAME == name && this.arrayBuscarUsuario[i].PASSWORD == pass){
             const id= this.arrayBuscarUsuario[i].ID_USUARIO;
            console.log("ADMIN");
            this.router.navigate(['/inicio-administrador/', id]);
            //this.router.navigate(["/inicio-administrador/this.arrayBuscarUsuario[i].ID_USUARIO"]);
           }
-          if (this.arrayBuscarUsuario[i].ES_ADMIN == false && this.arrayBuscarUsuario[i].NOMBRE == name && this.arrayBuscarUsuario[i].PASS == pass && this.arrayBuscarUsuario[i].FECHA_ALTA){
+          if (this.arrayBuscarUsuario[i].ES_ADMIN == false && this.arrayBuscarUsuario[i].NAME == name && this.arrayBuscarUsuario[i].PASSWORD == pass && this.arrayBuscarUsuario[i].FECHA_ALTA){
             const id= this.arrayBuscarUsuario[i].ID_USUARIO;
             console.log("JUGADOR");
             this.router.navigate(['/inicio-jugador/', id]);
@@ -75,8 +74,6 @@ export class LoginComponent implements OnInit{
            if(!this.arrayBuscarUsuario[i].FECHA_ALTA){
             this.mensaje="Tu solicitud no esta validada por un administrador";
            }
-            
-          
         }
       }
       else{
