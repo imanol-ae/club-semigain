@@ -59,7 +59,7 @@ export class NewPlayerComponent implements OnInit {
 
     /*Constructor con el servicio y iniciacios el atributo de la clase reserva*/
     constructor(private _crearUsuario : SelectService) {
-      this.crearUsuario = new NewPlayer(0,'','','','','','','','','','','','',false,'');
+      this.crearUsuario = new NewPlayer(0,'','','','','','','','','','','','','','');
     }
     
     ngOnInit() { 
@@ -72,7 +72,7 @@ export class NewPlayerComponent implements OnInit {
     this._crearUsuario.Read().subscribe({
       next :usuarios=>{
         this.ID_USUARIO = usuarios.length +1;
-        console.log("Read", usuarios);
+        console.log("Read", usuarios.data);
       },
       error : error=>{
         console.log("Read Error", error);
@@ -102,7 +102,7 @@ export class NewPlayerComponent implements OnInit {
       if (this.newPlayerForm.valid) {
   
         // Los metemos en el una Reserva
-        this.crearUsuario = new NewPlayer (this.ID_USUARIO,name, surname, birthdate,sex, direccion, municipality, province,'', email, membershipId, '', '', false, password2);
+        this.crearUsuario = new NewPlayer (this.ID_USUARIO,name, surname, birthdate,sex, direccion, municipality, province,'', email, membershipId, '', '', 'NO', password2);
         console.log(this.crearUsuario, " valido");
         // Creamos la reserva
         this.create();

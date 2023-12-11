@@ -18,18 +18,24 @@ export class SelectService {
   //  USUARIOS
   // creamos el usuario
   Create(usuario : any): Observable<any>{
-    return this._http1.post('http://51.20.81.158:80/api/usuarios/', usuario);
+    return this._http1.post('http://51.20.87.109/api/auth/register/', usuario);
+    
   }
+
+  /*  Create(usuario : any): Observable<any>{
+    return this._http1.post('http://51.20.87.109/api/auth/register/', usuario);
+    
+  }*/
 // auth/register
 // auth/login
-// leemos el usuario
+// leemos los usuarios
   Read(): Observable<any>{
-      return this._http1.get('http://51.20.81.158:80/api/usuarios');
+      return this._http1.get('http://127.0.0.1:8000/api/usuarios');
   }
 
   // leemos un usuario
-  Read_one(ID_USUARIO: number): Observable<any>{
-    return this._http1.get('http://51.20.81.158:80/api/usuarios/'+ ID_USUARIO);
+  Read_one(id: number): Observable<any>{
+    return this._http1.get('http://127.0.0.1:8000/api/usuarios/'+ id);
 }
 
   // modificamos el usuario

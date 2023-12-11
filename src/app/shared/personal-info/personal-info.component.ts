@@ -48,7 +48,7 @@ export class PersonalInfoComponent implements OnInit{
 
   constructor(private rutaActiva: ActivatedRoute, private _jugadores : SelectService) { 
   
-    this.jugador = new NewPlayer(0,'','','','','','','','','','','','',false,'');
+    this.jugador = new NewPlayer(0,'','','','','','','','','','','','','','');
     //this.reservas = new LookReserve(0,'','','',0,0,'',0);
    // this.instalacion = new Installation(0,'',0);
     this.arrayLabelsPersonales = ['Nombre', 'Apellidos', 'Nacimiento', 'Sexo', 'Numero de socio'];
@@ -77,10 +77,11 @@ export class PersonalInfoComponent implements OnInit{
   getJugador(id:any):void{
     // Buscamos todos los jugadores
       this._jugadores.Read_one(id).subscribe({
-        next :data=>{
-          console.log("Buscar jugadores", data);
+        next :usuario=>{
+          console.log("Buscar jugador", usuario.data);
          // this.meterJugadores(data);
-          this.arrayJugadores.push(data);
+          this.arrayJugadores.push(usuario.data);
+          console.log("Array jugador",this.arrayJugadores);
         },
         error : error=>{
           console.log("Buscar un jugador", error);
@@ -91,7 +92,7 @@ export class PersonalInfoComponent implements OnInit{
 
 
 
-  editar(id:number, nom :string, ape:string, fecha_na : string, sex : string, num_so:string, dire:string, muni:string, provin : string, email:string, fecha_alt:string, fecha_baj : string, pass:string, es_admin:boolean){
+  editar(id:number, nom :string, ape:string, fecha_na : string, sex : string, num_so:string, dire:string, muni:string, provin : string, email:string, fecha_alt:string, fecha_baj : string, pass:string, es_admin:string){
     // Recogemos los datos
     this.mensaje="";
     const buscar = num_so.match(this.patronNumSocio);

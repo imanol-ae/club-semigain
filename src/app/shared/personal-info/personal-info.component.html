@@ -28,19 +28,19 @@
         <td><input matInput placeholder="{{jugador.NUMERO_SOCIO}}" value="{{jugador.NUMERO_SOCIO}}" formControlName="numero_socio"></td>
         <td><button type="button" class="btn btn-outline-primary" (click)="editar(jugador.ID_USUARIO)" mdbRipple rippleColor="dark" mdbRipple>EDITAR</button></td>-->
 
-        <td><input  type="text" [(ngModel)]="jugador.NOMBRE" name="nombre"  [ngModelOptions]="{standalone: true}" required minlength="4"/></td>
-        <td><input  type="text" [(ngModel)]="jugador.APELLIDOS"  [ngModelOptions]="{standalone: true}" required/></td>
-        <td><input  type="date" min="jugador.FECHA_NACIMIENTO" [(ngModel)]="jugador.FECHA_NACIMIENTO"  [ngModelOptions]="{standalone: true}" required/></td>
-        <td><input  type="text" [(ngModel)]="jugador.SEXO"  [ngModelOptions]="{standalone: true}" /></td>
-        <td><input name="num_socio"  type="text" [(ngModel)]="jugador.NUMERO_SOCIO" [ngModelOptions]="{standalone: true}" required/>
-        <input  type="hidden" [(ngModel)]="jugador.DIRECCION_POSTAL" [ngModelOptions]="{standalone: true}" required />
-        <input  type="hidden" [(ngModel)]="jugador.MUNICIPIO" [ngModelOptions]="{standalone: true}" required />
-        <input  type="hidden"[(ngModel)]="jugador.PROVINCIA" [ngModelOptions]="{standalone: true}" required />
-        <input  type="hidden" [(ngModel)]="jugador.EMAIL" [ngModelOptions]="{standalone: true}" required />
-        <input type="hidden" [(ngModel)]="jugador.FECHA_ALTA" [ngModelOptions]="{standalone: true}" required />
-        <input type="hidden" [(ngModel)]="jugador.FECHA_BAJA" [ngModelOptions]="{standalone: true}" required />
-        <input type="hidden" [(ngModel)]="jugador.PASS" [ngModelOptions]="{standalone: true}" required />
-        <input type="hidden" [(ngModel)]="jugador.ES_ADMIN" [ngModelOptions]="{standalone: true}" required />
+        <td><input  type="text" [(ngModel)]="jugador.name" name="nombre"  [ngModelOptions]="{standalone: true}" required minlength="4"/></td>
+        <td><input  type="text" [(ngModel)]="jugador.apellidos"  [ngModelOptions]="{standalone: true}" required/></td>
+        <td><input  type="date" min="jugador.fecha_nacimiento" [(ngModel)]="jugador.FECHA_NACIMIENTO"  [ngModelOptions]="{standalone: true}" required/></td>
+        <td><input  type="text" [(ngModel)]="jugador.sexo"  [ngModelOptions]="{standalone: true}" /></td>
+        <td><input name="num_socio"  type="text" [(ngModel)]="jugador.numero_socio" [ngModelOptions]="{standalone: true}" required/>
+        <input  type="hidden" [(ngModel)]="jugador.direccion_postal" [ngModelOptions]="{standalone: true}" required />
+        <input  type="hidden" [(ngModel)]="jugador.municipio" [ngModelOptions]="{standalone: true}" required />
+        <input  type="hidden"[(ngModel)]="jugador.provincia" [ngModelOptions]="{standalone: true}" required />
+        <input  type="hidden" [(ngModel)]="jugador.email" [ngModelOptions]="{standalone: true}" required />
+        <input type="hidden" [(ngModel)]="jugador.fecha_alta" [ngModelOptions]="{standalone: true}" required />
+        <input type="hidden" [(ngModel)]="jugador.fecha_baja" [ngModelOptions]="{standalone: true}" required />
+        <input type="hidden" [(ngModel)]="jugador.password" [ngModelOptions]="{standalone: true}" required />
+        <input type="hidden" [(ngModel)]="jugador.es_admin" [ngModelOptions]="{standalone: true}" required />
 
         <td><button type="button" class="btn btn-outline-primary" (click)="editar(jugador.ID_USUARIO, jugador.NOMBRE, jugador.APELLIDOS, jugador.FECHA_NACIMIENTO, jugador.SEXO, jugador.NUMERO_SOCIO, jugador.DIRECCION_POSTAL, jugador.MUNICIPIO, jugador.PROVINCIA, jugador.EMAIL, jugador.FECHA_ALTA, jugador.FECHA_BAJA, jugador.PASS, jugador.ES_ADMIN)" mdbRipple rippleColor="dark" mdbRipple>EDITAR</button></td>
   
@@ -62,19 +62,19 @@
     </tr>
     <tr *ngFor="let jugador of arrayJugadores">
 
-      <input  type="hidden" [(ngModel)]="jugador.NOMBRE"  [ngModelOptions]="{standalone: true}" required minlength="4"/>
-      <input  type="hidden" [(ngModel)]="jugador.APELLIDOS"  [ngModelOptions]="{standalone: true}" required/>
-      <input  type="hidden" min="jugador.FECHA_NACIMIENTO" [(ngModel)]="jugador.FECHA_NACIMIENTO"  [ngModelOptions]="{standalone: true}" required/>
-      <input  type="hidden" [(ngModel)]="jugador.SEXO"  [ngModelOptions]="{standalone: true}" />
-      <input  type="hidden" [(ngModel)]="jugador.NUMERO_SOCIO" [ngModelOptions]="{standalone: true}" required />
-      <td><input  type="text" [(ngModel)]="jugador.DIRECCION_POSTAL" [ngModelOptions]="{standalone: true}" required /></td>
-      <td><input  type="text" [(ngModel)]="jugador.MUNICIPIO" [ngModelOptions]="{standalone: true}" required /></td>
-      <td><input  type="text" [(ngModel)]="jugador.PROVINCIA" [ngModelOptions]="{standalone: true}" required /></td>
-      <td><input  type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" [(ngModel)]="jugador.EMAIL"  ngModel #emailref="ngModel" required [ngModelOptions]="{standalone: true}"  /></td>
-      <input type="hidden" [(ngModel)]="jugador.FECHA_ALTA" [ngModelOptions]="{standalone: true}" required />
-      <input type="hidden" [(ngModel)]="jugador.FECHA_BAJA" [ngModelOptions]="{standalone: true}" required />
-      <input type="hidden" [(ngModel)]="jugador.PASS" [ngModelOptions]="{standalone: true}" required />
-      <input type="hidden" [(ngModel)]="jugador.ES_ADMIN" [ngModelOptions]="{standalone: true}" required />
+      <input  type="hidden" [(ngModel)]="jugador.name"  [ngModelOptions]="{standalone: true}" required minlength="4"/>
+      <input  type="hidden" [(ngModel)]="jugador.apellidos"  [ngModelOptions]="{standalone: true}" required/>
+      <input  type="hidden" min="jugador.fecha_nacimiento" [(ngModel)]="jugador.FECHA_NACIMIENTO"  [ngModelOptions]="{standalone: true}" required/>
+      <input  type="hidden" [(ngModel)]="jugador.sexo"  [ngModelOptions]="{standalone: true}" />
+      <input  type="hidden" [(ngModel)]="jugador.numero_socio" [ngModelOptions]="{standalone: true}" required />
+      <td><input  type="text" [(ngModel)]="jugador.direccion_postal" [ngModelOptions]="{standalone: true}" required /></td>
+      <td><input  type="text" [(ngModel)]="jugador.municipio" [ngModelOptions]="{standalone: true}" required /></td>
+      <td><input  type="text" [(ngModel)]="jugador.provincia" [ngModelOptions]="{standalone: true}" required /></td>
+      <td><input  type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" [(ngModel)]="jugador.email"  ngModel #emailref="ngModel" required [ngModelOptions]="{standalone: true}"  /></td>
+      <input type="hidden" [(ngModel)]="jugador.fecha_alta" [ngModelOptions]="{standalone: true}" required />
+      <input type="hidden" [(ngModel)]="jugador.fecha_baja" [ngModelOptions]="{standalone: true}" required />
+      <input type="hidden" [(ngModel)]="jugador.password" [ngModelOptions]="{standalone: true}" required />
+      <input type="hidden" [(ngModel)]="jugador.es_admin" [ngModelOptions]="{standalone: true}" required />
 
       
       <div [hidden]="!emailref.errors?.pattern"><!--mejorable-->
