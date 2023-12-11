@@ -18,7 +18,7 @@ export class AdministratorHomeComponent implements OnInit {
     public id : Number;
 
     constructor(private rutaActiva: ActivatedRoute, private _buscarAdmin: SelectService) {
-      this.administrador = new NewPlayer(0,'','','','','','','','','','','','',false,'');
+      this.administrador = new NewPlayer(0,'','','','','','','','','','','','','','');
 
     }
 

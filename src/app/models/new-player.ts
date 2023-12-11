@@ -1,40 +1,40 @@
 export class NewPlayer{
 
     // Atributos
-    public ID_USUARIO: Number;
-    public NAME : string;
-    public APELLIDOS: string;
-    public FECHA_NACIMIENTO : string;
-    public SEXO: string;
-    public DIRECCION_POSTAL: string;
-    public MUNICIPIO: string;
-    public PROVINCIA: string;
-    public IMAGEN_PERFIL : string;
-    public EMAIL: string;
-    public NUMERO_SOCIO: string;
-    public FECHA_ALTA: string;
-    public FECHA_BAJA: string;
-    public ES_ADMIN: boolean;
-    public PASSWORD: string;
+    public id: Number;
+    public name : string;
+    public apellidos: string;
+    public fecha_nacimiento : string;
+    public sexo: string;
+    public direccion_postal: string;
+    public municipio: string;
+    public provincia: string;
+    public imagen_perfil : string;
+    public email: string;
+    public numero_socio: string;
+    public fecha_alta: string;
+    public fecha_baja: string;
+    public es_admin: string;
+    public password: string;
 
 
     // Contructor
-    constructor( ID_USUARIO: Number,NAME : string, APELLIDOS: string, FECHA_NACIMIENTO : string, SEXO: string, DIRECCION_POSTAL: string, MUNICIPIO: string, PROVINCIA: string, IMAGEN_PERFIL : string,EMAIL: string, NUMERO_SOCIO:string,FECHA_ALTA: string, FECHA_BAJA: string, ES_ADMIN: boolean, PASSWORD:string){
-        this.ID_USUARIO = ID_USUARIO;
-        this.NAME = NAME;
-        this.APELLIDOS = APELLIDOS;
-        this.FECHA_NACIMIENTO = FECHA_NACIMIENTO;
-        this.SEXO = SEXO;
-        this.DIRECCION_POSTAL = DIRECCION_POSTAL;
-        this.MUNICIPIO= MUNICIPIO;
-        this.PROVINCIA = PROVINCIA;
-        this.IMAGEN_PERFIL = IMAGEN_PERFIL;
-        this.EMAIL = EMAIL;
-        this.NUMERO_SOCIO = NUMERO_SOCIO;
-        this.FECHA_ALTA = FECHA_ALTA;
-        this.FECHA_BAJA = FECHA_BAJA;
-        this.ES_ADMIN = ES_ADMIN;
-        this.PASSWORD = PASSWORD;
+    constructor( id: Number,name : string, apellidos: string, fecha_nacimiento : string, sexo: string, direccion_postal: string, municipio: string, provincia: string, imagen_perfil : string,email: string, numero_socio:string,fecha_alta: string, fecha_baja: string, es_admin: string, password:string){
+        this.id = id;
+        this.name = name;
+        this.apellidos = apellidos;
+        this.fecha_nacimiento = fecha_nacimiento;
+        this.sexo = sexo;
+        this.direccion_postal = direccion_postal;
+        this.municipio= municipio;
+        this.provincia = provincia;
+        this.imagen_perfil = imagen_perfil;
+        this.email = email;
+        this.numero_socio = numero_socio;
+        this.fecha_alta = fecha_alta;
+        this.fecha_baja = fecha_baja;
+        this.es_admin = es_admin;
+        this.password = password;
     }
 
     // Metodos

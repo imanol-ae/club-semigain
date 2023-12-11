@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -84,12 +87,16 @@
               "browserTarget": "club-semigain:build:development"
             }
           },
+          "options": {
+            "browserTarget": "demo-proxy-angular:build",
+            "proxyConfig": "proxy.conf.json"
+          },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "club-semigain:build"
+            "browserTarget": "club-semigain:build"     
           }
         },
         "test": {

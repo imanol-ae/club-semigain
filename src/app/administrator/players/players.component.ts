@@ -42,7 +42,7 @@ export class PlayersComponent implements OnInit {
 
   meterUsuarios(usuarios: any){
     for (let i = 0; i < usuarios.length; i++) {
-      if(usuarios[i].ES_ADMIN==false){
+      if(usuarios[i].es_admin=='No'){
         this.arrayBuscarUsuario.push(usuarios[i]);
       }
       
