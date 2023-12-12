@@ -30,7 +30,7 @@
 
         <td><input  type="text" [(ngModel)]="jugador.name" name="nombre"  [ngModelOptions]="{standalone: true}" required minlength="4"/></td>
         <td><input  type="text" [(ngModel)]="jugador.apellidos"  [ngModelOptions]="{standalone: true}" required/></td>
-        <td><input  type="date" min="jugador.fecha_nacimiento" [(ngModel)]="jugador.FECHA_NACIMIENTO"  [ngModelOptions]="{standalone: true}" required/></td>
+        <td><input  type="date" min="this.fecha_prueba" [(ngModel)]="this.fecha_prueba"  [ngModelOptions]="{standalone: true}" required/></td>
         <td><input  type="text" [(ngModel)]="jugador.sexo"  [ngModelOptions]="{standalone: true}" /></td>
         <td><input name="num_socio"  type="text" [(ngModel)]="jugador.numero_socio" [ngModelOptions]="{standalone: true}" required/>
         <input  type="hidden" [(ngModel)]="jugador.direccion_postal" [ngModelOptions]="{standalone: true}" required />
@@ -42,11 +42,10 @@
         <input type="hidden" [(ngModel)]="jugador.password" [ngModelOptions]="{standalone: true}" required />
         <input type="hidden" [(ngModel)]="jugador.es_admin" [ngModelOptions]="{standalone: true}" required />
 
-        <td><button type="button" class="btn btn-outline-primary" (click)="editar(jugador.ID_USUARIO, jugador.NOMBRE, jugador.APELLIDOS, jugador.FECHA_NACIMIENTO, jugador.SEXO, jugador.NUMERO_SOCIO, jugador.DIRECCION_POSTAL, jugador.MUNICIPIO, jugador.PROVINCIA, jugador.EMAIL, jugador.FECHA_ALTA, jugador.FECHA_BAJA, jugador.PASS, jugador.ES_ADMIN)" mdbRipple rippleColor="dark" mdbRipple>EDITAR</button></td>
+        <td><button type="button" class="btn btn-outline-primary" (click)="editar(jugador.id, jugador.name, jugador.apellidos, this.fecha_prueba, jugador.sexo, jugador.numero_socio, jugador.direccion_postal, jugador.municipio, jugador.provincia, jugador.email, jugador.fecha_alta, jugador.fecha_baja, jugador.password, jugador.es_admin)" mdbRipple rippleColor="dark" mdbRipple>EDITAR</button></td>
   
       </tr>
       <p style="white-space: pre">{{this.mensaje}}</p>
-    
     </table>
 
   </form>
@@ -64,7 +63,7 @@
 
       <input  type="hidden" [(ngModel)]="jugador.name"  [ngModelOptions]="{standalone: true}" required minlength="4"/>
       <input  type="hidden" [(ngModel)]="jugador.apellidos"  [ngModelOptions]="{standalone: true}" required/>
-      <input  type="hidden" min="jugador.fecha_nacimiento" [(ngModel)]="jugador.FECHA_NACIMIENTO"  [ngModelOptions]="{standalone: true}" required/>
+      <input  type="hidden" min="jugador.fecha_nacimiento" [(ngModel)]="jugador.fecha_nacimiento"  [ngModelOptions]="{standalone: true}" required/>
       <input  type="hidden" [(ngModel)]="jugador.sexo"  [ngModelOptions]="{standalone: true}" />
       <input  type="hidden" [(ngModel)]="jugador.numero_socio" [ngModelOptions]="{standalone: true}" required />
       <td><input  type="text" [(ngModel)]="jugador.direccion_postal" [ngModelOptions]="{standalone: true}" required /></td>
@@ -81,14 +80,15 @@
         Invalid pattern
       </div> 
 
-      <td><button type="button" class="btn btn-outline-primary" (click)="editar(jugador.ID_USUARIO, jugador.NOMBRE, jugador.APELLIDOS, jugador.FECHA_NACIMIENTO, jugador.SEXO, jugador.NUMERO_SOCIO, jugador.DIRECCION_POSTAL, jugador.MUNICIPIO, jugador.PROVINCIA, jugador.EMAIL, jugador.FECHA_ALTA, jugador.FECHA_BAJA, jugador.PASS, jugador.ES_ADMIN)" mdbRipple rippleColor="dark" mdbRipple>EDITAR</button></td>
+      <td><button type="button" class="btn btn-outline-primary" (click)="editar(jugador.id, jugador.name, jugador.apellidos, jugador.fecha_nacimiento, jugador.sexo, jugador.numero_socio, jugador.direccion_postal, jugador.municipio, jugador.provincia, jugador.email, jugador.fecha_alta, jugador.fecha_baja, jugador.password, jugador.es_admin)" mdbRipple rippleColor="dark" mdbRipple>EDITAR</button></td>
       
     </tr>
     
     <p style="white-space: pre">{{this.mensaje}}</p>
-    
+
     
   </table>
+  <p style="white-space: pre">{{this.editado}}</p>
 
 </form>
 

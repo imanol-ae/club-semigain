@@ -29,7 +29,10 @@ export class PlayerReservesComponent implements OnInit {
 
   public arrayReservas : Array<LookReserve> =[];
   public id : Number;
-  
+  public deuda : Number;
+  public fecha: Date;
+  public reservas:LookReserve;
+
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator,{static:true}) paginator:MatPaginator;
@@ -39,15 +42,17 @@ export class PlayerReservesComponent implements OnInit {
 
   constructor(private rutaActiva: ActivatedRoute, private _reservas : SelectService) { 
   //  this.dataSource = new MatTableDataSource(this.arrayReservas);
+  this.reservas = new LookReserve(0,this.fecha,'','',0,0,'',0);
 
   }
   ngOnInit() {
     let id=this.rutaActiva.snapshot.paramMap.get('id');
     this.getAllReservas(id);
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.paginator._intl.itemsPerPageLabel = 'Reservas por página';
+    //this.dataSource.sort = this.sort;
+    //this.dataSource.paginator = this.paginator;
+    //this.paginator._intl.itemsPerPageLabel = 'Reservas por página';
     //this.dataSource = new MatTableDataSource(this.arrayReservas);
+    this.deuda=0;
   }
 
   applyFilter(filterValue: string) {
@@ -69,11 +74,11 @@ export class PlayerReservesComponent implements OnInit {
   
       // Buscamos todos los jugadores
         this._reservas.Read_reservas().subscribe({
-          next :data=>{
-            console.log("Buscar jugadores", data);
+          next :reserva=>{
+            console.log("Buscar Reservas", reserva.data);
            // this.meterJugadores(data);
             //this.arrayReservas.push(data);
-            this.meterArrayReservas(data, id);
+            this.meterArrayReservas(reserva.data, id);
           },
           error : error=>{
             console.log("Buscar un jugador", error);
@@ -83,11 +88,13 @@ export class PlayerReservesComponent implements OnInit {
 
     meterArrayReservas(data:any, id:any):void{
       for (let i = 0; i < data.length; i++) {
-       if(data[i].ID_USUARIO==id){
+       if(data[i].usuario.id==id){
         this.arrayReservas.push(data[i]);
+        if(data[i].pago.pagado=='NO'){
+          this.deuda+=data[i].pago.cantidad;
+          console.log(data[i].fecha_reserva);
+        }
        }
-       
-        
     }
     console.log("Array Reservas",this.arrayReservas);
     }

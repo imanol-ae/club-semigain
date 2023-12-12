@@ -16,11 +16,12 @@ import { SelectService } from 'src/app/services/select.service';
 export class PersonalDataComponent implements OnInit {
 
   public jugador:NewPlayer;
-  
+  public fecha: Date;
+
   constructor(private rutaActiva: ActivatedRoute, private _usuario : SelectService) { 
    // this.rutaActiva.snapshot.paramMap.get('id');
     //console.log(this.id);
-    this.jugador = new NewPlayer(0,'','','','','','','','','','','','','','');
+    this.jugador = new NewPlayer(0,'','',this.fecha,'','','','','','','','',this.fecha,'','');
 
 
   }

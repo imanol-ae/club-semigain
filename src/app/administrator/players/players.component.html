@@ -16,8 +16,8 @@
                 style="width: 45px; height: 45px"
                 class="rounded-circle" routerLink="/jugador"/></a>
               <div class="ms-3">
-                <a href="#" class="fw-bold mb-1" routerLink="/jugador">{{usuario.NOMBRE}}</a>
-                <p class="text-muted mb-0">{{usuario.EMAIL}}</p>
+                <a href="#" class="fw-bold mb-1" routerLink="/jugador">{{usuario.name}}</a>
+                <p class="text-muted mb-0">{{usuario.email}}</p>
                 <button type="button" class="btn btn-primary" [routerLink]="['/jugador', usuario.id]">Entrar</button>
                 <button type="button" class="btn btn-outline-primary" (click)="eliminar(usuario.id)" mdbRipple rippleColor="dark" mdbRipple>Eliminar</button>
               </div>

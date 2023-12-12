@@ -1,4 +1,4 @@
-
+<!--
 <mat-form-field>
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
 </mat-form-field>
@@ -21,3 +21,25 @@
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>
 <span class="badge badge-danger">DEUDA TOTAL: {{ getTotal() }} €</span>
+-->
+<div class="table-responsive">
+  <table class="table">
+    <tr>
+      <td>Fecha</td>
+      <td>Hora</td>
+      <td>Luz</td>
+      <td>Tipo de pista</td>
+      <td>Numero de pista</td>
+      <td>Pagado</td>
+    </tr>
+    <tr *ngFor="let item of arrayReservas">
+      <td>{{item.fecha_reserva.substring(0,10)}}</td>
+      <td>{{item.hora_reserva}}</td>
+      <td>{{item.tiene_luz}}</td>
+      <td>{{item.pista.tipo_pista}}</td>
+      <td>{{item.pista.num_pista}}</td>
+      <td>{{item.pago.pagado}}</td>
+    </tr>
+  </table>
+  <p *ngIf="this.deuda !=0">{{'DEUDA TOTAL: '+this.deuda + '€'}}</p>
+</div>
