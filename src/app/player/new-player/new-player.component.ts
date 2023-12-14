@@ -7,10 +7,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { matchValidator } from './confirm-password.validator';
 
 // Servicio
-import { SelectService } from 'src/app/services/select.service'; 
+import { SelectService } from 'src/app/services/select.service';
 
 // Model new-player
-import { NewPlayer } from 'src/app/models/new-player'; 
+import { NewPlayer } from 'src/app/models/new-player';
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -35,10 +35,10 @@ export class NewPlayerComponent implements OnInit {
 
     public crearUsuario : NewPlayer;
     public ID_USUARIO:number;
-    
+
     public fb: FormBuilder;
 
-    /* Para saber la fecha actual*/ 
+    /* Para saber la fecha actual*/
     public currentDate = new Date().toISOString().substring(0, 10);
 
     /*formularios con sus validaciones*/
@@ -59,32 +59,32 @@ export class NewPlayerComponent implements OnInit {
 
     /*Constructor con el servicio y iniciacios el atributo de la clase reserva*/
     constructor(private _crearUsuario : SelectService) {
-      this.crearUsuario = new NewPlayer(0,'','','','','','','','','','','','',false,'');
+      this.crearUsuario = new NewPlayer(0,'','','','','','','','','','','','','','');
     }
-    
-    ngOnInit() { 
+
+    ngOnInit() {
       this.read();
     }
 
-    /*Leemos todos los usuarios y sumamos uno a la longitud*/ 
+    /*Leemos todos los usuarios y sumamos uno a la longitud*/
   read():void{
-    
+
     this._crearUsuario.Read().subscribe({
       next :usuarios=>{
         this.ID_USUARIO = usuarios.length +1;
-        console.log("Read", usuarios);
+        console.log("Read", usuarios.data);
       },
       error : error=>{
         console.log("Read Error", error);
       }
      });
   }
-  
+
     matcher = new MyErrorStateMatcher();
-  
+
     saveData(){
       console.log(this.newPlayerForm.value);
-       
+
       // Recogemos los datos
       const name: string = this.newPlayerForm.controls["name"].value as string;
       const surname: string = this.newPlayerForm.controls["surname"].value as string;
@@ -100,13 +100,13 @@ export class NewPlayerComponent implements OnInit {
       const password2: string = this.newPlayerForm.controls["password2"].value as string;
 
       if (this.newPlayerForm.valid) {
-  
+
         // Los metemos en el una Reserva
-        this.crearUsuario = new NewPlayer (this.ID_USUARIO,name, surname, birthdate,sex, direccion, municipality, province,'', email, membershipId, '', '', false, password2);
+        this.crearUsuario = new NewPlayer (this.ID_USUARIO, name, surname, birthdate, sex, direccion, municipality, province, '', email, membershipId, '', '', 'NO', password2);
         console.log(this.crearUsuario, " valido");
         // Creamos la reserva
         this.create();
-        
+
         // Si no son validos
       }else{
          console.log(this.crearUsuario, " no valido");
@@ -115,11 +115,11 @@ export class NewPlayerComponent implements OnInit {
 
     // Creamos la reserva y se la pasamos al servicio
   create():void{
-    
+
     this._crearUsuario.Create(this.crearUsuario).subscribe({
         next :usuarios=>{
           console.log("Create", usuarios, this.crearUsuario);
-        
+
         },
         error : error=>{
           console.log("Create Error", error);
@@ -129,4 +129,4 @@ export class NewPlayerComponent implements OnInit {
   }
 
 }
-  
+

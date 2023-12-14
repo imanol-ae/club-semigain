@@ -78,8 +78,8 @@ export class ValidatePlayersComponent implements OnInit {
   validar(id : any){
     this._buscarUsuarios.Read_one(id).subscribe({
       next :usuario=>{
-        console.log("Read", usuario);
-        this.buscarUsuario = new NewPlayer(id, usuario.NOMBRE, usuario.APELLIDOS, usuario.FECHA_NACIMIENTO, usuario.SEXO, usuario.DIRECCION_POSTAL, usuario.MUNICIPIO, usuario.PROVINCIA, '', usuario.EMAIL, usuario.NUMERO_SOCIO, this.currentDate, '', false, usuario.PASS); 
+        console.log("Read", usuario.data);
+        this.buscarUsuario = new NewPlayer(usuario.data.id,usuario.data.name,usuario.data.apellidos,usuario.data.fecha_nacimiento,usuario.data.sexo, usuario.data.direccion_postal,usuario.data.municipio,usuario.data.provincia,usuario.data.imagen_perfil, usuario.data.email, usuario.data.numero_socio, usuario.data.fecha_baja, usuario.data.fecha_alta, usuario.data.es_admin, usuario.data.password);
         this.editar(id, this.buscarUsuario); 
       },
       error : error=>{

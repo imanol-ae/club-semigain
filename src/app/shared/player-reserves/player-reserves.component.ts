@@ -33,11 +33,12 @@ export class PlayerReservesComponent implements OnInit {
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator,{static:true}) paginator:MatPaginator;
-  //dataSource = new MatTableDataSource(RESERVE_DATA);
-  dataSource : any;
+ //dataSource = new MatTableDataSource(RESERVE_DATA);
+  dataSource = new MatTableDataSource(this.arrayReservas)
+ // dataSource : any;
 
   constructor(private rutaActiva: ActivatedRoute, private _reservas : SelectService) { 
-    this.dataSource = new MatTableDataSource(this.arrayReservas);
+  //  this.dataSource = new MatTableDataSource(this.arrayReservas);
 
   }
   ngOnInit() {
@@ -46,7 +47,7 @@ export class PlayerReservesComponent implements OnInit {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.paginator._intl.itemsPerPageLabel = 'Reservas por página';
-    
+    //this.dataSource = new MatTableDataSource(this.arrayReservas);
   }
 
   applyFilter(filterValue: string) {

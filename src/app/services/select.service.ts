@@ -18,49 +18,59 @@ export class SelectService {
   //  USUARIOS
   // creamos el usuario
   Create(usuario : any): Observable<any>{
-    return this._http1.post('http://localhost:3000/usuarios/', usuario);
+    return this._http1.post('http://51.20.87.109/api/auth/register/', usuario);
+    
   }
 
-// leemos el usuario
+  /*  Create(usuario : any): Observable<any>{
+    return this._http1.post('http://51.20.87.109/api/auth/register/', usuario);
+    
+  }*/
+// auth/register
+// auth/login
+// leemos los usuarios
   Read(): Observable<any>{
-      return this._http1.get('http://localhost:3000/usuarios/');
+      return this._http1.get('http://127.0.0.1:8000/api/usuarios');
   }
 
   // leemos un usuario
-  Read_one(ID_USUARIO: number): Observable<any>{
-    return this._http1.get('http://localhost:3000/usuarios/'+ ID_USUARIO);
+  Read_one(id: number): Observable<any>{
+    return this._http1.get('http://127.0.0.1:8000/api/usuarios/'+ id);
 }
 
   // modificamos el usuario
   Update(ID_USUARIO: number, datos : any): Observable<any>{
-      return this._http1.put('http://localhost:3000/usuarios/' + ID_USUARIO, datos);
+      return this._http1.put('http://51.20.81.158:80/api/usuarios/' + ID_USUARIO, datos);
   }
 
   // borramos el suaurio
   Delete(ID_USUARIO: number): Observable<any>{
-      return this._http1.delete('http://localhost:3000/usuarios/' + ID_USUARIO);
+      return this._http1.delete('http://51.20.81.158:80/api/usuarios/' + ID_USUARIO);
   }
-
+  /*
+  Delete(ID_USUARIO: number): Observable<any>{
+      return this._http1.delete('http://localhost:3000/usuarios/' + ID_USUARIO);
+  }*/
   //RESERVAS
   // leemos un usuario
   Read_reservas(): Observable<any>{
-    return this._http1.get('http://localhost:3000/reservas/');
+    return this._http1.get('http://51.20.81.158:80/api/reservas/');
   }
 
   // leemos un usuario
   Read_una_reserva(ID_USUARIO: number): Observable<any>{
-    return this._http1.get('http://localhost:3000/reservas/'+ ID_USUARIO);
+    return this._http1.get('http://51.20.81.158:80/api/reservas/'+ ID_USUARIO);
   }
 
   // PISTAS
   //leemps un id de instalacion
   Read_una_instalacion(ID_PISTA: number): Observable<any>{
-    return this._http1.get('http://localhost:3000/pistas/'+ ID_PISTA);
+    return this._http1.get('http://51.20.81.158:80/api/pistas/'+ ID_PISTA);
   }
 
     //leemps un id de instalacion
     Read_instalaciones(): Observable<any>{
-      return this._http1.get('http://localhost:3000/pistas/');
+      return this._http1.get('http://51.20.81.158:80/api/pistas/');
     }
 
   getInstallationTypes() {
