@@ -37,13 +37,13 @@ export class AdministratorReservesComponent implements OnInit{
   public instalacion:Installation;
   public arrayBuscarReservas : Array<LookReserve> =[];
   public arrayBuscarPista : Array<Installation> =[];
-
+  public fecha: Date;
   
   constructor(private rutaActiva: ActivatedRoute, private _reservas : SelectService) { 
     this.rutaActiva.snapshot.paramMap.get('id');
     //console.log(this.id);
-    this.jugador = new NewPlayer(0,'','','','','','','','','','','','','','');
-    this.reservas = new LookReserve(0,'','','',0,0,'',0);
+    this.jugador = new NewPlayer(0,'','',this.fecha,'','','','','','','','',this.fecha,'','');
+    this.reservas = new LookReserve(0,this.fecha,'','',0,0,'',0);
     this.instalacion = new Installation(0,'',0);
 
   }
@@ -55,11 +55,11 @@ export class AdministratorReservesComponent implements OnInit{
   //  this.getReserva(id);
     this.getAllPista();
     this.getReservas(id);
-    this.dataSource = new MatTableDataSource<LookReserve>(this.arrayBuscarReservas);
+    //this.dataSource = new MatTableDataSource<LookReserve>(this.arrayBuscarReservas);
     console.log(this.dataSource);
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.paginator._intl.itemsPerPageLabel = 'Reservas por página';
+    //this.dataSource.sort = this.sort;
+    //this.dataSource.paginator = this.paginator;
+    //this.paginator._intl.itemsPerPageLabel = 'Reservas por página';
 
    // var myJsonString = JSON.stringify(this.arrayBuscarReservas)
     //this.dataSource = new MatTableDataSource(myJsonString);
@@ -77,12 +77,12 @@ export class AdministratorReservesComponent implements OnInit{
       // Obtenemos la reserva del jugador pasandosela al servicio el id (id del jugador)
       getReservas(id: any):void{
         this._reservas.Read_reservas().subscribe({
-          next :data=>{
-            console.log("Buscar reservas", data);
-            this.meterReservas(data, id);
+          next :reservas=>{
+            console.log("Buscar reservas", reservas.data);
+            this.meterReservas(reservas.data);
             //this.reservas = new LookReserve(data.ID_RESERVA,data.FECHA_RESERVA,data.APELLIDOS,data.HORA_RESERVA,data.ID_USUARIO, data.ID_PISTA,'',0);
             
-           // console.log(this.jugador);
+           //console.log(this.jugador);
           },
           error : error=>{
             console.log("Buscar un juagor", error);
@@ -134,19 +134,18 @@ export class AdministratorReservesComponent implements OnInit{
       });
     }
     
-    meterReservas(reservas: any, id:any){
+    meterReservas(reservas: any){
       for (let i = 0; i < reservas.length; i++) {
-        for (let y = 0; y < this.arrayBuscarPista.length; y++){
-          if(reservas[i].ID_USUARIO == id && reservas[i].ID_PISTA == this.arrayBuscarPista[y].ID_PISTA){
-            //this.getPista(reservas[i].ID_PISTA);
-            this.reservas = new LookReserve(reservas[i].ID_RESERVA,reservas[i].FECHA_RESERVA,reservas[i].HORA_RESERVA,reservas[i].TIENE_LUZ,reservas[i].ID_USUARIO, reservas[i].ID_PISTA,this.arrayBuscarPista[y].TIPO_PISTA,this.arrayBuscarPista[y].NUM_PISTA);
-            this.arrayBuscarReservas.push(this.reservas);
+            this.arrayBuscarReservas.push(reservas[i]);
           }
+          console.log("Array Reservas",this.arrayBuscarReservas);
         }
+       
       
-      }
-      console.log("Array Reservas",this.arrayBuscarReservas);
-    }
+      
+      
+      
+    
 
 
     meterInstalacionYnumero(instalacion : any){

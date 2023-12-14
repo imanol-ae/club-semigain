@@ -8,6 +8,8 @@ import { SelectService } from 'src/app/services/select.service';
 
 // Model new-player
 import { NewPlayer } from 'src/app/models/new-player'; 
+import { DatePipe, formatDate } from '@angular/common';
+import {  FormatWidth, getLocaleDateFormat } from '@angular/common';
 
 
 @Component({
@@ -21,29 +23,45 @@ export class ValidatePlayersComponent implements OnInit {
   public arrayBuscarUsuario : Array<NewPlayer> =[];
   public nombre : String;
   public apellidos : String;
+  public dia : number;
+  public mes : number;
+  public anio : number;
 
   /* Para saber la fecha actual*/ 
-  public currentDate = new Date().toISOString().substring(0, 10);
+ // public currentDate1 = new Date().toISOString().substring(0, 10);
+ // public currentDate : Date;
 
    /*Constructor con el servicio, y la ruta*/
    constructor(private _buscarUsuarios : SelectService, public router: Router, private rutaActiva: ActivatedRoute) {
     this.nombre="";
     this.apellidos="";
+    const format = 'dd-MM-yyyy';
+    const myDate = '2019-06-29';
+    const locale = 'en-US';
+  //  const currentDate1 = new Date().toISOString().substring(0, 10);
+  // this.currentDate = moment
+    //this.currentDate1 = this.currentDate1.tod
+   // console.log(this.currentDate);
+   //this.currentDate = new Date();
+    //this.currentDate = new Date(this.currentDate1);
+   // console.log(this.currentDate1);
+    //console.log(this.currentDate);
   }
    
   ngOnInit() { 
     let id = this.rutaActiva.snapshot.paramMap.get('id');
     this.getAdministrador(id);
     this.read();
+    
   }
 
   // Obtenemos al administrador pasandosela al servicio el id (id del jugador)
   getAdministrador(id: any):void{
     this._buscarUsuarios.Read_one(id).subscribe({
-      next :data=>{
-        console.log("Buscar un administrador", data);
-       this.nombre=data.NOMBRE;
-       this.apellidos=data.APELLIDOS;
+      next :administrador=>{
+        console.log("Buscar un administrador", administrador.data);
+       this.nombre=administrador.data.name;
+       this.apellidos=administrador.data.apellidos;
       },
       error : error=>{
         console.log("Buscar un administrador", error);
@@ -56,8 +74,8 @@ export class ValidatePlayersComponent implements OnInit {
     
     this._buscarUsuarios.Read().subscribe({
       next :usuarios=>{
-        console.log("Read", usuarios);
-        this.meterUsuarios(usuarios);    
+        console.log("Read", usuarios.data);
+        this.meterUsuarios(usuarios.data);    
       },
       error : error=>{
         console.log("Read Error", error);
@@ -67,7 +85,7 @@ export class ValidatePlayersComponent implements OnInit {
 
   meterUsuarios(usuarios: any){
     for (let i = 0; i < usuarios.length; i++) {
-      if(!usuarios[i].FECHA_ALTA){
+      if(!usuarios[i].fecha_alta){
         this.arrayBuscarUsuario.push(usuarios[i]);
       }
     }
@@ -78,8 +96,10 @@ export class ValidatePlayersComponent implements OnInit {
   validar(id : any){
     this._buscarUsuarios.Read_one(id).subscribe({
       next :usuario=>{
-        console.log("Read", usuario.data);
-        this.buscarUsuario = new NewPlayer(usuario.data.id,usuario.data.name,usuario.data.apellidos,usuario.data.fecha_nacimiento,usuario.data.sexo, usuario.data.direccion_postal,usuario.data.municipio,usuario.data.provincia,usuario.data.imagen_perfil, usuario.data.email, usuario.data.numero_socio, usuario.data.fecha_baja, usuario.data.fecha_alta, usuario.data.es_admin, usuario.data.password);
+        console.log("Read ", usuario.data);
+        let currentDate1 = new Date().toISOString().substring(0, 10);
+        this.buscarUsuario = new NewPlayer(usuario.data.id,usuario.data.name,usuario.data.apellidos,usuario.data.fecha_nacimiento,usuario.data.sexo, usuario.data.direccion_postal,usuario.data.municipio,usuario.data.provincia,usuario.data.imagen_perfil, usuario.data.email, usuario.data.numero_socio, currentDate1, usuario.data.fecha_baja, usuario.data.es_admin, usuario.data.password);
+        console.log(usuario.data.id);
         this.editar(id, this.buscarUsuario); 
       },
       error : error=>{

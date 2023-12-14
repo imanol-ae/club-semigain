@@ -4,7 +4,7 @@ export class NewPlayer{
     public id: Number;
     public name : string;
     public apellidos: string;
-    public fecha_nacimiento : string;
+    public fecha_nacimiento : Date;
     public sexo: string;
     public direccion_postal: string;
     public municipio: string;
@@ -13,13 +13,13 @@ export class NewPlayer{
     public email: string;
     public numero_socio: string;
     public fecha_alta: string;
-    public fecha_baja: string;
+    public fecha_baja: Date;
     public es_admin: string;
     public password: string;
 
 
     // Contructor
-    constructor( id: Number,name : string, apellidos: string, fecha_nacimiento : string, sexo: string, direccion_postal: string, municipio: string, provincia: string, imagen_perfil : string,email: string, numero_socio:string,fecha_alta: string, fecha_baja: string, es_admin: string, password:string){
+    constructor( id: Number,name : string, apellidos: string, fecha_nacimiento : Date, sexo: string, direccion_postal: string, municipio: string, provincia: string, imagen_perfil : string,email: string, numero_socio:string,fecha_alta: string, fecha_baja: Date, es_admin: string, password:string){
         this.id = id;
         this.name = name;
         this.apellidos = apellidos;

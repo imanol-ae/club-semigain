@@ -13,6 +13,7 @@ import { Installation } from 'src/app/models/installation';
 // Servicio
 import { SelectService } from 'src/app/services/select.service'; 
 import { ActivatedRoute, Params } from '@angular/router';
+import { formatDate } from '@angular/common';
 
 
 @Component({
@@ -43,12 +44,16 @@ export class PersonalInfoComponent implements OnInit{
   public patronNombresApellidos : string;
   public patronEmail : string;
   public rex : RegExp;
+  public fecha : Date;
+  public fecha_prueba : string;
 
   public mensaje: string;
+  public editado: string;
 
   constructor(private rutaActiva: ActivatedRoute, private _jugadores : SelectService) { 
-  
-    this.jugador = new NewPlayer(0,'','','','','','','','','','','','','','');
+    //this.fecha=0-0-0000;
+   // this.fecha = new Date("2017-01-26");
+    this.jugador = new NewPlayer(0,'','',this.fecha,'','','','','','','','',this.fecha,'','');
     //this.reservas = new LookReserve(0,'','','',0,0,'',0);
    // this.instalacion = new Installation(0,'',0);
     this.arrayLabelsPersonales = ['Nombre', 'Apellidos', 'Nacimiento', 'Sexo', 'Numero de socio'];
@@ -71,7 +76,9 @@ export class PersonalInfoComponent implements OnInit{
     console.log(id);
    // this.getAllJugadores();
     this.getJugador(id);
-
+    
+    //console.log(this.fecha);
+    //this.fecha_prueba="1991-01-31";
   }
 
   getJugador(id:any):void{
@@ -82,6 +89,11 @@ export class PersonalInfoComponent implements OnInit{
          // this.meterJugadores(data);
           this.arrayJugadores.push(usuario.data);
           console.log("Array jugador",this.arrayJugadores);
+          this.fecha_prueba=this.arrayJugadores[0].fecha_nacimiento.toLocaleString();
+          let dia= this.fecha_prueba.substring(0,2);
+          let mes= this.fecha_prueba.substring(3,5);
+          let anio= this.fecha_prueba.substring(6,10);
+          this.fecha_prueba=anio+"-"+mes+"-"+dia;
         },
         error : error=>{
           console.log("Buscar un jugador", error);
@@ -92,13 +104,12 @@ export class PersonalInfoComponent implements OnInit{
 
 
 
-  editar(id:number, nom :string, ape:string, fecha_na : string, sex : string, num_so:string, dire:string, muni:string, provin : string, email:string, fecha_alt:string, fecha_baj : string, pass:string, es_admin:string){
+  editar(id:number, nom :string, ape:string, fecha_na : Date, sex : string, num_so:string, dire:string, muni:string, provin : string, email:string, fecha_alt:string, fecha_baj : Date, pass:string, es_admin:string){
     // Recogemos los datos
     this.mensaje="";
     const buscar = num_so.match(this.patronNumSocio);
     const buscarNom = nom.match(this.patronNombresApellidos);
     const buscarApe = ape.match(this.patronNombresApellidos);
-    
    /*
     console.log(buscarEmail);
     const re =   /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
@@ -107,7 +118,7 @@ export class PersonalInfoComponent implements OnInit{
     */
 
     // Meter los demas datos pruebas
-    if (nom =="" || ape =="" || fecha_na =="" || sex =="" || num_so ==""|| dire ==""){
+    if (nom =="" || ape =="" || sex =="" || num_so ==""|| dire ==""){
       console.log("Formulario no enviado");
       this.mensaje= "No puedes dejar campos vacios.\r\n";
     } 
@@ -132,8 +143,9 @@ export class PersonalInfoComponent implements OnInit{
     else {
       // Si son validos
       console.log("Formulario Enviado");
-      this.jugador = new NewPlayer(id, nom, ape, fecha_na, sex, dire,muni,provin,'',email,num_so,fecha_alt,fecha_baj ,es_admin,pass);
+      this.jugador = new NewPlayer(id, nom, ape, fecha_na , sex, dire,muni,provin,'',email,num_so,fecha_alt,fecha_baj ,es_admin,pass);
       this.update(id);
+      this.editado=" Campos editados correctamente";
     }
   }
 

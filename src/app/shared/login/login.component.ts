@@ -61,17 +61,18 @@ export class LoginComponent implements OnInit{
       if (this.formLogin.valid) {
         console.log(this.arrayBuscarUsuario[0].fecha_alta);
         for (let i = 0; i < this.arrayBuscarUsuario.length; i++) {
-          if (this.arrayBuscarUsuario[i].es_admin == 'Si' && this.arrayBuscarUsuario[i].name == name){
+          if (this.arrayBuscarUsuario[i].es_admin == 'SI' && this.arrayBuscarUsuario[i].name == name){
             const id= this.arrayBuscarUsuario[i].id;
            console.log("ADMIN");
            this.router.navigate(['/inicio-administrador/', id]);
            //this.router.navigate(["/inicio-administrador/this.arrayBuscarUsuario[i].ID_USUARIO"]);
           }
-          if (this.arrayBuscarUsuario[i].es_admin == 'No' && this.arrayBuscarUsuario[i].name == name && this.arrayBuscarUsuario[i].fecha_alta){
+          if (this.arrayBuscarUsuario[i].es_admin == 'NO' && this.arrayBuscarUsuario[i].name == name && this.arrayBuscarUsuario[i].fecha_alta){
             // if (this.arrayBuscarUsuario[i].ES_ADMIN == false && this.arrayBuscarUsuario[i].NAME == name && this.arrayBuscarUsuario[i].PASSWORD == pass && this.arrayBuscarUsuario[i].FECHA_ALTA){
 
             const id= this.arrayBuscarUsuario[i].id;
             console.log("JUGADOR");
+            console.log(this.arrayBuscarUsuario[i].password);
             this.router.navigate(['/inicio-jugador/', id]);
            } 
 

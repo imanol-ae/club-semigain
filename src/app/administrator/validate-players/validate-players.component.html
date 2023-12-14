@@ -16,14 +16,14 @@
                   style="width: 45px; height: 45px"
                   class="rounded-circle"/>
                 <div class="ms-3">
-                  <h2>{{item.NOMBRE + ' ' + item.APELLIDOS}}</h2>
+                  <h2>{{item.name + ' ' + item.apellidos}}</h2>
                   <div class="more-info">
-                    <p class="text-muted mb-0">{{item.NUMERO_SOCIO}}</p>
-                    <p class="text-muted mb-0">{{item.MUNICIPIO + ' (' + item.PROVINCIA + ')'}}</p>
-                    <a class="text-muted mb-0" mailto="andere.perez.ulzama@gmail.com">{{item.EMAIL}}</a>
+                    <p class="text-muted mb-0">{{item.numero_socio}}</p>
+                    <p class="text-muted mb-0">{{item.municipio + ' (' + item.provincia + ')'}}</p>
+                    <a class="text-muted mb-0" mailto="andere.perez.ulzama@gmail.com">{{item.email}}</a>
                   </div>
-                  <button type="button" class="btn btn-primary" (click)="validar(item.ID_USUARIO)" >Validar</button>
-                  <button type="button" class="btn btn-outline-primary" (click)="Eliminar(item.ID_USUARIO)" mdbRipple rippleColor="dark" mdbRipple>Eliminar</button>
+                  <button type="button" class="btn btn-primary" (click)="validar(item.id)" >Validar</button>
+                  <button type="button" class="btn btn-outline-primary" (click)="Eliminar(item.id)" mdbRipple rippleColor="dark" mdbRipple>Eliminar</button>
                 </div>
               </div>
             </div>

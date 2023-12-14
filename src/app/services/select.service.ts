@@ -39,13 +39,13 @@ export class SelectService {
 }
 
   // modificamos el usuario
-  Update(ID_USUARIO: number, datos : any): Observable<any>{
-      return this._http1.put('http://51.20.81.158:80/api/usuarios/' + ID_USUARIO, datos);
+  Update(id: number, datos : any): Observable<any>{
+      return this._http1.put('http://127.0.0.1:8000/api/usuarios/' + id, datos);
   }
 
   // borramos el suaurio
-  Delete(ID_USUARIO: number): Observable<any>{
-      return this._http1.delete('http://51.20.81.158:80/api/usuarios/' + ID_USUARIO);
+  Delete(id: number): Observable<any>{
+      return this._http1.delete('http://127.0.0.1:8000/api/usuarios/' + id);
   }
   /*
   Delete(ID_USUARIO: number): Observable<any>{
@@ -54,12 +54,12 @@ export class SelectService {
   //RESERVAS
   // leemos un usuario
   Read_reservas(): Observable<any>{
-    return this._http1.get('http://51.20.81.158:80/api/reservas/');
+    return this._http1.get('http://127.0.0.1:8000/api/reservas/');
   }
 
   // leemos un usuario
   Read_una_reserva(ID_USUARIO: number): Observable<any>{
-    return this._http1.get('http://51.20.81.158:80/api/reservas/'+ ID_USUARIO);
+    return this._http1.get('http://127.0.0.1:8000/api/reservas/'+ ID_USUARIO);
   }
 
   // PISTAS

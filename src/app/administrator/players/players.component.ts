@@ -31,8 +31,8 @@ export class PlayersComponent implements OnInit {
     
     this._usuario.Read().subscribe({
       next :usuarios=>{
-        console.log("Read", usuarios);
-        this.meterUsuarios(usuarios);    
+        console.log("Read", usuarios.data);
+        this.meterUsuarios(usuarios.data);    
       },
       error : error=>{
         console.log("Read Error", error);
@@ -42,7 +42,7 @@ export class PlayersComponent implements OnInit {
 
   meterUsuarios(usuarios: any){
     for (let i = 0; i < usuarios.length; i++) {
-      if(usuarios[i].es_admin=='No'){
+      if(usuarios[i].es_admin=='NO'){
         this.arrayBuscarUsuario.push(usuarios[i]);
       }
       
