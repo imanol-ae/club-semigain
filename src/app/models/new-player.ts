@@ -19,7 +19,7 @@ export class NewPlayer{
 
 
     // Contructor
-    constructor( id: Number,name : string, apellidos: string, fecha_nacimiento : Date, sexo: string, direccion_postal: string, municipio: string, provincia: string, imagen_perfil : string,email: string, numero_socio:string,fecha_alta: string, fecha_baja: Date, es_admin: string, password:string){
+    constructor( id: Number, name : string, apellidos: string, fecha_nacimiento : Date, sexo: string, direccion_postal: string, municipio: string, provincia: string, imagen_perfil : string,email: string, numero_socio:string,fecha_alta: string, fecha_baja: Date, es_admin: string, password:string){
         this.id = id;
         this.name = name;
         this.apellidos = apellidos;

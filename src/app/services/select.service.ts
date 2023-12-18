@@ -10,24 +10,27 @@ import { NewPlayer } from '../models/new-player';
 
 @Injectable()
 export class SelectService {
-  
+
   constructor(public _http1 : HttpClient){
-        
+
   }
 
   //  USUARIOS
   // creamos el usuario
   Create(usuario : any): Observable<any>{
-    return this._http1.post('http://51.20.87.109/api/auth/register/', usuario);
-    
+    return this._http1.post('http://127.0.0.1:8000/api/auth/register/', usuario);
+
   }
 
   /*  Create(usuario : any): Observable<any>{
     return this._http1.post('http://51.20.87.109/api/auth/register/', usuario);
-    
+
   }*/
 // auth/register
 // auth/login
+  Login(usuario: any):Observable<any>{
+    return this._http1.post('http://127.0.0.1:8000/api/auth/login/', usuario);
+  }
 // leemos los usuarios
   Read(): Observable<any>{
       return this._http1.get('http://127.0.0.1:8000/api/usuarios');
@@ -68,10 +71,10 @@ export class SelectService {
     return this._http1.get('http://51.20.81.158:80/api/pistas/'+ ID_PISTA);
   }
 
-    //leemps un id de instalacion
-    Read_instalaciones(): Observable<any>{
-      return this._http1.get('http://51.20.81.158:80/api/pistas/');
-    }
+  //leemps un id de instalacion
+  Read_instalaciones(): Observable<any>{
+    return this._http1.get('http://51.20.81.158:80/api/pistas/');
+  }
 
   getInstallationTypes() {
     return [

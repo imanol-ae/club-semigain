@@ -50,11 +50,12 @@ export class NewPlayerComponent implements OnInit {
     municipality: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]),
     province: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]),
     email : new FormControl('', [Validators.required, Validators.email]),
-    membershipId : new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern('^[0-9]{3}' + '[A-Z]')]),
+    //membershipId : new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern('^[0-9]{3}' + '[A-Z]')]),
     date : new FormControl(this.todayDate, [Validators.required]),
     sex : new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]),
     birthdate : new FormControl('', [Validators.required]),
-    password1: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$'), matchValidator('password2', true)]),
+    // password1: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-_+=<>?]).{8,16}$'), matchValidator('password2', true)]),
+    password1: new FormControl('', [Validators.required, matchValidator('password2', true)]),
     password2: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(10),  matchValidator('password1')])
   });
 
@@ -72,8 +73,9 @@ export class NewPlayerComponent implements OnInit {
 
     this._crearUsuario.Read().subscribe({
       next :usuarios=>{
-        this.ID_USUARIO = usuarios.length +1;
-        console.log("Read", usuarios.data);
+        const sortedUsers = [...usuarios.data].sort((a, b) => b.id - a.id);
+        const userWithMaxId = sortedUsers[0];
+        this.ID_USUARIO = userWithMaxId.id +1;
       },
       error : error=>{
         console.log("Read Error", error);
@@ -94,7 +96,7 @@ export class NewPlayerComponent implements OnInit {
       const sex: string = this.newPlayerForm.controls["sex"].value as string;
       const province: string = this.newPlayerForm.controls["province"].value as string;
       const email: string = this.newPlayerForm.controls["email"].value as string;
-      const membershipId: string = this.newPlayerForm.controls["membershipId"].value as string;
+      //const membershipId: string = this.newPlayerForm.controls["membershipId"].value as string;
       const date: Date = this.newPlayerForm.controls["date"].value as Date;
       const birthdate: Date = this.newPlayerForm.controls["birthdate"].value as Date;
       const password1: string = this.newPlayerForm.controls["password1"].value as string;
@@ -102,10 +104,10 @@ export class NewPlayerComponent implements OnInit {
 
       if (this.newPlayerForm.valid) {
 
-        // Los metemos en el una Reserva
-        this.crearUsuario = new NewPlayer (this.ID_USUARIO,name, surname, birthdate,sex, direccion, municipality, province,'', email, membershipId, '' ,date, 'NO', password2);
+        // Los metemos en el un Usuario
+        this.crearUsuario = new NewPlayer (this.ID_USUARIO, name, surname, birthdate,sex, direccion, municipality, province,'', email, '', '' ,date, 'NO', password2);
         console.log(this.crearUsuario, " valido");
-        // Creamos la reserva
+        // Creamos el usuario
         this.create();
 
         // Si no son validos

@@ -11,7 +11,7 @@ import { LookReserve } from 'src/app/models/look-reserve';
 import { Installation } from 'src/app/models/installation';
 
 // Servicio
-import { SelectService } from 'src/app/services/select.service'; 
+import { SelectService } from 'src/app/services/select.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { formatDate } from '@angular/common';
 
@@ -22,7 +22,7 @@ import { formatDate } from '@angular/common';
   styleUrls: ['./personal-info.component.scss']
 })
 export class PersonalInfoComponent implements OnInit{
-  
+
  // displayedColumns: string[] = COLUMNS_SCHEMA.map((col) => col.key);
  // displayedContactColumns: string[] = CONTACT_COLUMNS_SCHEMA.map((col) => col.key);
   //dataSource = USER_DATA;
@@ -50,7 +50,7 @@ export class PersonalInfoComponent implements OnInit{
   public mensaje: string;
   public editado: string;
 
-  constructor(private rutaActiva: ActivatedRoute, private _jugadores : SelectService) { 
+  constructor(private rutaActiva: ActivatedRoute, private _jugadores : SelectService) {
     //this.fecha=0-0-0000;
    // this.fecha = new Date("2017-01-26");
     this.jugador = new NewPlayer(0,'','',this.fecha,'','','','','','','','',this.fecha,'','');
@@ -67,7 +67,7 @@ export class PersonalInfoComponent implements OnInit{
    // this.rex = new RegExp(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/);
     this.rex = new RegExp(/^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$/);
     this.patronEmail = '[a-z0-9._%+-]' + '@[a-z0-9.-]' + '.[a-z]{2,4}';
-    
+
   }
 
 
@@ -76,7 +76,7 @@ export class PersonalInfoComponent implements OnInit{
     console.log(id);
    // this.getAllJugadores();
     this.getJugador(id);
-    
+
     //console.log(this.fecha);
     //this.fecha_prueba="1991-01-31";
   }
@@ -99,7 +99,7 @@ export class PersonalInfoComponent implements OnInit{
           console.log("Buscar un jugador", error);
         }
       });
-    
+
   }
 
 
@@ -121,15 +121,15 @@ export class PersonalInfoComponent implements OnInit{
     if (nom =="" || ape =="" || sex =="" || num_so ==""|| dire ==""){
       console.log("Formulario no enviado");
       this.mensaje= "No puedes dejar campos vacios.\r\n";
-    } 
+    }
      if (buscar?.[0] != buscar?.input){
       console.log("Formulario no enviado");
       this.mensaje+= "Patron no aceptado.\r\n";
-    } 
+    }
     if(buscarNom?.[0] != buscarNom?.input){
       console.log("Formulario no enviado");
       this.mensaje+= "Patron noaceptado nom.\r\n";
-    } 
+    }
     if(buscarApe?.[0] != buscarApe?.input){
       console.log("Formulario no enviado");
       this.mensaje+= "Patron no aceptado ape.\r\n";
@@ -139,7 +139,7 @@ export class PersonalInfoComponent implements OnInit{
       console.log("Formulario no enviado");
       this.mensaje+= "Patron no aceptado email.\r\n";
     }*/
-    
+
     else {
       // Si son validos
       console.log("Formulario Enviado");
@@ -154,7 +154,7 @@ export class PersonalInfoComponent implements OnInit{
     this._jugadores.Update(id, this.jugador).subscribe({
       next :data=>{
         console.log("Update", data);
-          
+
       },
       error : error=>{
         console.log("Update Error", error);
