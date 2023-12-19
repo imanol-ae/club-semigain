@@ -30,7 +30,7 @@ const routes: Routes = [
   { path: 'reservas-jugador/:id', component: PlayerReservesInPlayerComponent },
   { path: 'nueva-reserva/:id', component: NewReserveComponent },
   { path: 'jugadores', component: PlayersComponent },
-  { path: 'reservas-total', component: AdministratorReservesComponent },
+  { path: 'reservas-total/:id', component: AdministratorReservesComponent },
   { path: 'datos-personales-jugador/:id', component: PersonalDataPlayerComponent },
   { path: 'datos-personales-administrador/:id', component: PersonalDataAdminComponent },
   { path: 'jugador/:id', component: PlayerInAdminComponent },
