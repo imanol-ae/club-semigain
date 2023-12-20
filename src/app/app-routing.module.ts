@@ -16,6 +16,8 @@ import { AdministratorReservesComponent } from './administrator/administrator-re
 import { PersonalDataAdminComponent } from './administrator/personal-data-admin/personal-data-admin.component';
 import { NewPlayerComponent } from './player/new-player/new-player.component';
 import { PlayerInAdminComponent } from './administrator/player-in-admin/player-in-admin.component';
+import { ResetPasswordComponent } from './shared/reset-password/reset-password.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
@@ -34,7 +36,8 @@ const routes: Routes = [
   { path: 'datos-personales-jugador/:id', component: PersonalDataPlayerComponent },
   { path: 'datos-personales-administrador/:id', component: PersonalDataAdminComponent },
   { path: 'jugador/:id', component: PlayerInAdminComponent },
-  { path: 'nuevo-jugador', component: NewPlayerComponent }
+  { path: 'nuevo-jugador', component: NewPlayerComponent },
+  { path: 'regenerar-contrasena', component: ResetPasswordComponent }
 ];
 
 @NgModule({
