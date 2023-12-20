@@ -2,7 +2,7 @@
     <div class="player-title">
         <h1>Reservas realizadas</h1>
         <div class="user">
-            <a href="#" routerLink="/inicio-administrador"><span class="badge badge-primary"><i class="fas fa-circle-user"></i> Antonio Martínez Uribe</span></a>
+            <a href="#" routerLink="/inicio-administrador"><span class="badge badge-primary"><i class="fas fa-circle-user"></i> {{this.nombre + ' ' + this.apellido}}</span></a>
         </div>
     </div>
     <!--
@@ -52,6 +52,7 @@
         <td>Hora</td>
         <td>Tipo de pista</td>
         <td>Numero de pista</td>
+        <td>Pagado</td>
         </tr>
         <tr *ngFor="let item of arrayBuscarReservas">
           <td>{{item.usuario.name}}</td>
@@ -60,6 +61,10 @@
           <td>{{item.hora_reserva}}</td>
           <td>{{item.pista.tipo_pista}}</td>
           <td>{{item.pista.num_pista}}</td>
+          <td><input name="pagado"  type="text" [(ngModel)]="item.pago.pagado" [ngModelOptions]="{standalone: true}" required/>
+          <td><button type="button" class="btn btn-outline-primary" (click)="editar(item.pago)" mdbRipple rippleColor="dark" mdbRipple>EDITAR</button></td>
+          <td><button type="button" class="btn btn-outline-primary" (click)="eliminar(item.id, item.pago.id)" mdbRipple rippleColor="dark" mdbRipple>ELIMINAR</button></td>
+  
         </tr>
       </table>
     </div>

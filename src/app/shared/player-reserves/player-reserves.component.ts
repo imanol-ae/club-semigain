@@ -29,7 +29,8 @@ export class PlayerReservesComponent implements OnInit {
 
   public arrayReservas : Array<LookReserve> =[];
   public id : Number;
-  public deuda : Number;
+  public deuda : number;
+  public cantidad : number;
   public fecha: Date;
   public reservas:LookReserve;
 
@@ -47,6 +48,7 @@ export class PlayerReservesComponent implements OnInit {
   }
   ngOnInit() {
     let id=this.rutaActiva.snapshot.paramMap.get('id');
+    console.log(id);
     this.getAllReservas(id);
     //this.dataSource.sort = this.sort;
     //this.dataSource.paginator = this.paginator;
@@ -91,8 +93,11 @@ export class PlayerReservesComponent implements OnInit {
        if(data[i].usuario.id==id){
         this.arrayReservas.push(data[i]);
         if(data[i].pago.pagado=='NO'){
-          this.deuda+=data[i].pago.cantidad;
-          console.log(data[i].fecha_reserva);
+          this.cantidad = parseFloat(data[i].pago.cantidad);
+          console.log(this.cantidad + ' vuelta ' + i);
+          console.log(this.cantidad);
+          this.deuda=this.cantidad + this.deuda;
+          console.log(this.deuda);
         }
        }
     }

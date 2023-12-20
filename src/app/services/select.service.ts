@@ -61,21 +61,42 @@ export class SelectService {
   }
 
   // leemos un usuario
-  Read_una_reserva(ID_USUARIO: number): Observable<any>{
-    return this._http1.get('http://127.0.0.1:8000/api/reservas/'+ ID_USUARIO);
+  Read_una_reserva(id: number): Observable<any>{
+    return this._http1.get('http://127.0.0.1:8000/api/reservas/'+ id);
+  }
+
+   // eliminamos pago
+   Delete_reserva(id: number): Observable<any>{
+    return this._http1.delete('http://127.0.0.1:8000/api/reservas/'+ id);
+  }
+
+  // leemos un usuario
+  Update_reserva(id: number, datos:any): Observable<any>{
+    return this._http1.put('http://127.0.0.1:8000/api/reservas/'+ id, datos);
+  }
+
+  // modificacion pago
+  Update_pagos(id: number, datos:any): Observable<any>{
+    return this._http1.put('http://127.0.0.1:8000/api/pagos/'+ id, datos);
+  }
+
+    // eliminamos pago
+  Delete_pago(id: number): Observable<any>{
+    return this._http1.delete('http://127.0.0.1:8000/api/pagos/'+ id);
   }
 
   // PISTAS
   //leemps un id de instalacion
+  /*
   Read_una_instalacion(ID_PISTA: number): Observable<any>{
     return this._http1.get('http://51.20.81.158:80/api/pistas/'+ ID_PISTA);
   }
 
-  //leemps un id de instalacion
-  Read_instalaciones(): Observable<any>{
-    return this._http1.get('http://51.20.81.158:80/api/pistas/');
-  }
-
+    //leemps un id de instalacion
+    Read_instalaciones(): Observable<any>{
+      return this._http1.get('http://51.20.81.158:80/api/pistas/');
+    }
+*/
   getInstallationTypes() {
     return [
      new InstallationType(1, 'Tenis' ),
