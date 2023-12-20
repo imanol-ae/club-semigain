@@ -64,25 +64,28 @@ export class LoginComponent implements OnInit{
           console.log("Read", user.data);
           this.usuario = user.data;
 
-          if(this.usuario?.es_admin === 'SI'){
-            console.log("ADMIN");
-            this.router.navigate(['/inicio-administrador/', this.usuario.id]);
+          if (this.usuario) {
+            if (this.usuario.es_admin === 'SI') {
+              console.log("ADMIN");
+              this.router.navigate(['/inicio-administrador/', this.usuario.id]);
+            } else if (this.usuario.fecha_alta === null || this.usuario.fecha_alta === undefined) {
+              this.mensaje = "Tu solicitud no está validada por un administrador";
+            } else if (this.usuario.fecha_baja != null) {
+              this.mensaje = "El usuario introducido esta dado de baja, pongase en contacto con el administrador"
+            } else if (this.usuario.es_admin === 'NO') {
+              console.log("JUGADOR");
+              this.router.navigate(['/inicio-jugador/', this.usuario.id]);
+            }
+          } else {
+            this.mensaje = "No se encontraron datos del usuario";
           }
-          if(this.usuario?.fecha_alta === undefined){
-            this.mensaje="Tu solicitud no esta validada por un administrador";
-          }
-          if(this.usuario?.es_admin === 'NO'){
-            console.log("JUGADOR");
-            this.router.navigate(['/inicio-jugador/', this.usuario.id]);
-          }
+
         },
         error : error=>{
           console.log("Read Error", error);
         }
         });
       console.log(this.usuario);
-
-
 
     }
     else{
