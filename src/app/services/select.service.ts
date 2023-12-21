@@ -82,18 +82,6 @@ export class SelectService {
     return this._http1.delete('http://127.0.0.1:8000/api/pagos/'+ id);
   }
 
-  // PISTAS
-  //leemps un id de instalacion
-  /*
-  Read_una_instalacion(ID_PISTA: number): Observable<any>{
-    return this._http1.get('http://51.20.81.158:80/api/pistas/'+ ID_PISTA);
-  }
-
-    //leemps un id de instalacion
-    Read_instalaciones(): Observable<any>{
-      return this._http1.get('http://51.20.81.158:80/api/pistas/');
-    }
-*/
   getInstallationTypes() {
     return [
      new InstallationType(1, 'Tenis' ),

@@ -2,7 +2,7 @@
     <div class="admin-title">
         <h1>Jugadores/as del Club de Tenis Semigain</h1>
         <div class="user">
-            <a href="#" routerLink="/inicio-administrador"><span class="badge badge-primary"><i class="fas fa-circle-user"></i> Antonio Martínez Uribe</span></a>
+            <a href="#" routerLink="/inicio-administrador"><span class="badge badge-primary"><i class="fas fa-circle-user"></i> {{this.nombre + ' ' + this.apellido}}</span></a>
         </div>
     </div>  
     <div class="row">
@@ -18,7 +18,7 @@
               <div class="ms-3">
                 <a href="#" class="fw-bold mb-1" routerLink="/jugador">{{usuario.name}}</a>
                 <p class="text-muted mb-0">{{usuario.email}}</p>
-                <button type="button" class="btn btn-primary" [routerLink]="['/jugador', usuario.id]">Entrar</button>
+                <button type="button" class="btn btn-primary" [routerLink]="['/jugador', usuario.id, this.id]">Entrar</button>
                 <button type="button" class="btn btn-outline-primary" (click)="eliminar(usuario.id)" mdbRipple rippleColor="dark" mdbRipple>Eliminar</button>
               </div>
             </div>

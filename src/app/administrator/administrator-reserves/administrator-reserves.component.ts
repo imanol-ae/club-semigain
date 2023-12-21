@@ -23,14 +23,13 @@ import { SelectService } from 'src/app/services/select.service';
   styleUrls: ['./administrator-reserves.component.scss']
 })
 export class AdministratorReservesComponent implements OnInit{
-  displayedColumns: string[] = RESERVES_COLUMNS_SCHEMA.slice(1,11).map((col) => col.key);
-  columnsSchema: any = RESERVES_COLUMNS_SCHEMA;
+ // displayedColumns: string[] = RESERVES_COLUMNS_SCHEMA.slice(1,11).map((col) => col.key);
+ // columnsSchema: any = RESERVES_COLUMNS_SCHEMA;
   
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  @ViewChild(MatPaginator,{static:true}) paginator:MatPaginator;
+ // @ViewChild(MatSort, {static: true}) sort: MatSort;
+ // @ViewChild(MatPaginator,{static:true}) paginator:MatPaginator;
   //dataSource = new MatTableDataSource(RESERVE_DATA);
-  datos: LookReserve[] = [];
-  dataSource:any;
+  //datos: LookReserve[] = [];
 
   public jugador:NewPlayer;
   public reservas:LookReserve;
@@ -46,13 +45,19 @@ export class AdministratorReservesComponent implements OnInit{
 
   public idPago: Number;
   public idReserva: Number;
+
+  ///
+  columnas: string[] = ['Nombre', 'Apellidos', 'Fecha', 'Hora', 'Tipo de pista', 'Numero de pista', 'Pagado', 'Editar', 'Eliminar'];
+  dataSource:any;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+  datos: LookReserve[] = [];
+
   
   constructor(private rutaActiva: ActivatedRoute, private _reservas : SelectService) { 
     this.rutaActiva.snapshot.paramMap.get('id');
-    //console.log(this.id);
     this.jugador = new NewPlayer(0,'','',this.fecha,'','','','','','','','',this.fecha,'','');
     this.reservas = new LookReserve(0,this.fecha,'','',0,0,'',0);
-    this.instalacion = new Installation(0,'',0);
 
   }
 
@@ -64,6 +69,7 @@ export class AdministratorReservesComponent implements OnInit{
     //this.getAllPista();
     this.getReservas();
     this.getAdmin(id);
+
     //this.dataSource = new MatTableDataSource<LookReserve>(this.arrayBuscarReservas);
     //console.log(this.dataSource);
     //this.dataSource.sort = this.sort;
@@ -72,16 +78,17 @@ export class AdministratorReservesComponent implements OnInit{
 
    // var myJsonString = JSON.stringify(this.arrayBuscarReservas)
     //this.dataSource = new MatTableDataSource(myJsonString);
-
+    //this.datos.push(this.arrayBuscarReservas);
+    
   }
-
+  /*
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-  }
+  }*/
 
       // Obtenemos todas las reservas 
       getReservas():void{
@@ -145,7 +152,8 @@ export class AdministratorReservesComponent implements OnInit{
     this._reservas.Delete_pago(id).subscribe({
       next :data=>{
         console.log("Eliminar pago", data, id);
-          
+        window.location.reload();
+
       },
       error : error=>{
         console.log("Eliminar Error", error);
@@ -157,26 +165,25 @@ export class AdministratorReservesComponent implements OnInit{
     this._reservas.Delete_reserva(id).subscribe({
       next :data=>{
         console.log("Eliminar reserva", data, id);
-          
+        window.location.reload();
+
       },
       error : error=>{
         console.log("Eliminar reserva", error);
       }
     });
   }
-    
- 
-    
+     
     meterReservas(reservas: any){
       for (let i = 0; i < reservas.length; i++) {
             this.arrayBuscarReservas.push(reservas[i]);
+            this.dataSource = new MatTableDataSource<LookReserve>(this.arrayBuscarReservas);
+           this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
           }
           console.log("Array Reservas",this.arrayBuscarReservas);
     }
-    
-
-
-    
+       
 }
 
 

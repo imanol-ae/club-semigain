@@ -85,3 +85,59 @@
         </ul>
     </div>
 </div>
+
+
+
+
+<div class="admin">
+    <div class="player-title">
+        <h1>Reservas realizadas</h1>
+    </div>
+<div class="table mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource" matSort >
+
+      <ng-container matColumnDef="Fecha">
+        <mat-header-cell *matHeaderCellDef class="table-light"> Fecha</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.fecha_reserva.substring(0,10)}}</mat-cell>
+      </ng-container>
+  
+     
+       <ng-container matColumnDef="Hora">
+        <mat-header-cell *matHeaderCellDef> Hora </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.hora_reserva}}  </mat-cell>
+      </ng-container>
+  
+  
+      <ng-container matColumnDef="Tipo de pista">
+        <mat-header-cell *matHeaderCellDef> Tipo de pista </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.pista.tipo_pista}} </mat-cell>
+      </ng-container>
+  
+     
+      <ng-container matColumnDef="Numero de pista">
+        <mat-header-cell *matHeaderCellDef> Numero de pista </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.pista.num_pista}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Pagado">
+        <mat-header-cell *matHeaderCellDef> Pagado </mat-header-cell>
+        <mat-cell *matCellDef="let element"><input name="pagado"  type="text" [(ngModel)]="element.pago.pagado" [ngModelOptions]="{standalone: true}" required/></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Editar">
+        <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+        <mat-cell *matCellDef="let element"><button type="button" class="btn btn-outline-primary" (click)="editar(element.pago)" mdbRipple rippleColor="dark" mdbRipple>EDITAR</button></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Eliminar">
+        <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+        <mat-cell *matCellDef="let element"><button type="button" class="btn btn-outline-primary" (click)="eliminar(element.id, element.pago.id)" mdbRipple rippleColor="dark" mdbRipple>ELIMINAR</button></mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: columnas;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+  </div>
+</div>

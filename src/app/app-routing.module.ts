@@ -31,11 +31,11 @@ const routes: Routes = [
   { path: 'inicio-administrador/:id', component: AdministratorHomeComponent },
   { path: 'reservas-jugador/:id', component: PlayerReservesInPlayerComponent },
   { path: 'nueva-reserva/:id', component: NewReserveComponent },
-  { path: 'jugadores', component: PlayersComponent },
+  { path: 'jugadores/:id', component: PlayersComponent },
   { path: 'reservas-total/:id', component: AdministratorReservesComponent },
   { path: 'datos-personales-jugador/:id', component: PersonalDataPlayerComponent },
   { path: 'datos-personales-administrador/:id', component: PersonalDataAdminComponent },
-  { path: 'jugador/:id', component: PlayerInAdminComponent },
+  { path: 'jugador/:id/:id_admin', component: PlayerInAdminComponent },
   { path: 'nuevo-jugador', component: NewPlayerComponent },
   { path: 'regenerar-contrasena', component: ResetPasswordComponent }
 ];
