@@ -6,7 +6,7 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 import { NewPlayer } from 'src/app/models/new-player';
-import { LookReserve } from 'src/app/models/look-reserve';
+import { SearchReserve } from 'src/app/models/search-reserve';
 
 
 // Servicio
@@ -22,26 +22,28 @@ export class PersonalDataComponent implements OnInit {
 
   public jugador:NewPlayer;
   public fecha: Date;
-  public arrayBuscarReservas : Array<LookReserve> =[];
+  public arrayBuscarReservas : Array<SearchReserve> =[];
   public id : number;
 
   public pagado : String;
+  public cantidad : number;
+  public deuda : number;
+
 
   public idPago: Number;
   public idReserva: Number;
 
    ///
-   columnas: string[] = ['Fecha', 'Hora', 'Tipo de pista', 'Numero de pista', 'Pagado', 'Editar', 'Eliminar'];
+   columnas: string[] = ['Fecha', 'Hora', 'Tipo de pista', 'Luz', 'Importe', 'Pagado', 'Editar', 'Eliminar'];
    dataSource:any;
    @ViewChild(MatSort, {static: true}) sort: MatSort;
    @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
 
-   datos: LookReserve[] = [];
+   datos: SearchReserve[] = [];
 
   constructor(private rutaActiva: ActivatedRoute, private _usuario : SelectService, private _reservas : SelectService) { 
-   // this.rutaActiva.snapshot.paramMap.get('id');
-    //console.log(this.id);
+
     this.jugador = new NewPlayer(0,'','',this.fecha,'','','','','','','','',this.fecha,'','');
 
 
@@ -52,11 +54,7 @@ export class PersonalDataComponent implements OnInit {
     console.log(id);
     this.getJugador(id);
     this.getReservas();
-    console.log(this.arrayBuscarReservas);
-   // this.dataSource = new MatTableDataSource<LookReserve>(this.arrayBuscarReservas);
-   // this.dataSource.sort = this.sort;
-   // console.log(this.dataSource);
-   // this.dataSource.paginator = this.paginator;
+    this.deuda=0;
   }
 
   // Obtenemos al jugador pasandosela al servicio el id (id del jugador)
@@ -90,9 +88,14 @@ export class PersonalDataComponent implements OnInit {
     for (let i = 0; i < reservas.length; i++) {
       if(reservas[i].usuario.id==this.id){
         this.arrayBuscarReservas.push(reservas[i]);
-        this.dataSource = new MatTableDataSource<LookReserve>(this.arrayBuscarReservas);
+        this.dataSource = new MatTableDataSource<SearchReserve>(this.arrayBuscarReservas);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        if(reservas[i].pago.pagado=='NO'){
+          this.cantidad = parseFloat(reservas[i].pago.cantidad);
+          this.deuda=this.cantidad + this.deuda;
+          console.log(this.deuda);
+        }
       }
     }
       console.log("Array Reservas",this.arrayBuscarReservas);
@@ -119,7 +122,7 @@ export class PersonalDataComponent implements OnInit {
    this._reservas.Update_pagos(id, pagado).subscribe({
      next :data=>{
        console.log("Update", data);
-         
+       window.location.reload();
      },
      error : error=>{
        console.log("Update Error", error);

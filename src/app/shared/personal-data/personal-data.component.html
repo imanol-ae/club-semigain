@@ -86,58 +86,61 @@
     </div>
 </div>
 
-
-
-
 <div class="admin">
     <div class="player-title">
         <h1>Reservas realizadas</h1>
     </div>
-<div class="table mat-elevation-z8">
-    <mat-table #table [dataSource]="dataSource" matSort >
-
-      <ng-container matColumnDef="Fecha">
-        <mat-header-cell *matHeaderCellDef class="table-light"> Fecha</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.fecha_reserva.substring(0,10)}}</mat-cell>
-      </ng-container>
-  
+    <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+      </mat-form-field>
+      <div class="mat-elevation-z8 table-responsive">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table" matSort #tabla1>
      
-       <ng-container matColumnDef="Hora">
-        <mat-header-cell *matHeaderCellDef> Hora </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.hora_reserva}}  </mat-cell>
-      </ng-container>
+          <ng-container matColumnDef="Fecha">
+            <th mat-header-cell *matHeaderCellDef class="table-light" style="font-weight: bold;"> Fecha </th>
+            <td mat-cell *matCellDef="let item" style="font-weight: bold;"> {{item.fecha_reserva.substring(0,10)}} </td>
+          </ng-container>
   
+          <ng-container matColumnDef="Hora">
+            <th mat-header-cell *matHeaderCellDef class="table-light" style="font-weight: bold;"> Hora </th>
+            <td mat-cell *matCellDef="let item"> {{item.hora_reserva}} </td>
+          </ng-container>
   
-      <ng-container matColumnDef="Tipo de pista">
-        <mat-header-cell *matHeaderCellDef> Tipo de pista </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.pista.tipo_pista}} </mat-cell>
-      </ng-container>
+          <ng-container matColumnDef="Tipo de pista">
+            <th mat-header-cell *matHeaderCellDef class="table-light" style="font-weight: bold;"> Instalacion</th>
+            <td mat-cell *matCellDef="let item"> {{item.pista.tipo_pista +' - Pista ' + item.pista.num_pista}}  </td>
+          </ng-container>
   
-     
-      <ng-container matColumnDef="Numero de pista">
-        <mat-header-cell *matHeaderCellDef> Numero de pista </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.pista.num_pista}}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="Pagado">
-        <mat-header-cell *matHeaderCellDef> Pagado </mat-header-cell>
-        <mat-cell *matCellDef="let element"><input name="pagado"  type="text" [(ngModel)]="element.pago.pagado" [ngModelOptions]="{standalone: true}" required/></mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="Editar">
-        <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
-        <mat-cell *matCellDef="let element"><button type="button" class="btn btn-outline-primary" (click)="editar(element.pago)" mdbRipple rippleColor="dark" mdbRipple>EDITAR</button></mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="Eliminar">
-        <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
-        <mat-cell *matCellDef="let element"><button type="button" class="btn btn-outline-primary" (click)="eliminar(element.id, element.pago.id)" mdbRipple rippleColor="dark" mdbRipple>ELIMINAR</button></mat-cell>
-      </ng-container>
+          <ng-container matColumnDef="Luz">
+            <th mat-header-cell *matHeaderCellDef class="table-light" style="font-weight: bold;"> Luz </th>
+            <td mat-cell *matCellDef="let item"> {{item.tiene_luz}} </td>
+          </ng-container>
   
-      <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: columnas;"></mat-row>
-    </mat-table>
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-
-  </div>
+          <ng-container matColumnDef="Importe">
+            <th mat-header-cell *matHeaderCellDef class="table-light" style="font-weight: bold;"> Importe </th>
+            <td mat-cell *matCellDef="let item"> {{item.pago.cantidad}} </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="Pagado">
+            <th mat-header-cell *matHeaderCellDef class="table-light" style="font-weight: bold;"> Pagado </th>
+            <td mat-cell *matCellDef="let item"><input name="pagado"  type="text" [(ngModel)]="item.pago.pagado" [ngModelOptions]="{standalone: true}" required/></td>
+          </ng-container>
+  
+          <ng-container matColumnDef="Editar">
+            <th mat-header-cell *matHeaderCellDef>  </th>
+            <td mat-cell *matCellDef="let item"><button type="button" class="btn btn-outline-primary" (click)="editar(item.pago)" mdbRipple rippleColor="dark" mdbRipple>EDITAR</button></td>
+          </ng-container>
+          
+          <ng-container matColumnDef="Eliminar">
+            <th mat-header-cell *matHeaderCellDef>  </th>
+            <td mat-cell *matCellDef="let item"><button type="button" class="btn btn-outline-primary" (click)="eliminar(item.id, item.pago.id)" mdbRipple rippleColor="dark" mdbRipple>ELIMINAR</button></td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+          <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>  
+        <p *ngIf="this.deuda !=0" style="color: brown;">{{'DEUDA TOTAL: '+this.deuda + '€'}}</p>
+  
+      </div>
 </div>

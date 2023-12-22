@@ -1,4 +1,4 @@
-export class LookReserve{
+export class SearchReserve{
 
     // Atributos
     public id: Number;

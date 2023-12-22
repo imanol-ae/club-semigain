@@ -7,7 +7,7 @@ import { RESERVES_COLUMNS_SCHEMA } from '../../models/reserves_schema';
 import { RESERVE_DATA } from '../../mockup_data/reserves';
 
 import { NewPlayer } from 'src/app/models/new-player';
-import { LookReserve } from 'src/app/models/look-reserve';
+import { SearchReserve } from 'src/app/models/search-reserve';
 import { Installation } from 'src/app/models/installation';
 
 // Servicio
@@ -22,38 +22,36 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class PlayerReservesComponent implements OnInit {
   //ELiminamos las columnas de nombre y apellidos porque siempre se repiten
-  displayedColumnsDeleted: any = RESERVES_COLUMNS_SCHEMA.splice(3, 2);
-  displayedColumns: string[] = RESERVES_COLUMNS_SCHEMA.slice(1, 8).map((col) => col.key);
+  //displayedColumnsDeleted: any = RESERVES_COLUMNS_SCHEMA.splice(3, 2);
+ // displayedColumns: string[] = RESERVES_COLUMNS_SCHEMA.slice(1, 8).map((col) => col.key);
 
-  columnsSchema: any = RESERVES_COLUMNS_SCHEMA;
+  //columnsSchema: any = RESERVES_COLUMNS_SCHEMA;
 
-  public arrayReservas : Array<LookReserve> =[];
+  public arrayReservas : Array<SearchReserve> =[];
   public id : Number;
   public deuda : number;
   public cantidad : number;
   public fecha: Date;
-  public reservas:LookReserve;
+  public reservas:SearchReserve;
+  columnas: string[] = ['Fecha', 'Hora', 'Instalacion', 'Luz', 'Importe', 'Pagado'];
+
 
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator,{static:true}) paginator:MatPaginator;
  //dataSource = new MatTableDataSource(RESERVE_DATA);
-  dataSource = new MatTableDataSource(this.arrayReservas)
- // dataSource : any;
+ //dataSource = new MatTableDataSource(this.arrayReservas)
+ dataSource : any;
 
   constructor(private rutaActiva: ActivatedRoute, private _reservas : SelectService) { 
   //  this.dataSource = new MatTableDataSource(this.arrayReservas);
-  this.reservas = new LookReserve(0,this.fecha,'','',0,0,'',0);
+  this.reservas = new SearchReserve(0,this.fecha,'','',0,0,'',0);
 
   }
   ngOnInit() {
     let id=this.rutaActiva.snapshot.paramMap.get('id');
     console.log(id);
     this.getAllReservas(id);
-    //this.dataSource.sort = this.sort;
-    //this.dataSource.paginator = this.paginator;
-    //this.paginator._intl.itemsPerPageLabel = 'Reservas por página';
-    //this.dataSource = new MatTableDataSource(this.arrayReservas);
     this.deuda=0;
   }
 
@@ -65,21 +63,20 @@ export class PlayerReservesComponent implements OnInit {
     }
   }
 
+  /*
   getTotal() {
     return RESERVE_DATA.reduce((acc, element) => {
       if (element.paid !== true) return acc + element.price;
       return acc;
     }, 0);
-  }
+  }*/
 
   getAllReservas(id:any):void{
   
-      // Buscamos todos los jugadores
+      // Buscamos todas las reservas
         this._reservas.Read_reservas().subscribe({
           next :reserva=>{
             console.log("Buscar Reservas", reserva.data);
-           // this.meterJugadores(data);
-            //this.arrayReservas.push(data);
             this.meterArrayReservas(reserva.data, id);
           },
           error : error=>{
@@ -91,11 +88,13 @@ export class PlayerReservesComponent implements OnInit {
     meterArrayReservas(data:any, id:any):void{
       for (let i = 0; i < data.length; i++) {
        if(data[i].usuario.id==id){
-        this.arrayReservas.push(data[i]);
+          this.arrayReservas.push(data[i]);
+          this.dataSource = new MatTableDataSource<SearchReserve>(this.arrayReservas);
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
+          this.paginator._intl.itemsPerPageLabel = 'Reservas por página';
         if(data[i].pago.pagado=='NO'){
           this.cantidad = parseFloat(data[i].pago.cantidad);
-          console.log(this.cantidad + ' vuelta ' + i);
-          console.log(this.cantidad);
           this.deuda=this.cantidad + this.deuda;
           console.log(this.deuda);
         }
@@ -103,6 +102,4 @@ export class PlayerReservesComponent implements OnInit {
     }
     console.log("Array Reservas",this.arrayReservas);
     }
-
-
 }

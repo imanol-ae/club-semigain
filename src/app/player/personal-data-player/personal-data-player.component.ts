@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NewPlayer } from 'src/app/models/new-player';
-import { LookReserve } from 'src/app/models/look-reserve';
+import { SearchReserve } from 'src/app/models/search-reserve';
 import { Installation } from 'src/app/models/installation';
 
 // Servicio
@@ -18,7 +18,7 @@ export class PersonalDataPlayerComponent implements OnInit {
 
   public jugador:NewPlayer;
   public jugadorBuscar:NewPlayer;
-  public reservas:LookReserve;
+  public reservas:SearchReserve;
   public instalacion:Installation;
   public arrayJugadores : Array<NewPlayer> =[];
   public nombre : string;

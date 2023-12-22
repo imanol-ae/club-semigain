@@ -10,7 +10,7 @@ import { map, filter } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 
 import { NewPlayer } from 'src/app/models/new-player';
-import { LookReserve } from 'src/app/models/look-reserve';
+import { SearchReserve } from 'src/app/models/search-reserve';
 import { Installation } from 'src/app/models/installation';
 
 // Servicio
@@ -32,63 +32,52 @@ export class AdministratorReservesComponent implements OnInit{
   //datos: LookReserve[] = [];
 
   public jugador:NewPlayer;
-  public reservas:LookReserve;
+  public reservas:SearchReserve;
   public instalacion:Installation;
-  public arrayBuscarReservas : Array<LookReserve> =[];
-  public arrayBuscarObtener : Array<LookReserve> =[];
+  public arrayBuscarReservas : Array<SearchReserve> =[];
+  public arrayBuscarObtener : Array<SearchReserve> =[];
   public arrayBuscarPista : Array<Installation> =[];
   public fecha: Date;
   public nombre : String;
   public apellido : String;
   public id:Number;
   public pagado : String;
+  public deuda : number;
+  public cantidad : number;
 
   public idPago: Number;
   public idReserva: Number;
 
   ///
-  columnas: string[] = ['Nombre', 'Apellidos', 'Fecha', 'Hora', 'Tipo de pista', 'Numero de pista', 'Pagado', 'Editar', 'Eliminar'];
+  columnas: string[] = ['Fecha', 'Hora', 'Nombre', 'Tipo de pista', 'Luz', 'Importe', 'Pagado', 'Editar', 'Eliminar'];
   dataSource:any;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-  datos: LookReserve[] = [];
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  datos: SearchReserve[] = [];
 
   
   constructor(private rutaActiva: ActivatedRoute, private _reservas : SelectService) { 
     this.rutaActiva.snapshot.paramMap.get('id');
     this.jugador = new NewPlayer(0,'','',this.fecha,'','','','','','','','',this.fecha,'','');
-    this.reservas = new LookReserve(0,this.fecha,'','',0,0,'',0);
+    this.reservas = new SearchReserve(0,this.fecha,'','',0,0,'',0);
 
   }
 
   ngOnInit() {
     
     let id = this.rutaActiva.snapshot.paramMap.get('id');
-   // console.log(id);
-  //  this.getReserva(id);
-    //this.getAllPista();
     this.getReservas();
     this.getAdmin(id);
-
-    //this.dataSource = new MatTableDataSource<LookReserve>(this.arrayBuscarReservas);
-    //console.log(this.dataSource);
-    //this.dataSource.sort = this.sort;
-    //this.dataSource.paginator = this.paginator;
-    //this.paginator._intl.itemsPerPageLabel = 'Reservas por página';
-
-   // var myJsonString = JSON.stringify(this.arrayBuscarReservas)
-    //this.dataSource = new MatTableDataSource(myJsonString);
-    //this.datos.push(this.arrayBuscarReservas);
-    
+    this.deuda=0;
   }
-  /*
+  
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-  }*/
+  }
 
       // Obtenemos todas las reservas 
       getReservas():void{
@@ -140,7 +129,7 @@ export class AdministratorReservesComponent implements OnInit{
     this._reservas.Update_pagos(id, pagado).subscribe({
       next :data=>{
         console.log("Update", data);
-          
+        window.location.reload();
       },
       error : error=>{
         console.log("Update Error", error);
@@ -177,9 +166,14 @@ export class AdministratorReservesComponent implements OnInit{
     meterReservas(reservas: any){
       for (let i = 0; i < reservas.length; i++) {
             this.arrayBuscarReservas.push(reservas[i]);
-            this.dataSource = new MatTableDataSource<LookReserve>(this.arrayBuscarReservas);
+            this.dataSource = new MatTableDataSource<SearchReserve>(this.arrayBuscarReservas);
            this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
+          if(reservas[i].pago.pagado=='NO'){
+            this.cantidad = parseFloat(reservas[i].pago.cantidad);
+            this.deuda=this.cantidad + this.deuda;
+            console.log(this.deuda);
+          }
           }
           console.log("Array Reservas",this.arrayBuscarReservas);
     }
