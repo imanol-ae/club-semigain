@@ -25,108 +25,108 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   selector: 'app-new-player',
   templateUrl: './new-player.component.html',
   styleUrls: ['./new-player.component.scss'],
-  providers:[SelectService]
+  providers: [SelectService]
 })
 
 export class NewPlayerComponent implements OnInit {
 
-    //newPlayerForm: FormGroup;
-    todayDate:Date = new Date();
+  //newPlayerForm: FormGroup;
+  todayDate: Date = new Date();
 
-    public crearUsuario : NewPlayer;
-    public ID_USUARIO:number;
-    public fecha: Date;
+  public crearUsuario: NewPlayer;
+  public ID_USUARIO: number;
+  public fecha: Date;
 
-    public fb: FormBuilder;
+  public fb: FormBuilder;
 
-    /* Para saber la fecha actual*/
-    public currentDate = new Date().toISOString().substring(0, 10);
+  /* Para saber la fecha actual*/
+  public currentDate = new Date().toISOString().substring(0, 10);
 
-    /*formularios con sus validaciones*/
-    newPlayerForm = new FormGroup({
+  /*formularios con sus validaciones*/
+  newPlayerForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(30), Validators.pattern(/^[A-Za-z\s\xF1\xD1]+$/)]),
     surname: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(40), Validators.pattern(/^[A-Za-z\s\xF1\xD1]+$/)]),
     direction: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(60)]),
     municipality: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]),
     province: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]),
-    email : new FormControl('', [Validators.required, Validators.email]),
+    email: new FormControl('', [Validators.required, Validators.email]),
     //membershipId : new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern('^[0-9]{3}' + '[A-Z]')]),
-    date : new FormControl(this.todayDate, [Validators.required]),
-    sex : new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]),
-    birthdate : new FormControl('', [Validators.required]),
+    date: new FormControl(this.todayDate, [Validators.required]),
+    sex: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]),
+    birthdate: new FormControl('', [Validators.required]),
     // password1: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-_+=<>?]).{8,16}$'), matchValidator('password2', true)]),
     password1: new FormControl('', [Validators.required, matchValidator('password2', true)]),
-    password2: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(10),  matchValidator('password1')])
+    password2: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(10), matchValidator('password1')])
   });
 
-    /*Constructor con el servicio y iniciacios el atributo de la clase reserva*/
-    constructor(private _crearUsuario : SelectService) {
-      this.crearUsuario = new NewPlayer(0,'','',this.fecha,'','','','','','','','',this.fecha,'','');
-    }
-
-    ngOnInit() {
-      this.read();
-    }
-
-    /*Leemos todos los usuarios y sumamos uno a la longitud*/
-  read():void{
-
-    this._crearUsuario.Read().subscribe({
-      next :usuarios=>{
-        const sortedUsers = [...usuarios.data].sort((a, b) => b.id - a.id);
-        const userWithMaxId = sortedUsers[0];
-        this.ID_USUARIO = userWithMaxId.id +1;
-      },
-      error : error=>{
-        console.log("Read Error", error);
-      }
-     });
+  /*Constructor con el servicio y iniciacios el atributo de la clase reserva*/
+  constructor(private _crearUsuario: SelectService) {
+    this.crearUsuario = new NewPlayer(0, '', '', this.fecha, '', '', '', '', '', '', '', '', this.fecha, '', '');
   }
 
-    matcher = new MyErrorStateMatcher();
+  ngOnInit() {
+    this.read();
+  }
 
-    saveData(){
-      console.log(this.newPlayerForm.value);
+  /*Leemos todos los usuarios y sumamos uno a la longitud*/
+  read(): void {
 
-      // Recogemos los datos
-      const name: string = this.newPlayerForm.controls["name"].value as string;
-      const surname: string = this.newPlayerForm.controls["surname"].value as string;
-      const direccion: string = this.newPlayerForm.controls["direction"].value as string;
-      const municipality: string = this.newPlayerForm.controls["municipality"].value as string;
-      const sex: string = this.newPlayerForm.controls["sex"].value as string;
-      const province: string = this.newPlayerForm.controls["province"].value as string;
-      const email: string = this.newPlayerForm.controls["email"].value as string;
-      //const membershipId: string = this.newPlayerForm.controls["membershipId"].value as string;
-      const date: Date = this.newPlayerForm.controls["date"].value as Date;
-      const birthdate: Date = this.newPlayerForm.controls["birthdate"].value as Date;
-      const password1: string = this.newPlayerForm.controls["password1"].value as string;
-      const password2: string = this.newPlayerForm.controls["password2"].value as string;
+    this._crearUsuario.Read().subscribe({
+      next: usuarios => {
+        const sortedUsers = [...usuarios.data].sort((a, b) => b.id - a.id);
+        const userWithMaxId = sortedUsers[0];
+        this.ID_USUARIO = userWithMaxId.id + 1;
+      },
+      error: error => {
+        console.log("Read Error", error);
+      }
+    });
+  }
 
-      if (this.newPlayerForm.valid) {
+  matcher = new MyErrorStateMatcher();
 
-        // Los metemos en el un Usuario
-        this.crearUsuario = new NewPlayer (this.ID_USUARIO, name, surname, birthdate,sex, direccion, municipality, province,'', email, '', '' ,date, 'NO', password2);
-        console.log(this.crearUsuario, " valido");
-        // Creamos el usuario
-        this.create();
+  saveData() {
+    console.log(this.newPlayerForm.value);
 
-        // Si no son validos
-      }else{
-         console.log(this.crearUsuario, " no valido");
-        }
+    // Recogemos los datos
+    const name: string = this.newPlayerForm.controls["name"].value as string;
+    const surname: string = this.newPlayerForm.controls["surname"].value as string;
+    const direccion: string = this.newPlayerForm.controls["direction"].value as string;
+    const municipality: string = this.newPlayerForm.controls["municipality"].value as string;
+    const sex: string = this.newPlayerForm.controls["sex"].value as string;
+    const province: string = this.newPlayerForm.controls["province"].value as string;
+    const email: string = this.newPlayerForm.controls["email"].value as string;
+    //const membershipId: string = this.newPlayerForm.controls["membershipId"].value as string;
+    const date: Date = this.newPlayerForm.controls["date"].value as Date;
+    const birthdate: Date = this.newPlayerForm.controls["birthdate"].value as Date;
+    const password1: string = this.newPlayerForm.controls["password1"].value as string;
+    const password2: string = this.newPlayerForm.controls["password2"].value as string;
+
+    if (this.newPlayerForm.valid) {
+
+      // Los metemos en el un Usuario
+      this.crearUsuario = new NewPlayer(this.ID_USUARIO, name, surname, birthdate, sex, direccion, municipality, province, '', email, '', '', date, 'NO', password2);
+      console.log(this.crearUsuario, " valido");
+      // Creamos el usuario
+      this.create();
+
+      // Si no son validos
+    } else {
+      console.log(this.crearUsuario, " no valido");
     }
+  }
 
-    // Creamos la reserva y se la pasamos al servicio
-  create():void{
+  // Creamos la reserva y se la pasamos al servicio
+  create(): void {
 
     this._crearUsuario.Create(this.crearUsuario).subscribe({
-        next :usuarios=>{
-          console.log("Create", usuarios, this.crearUsuario);
+      next: usuarios => {
+        console.log("Create", usuarios, this.crearUsuario);
 
-        },
-        error : error=>{
-          console.log("Create Error", error);
-        }
+      },
+      error: error => {
+        console.log("Create Error", error);
+      }
     });
 
   }

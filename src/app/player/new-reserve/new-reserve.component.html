@@ -2,7 +2,7 @@
   <div class="player-title">
       <h1>Nueva reserva</h1>
       <div class="user">
-          <a href="#" routerLink="/inicio-jugador"><span class="badge badge-primary"><i class="fas fa-circle-user"></i> Andere Pérez Ulzama</span></a>
+          <a href="#" routerLink="/inicio-jugador"><span class="badge badge-primary"><i class="fas fa-circle-user"></i> {{this.nombre +' '+ this.apellidos}} </span></a>
       </div>
       <p class="reserve-info">Se permite realizar <strong>una reserva (1 hora)</strong> de una instalación al día, con una antelación de <strong>7 días</strong>. Recuerda que las instalaciones las cuidamos y conservamos entre todos.</p>
   </div>
@@ -19,21 +19,21 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Pista número:</mat-label>
-        <select matNativeControl required formControlName="installation" [errorStateMatcher]="matcher">
+        <select matNativeControl required formControlName="installation" (change)="onChange($event)" [errorStateMatcher]="matcher">
           <option value="0">--Selecciona--</option>
-          <option *ngFor="let installation of installations" value= {{installation.ID_PISTA}}>{{installation.NUM_PISTA}}</option>
+          <option *ngFor="let installation of installations" value= {{installation.TIPO_PISTA}}>{{installation.TIPO_PISTA}}</option>
         </select>
         <mat-hint>Campo obligatorio</mat-hint>
       </mat-form-field>
     </div>
-    
+
     <div class="reserve-date">
       <mat-form-field class="calendar">
-          <mat-label>Fecha:</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="date" [errorStateMatcher]="matcher" placeholder="Selecciona fecha" [min]="todayDate" [max]="maxDate">
-          <mat-hint>MM/DD/YYYY (Campo obligatorio)</mat-hint>
-          <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+        <mat-label>Fecha:</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="date" (dateChange)="onDate($event)" [errorStateMatcher]="matcher" placeholder="Selecciona fecha" [min]="todayDate" [max]="maxDate">
+        <mat-hint>MM/DD/YYYY (Campo obligatorio)</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
       <mat-form-field class="time">
         <mat-label>Hora de inicio (09:00 - 21:00):</mat-label>
