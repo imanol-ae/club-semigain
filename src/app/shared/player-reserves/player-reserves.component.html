@@ -22,6 +22,7 @@
 </div>
 <span class="badge badge-danger">DEUDA TOTAL: {{ getTotal() }} €</span>
 -->
+<!--
 <div class="table-responsive">
   <table class="table">
     <tr>
@@ -42,4 +43,48 @@
     </tr>
   </table>
   <p *ngIf="this.deuda !=0">{{'DEUDA TOTAL: '+this.deuda + '€'}}</p>
+</div>
+-->
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+</mat-form-field>
+<div class="mat-elevation-z8 table-responsive">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table" matSort #tabla1>
+
+    <ng-container matColumnDef="Fecha">
+      <th mat-header-cell *matHeaderCellDef class="table-light" style="font-weight: bold;"> Fecha </th>
+      <td mat-cell *matCellDef="let item" style="font-weight: bold;"> {{item.fecha_reserva.substring(0,10)}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Hora">
+      <th mat-header-cell *matHeaderCellDef class="table-light" style="font-weight: bold;"> Hora </th>
+      <td mat-cell *matCellDef="let item"> {{item.hora_reserva}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Instalacion">
+      <th mat-header-cell *matHeaderCellDef class="table-light" style="font-weight: bold;"> Instalacion</th>
+      <td mat-cell *matCellDef="let item"> {{item.pista.tipo_pista +' - Pista ' + item.pista.num_pista}}  </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Luz">
+      <th mat-header-cell *matHeaderCellDef class="table-light" style="font-weight: bold;"> Luz </th>
+      <td mat-cell *matCellDef="let item"> {{item.tiene_luz}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Importe">
+      <th mat-header-cell *matHeaderCellDef class="table-light" style="font-weight: bold;"> Importe </th>
+      <td mat-cell *matCellDef="let item"> {{item.pago.cantidad}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Pagado">
+      <th mat-header-cell *matHeaderCellDef class="table-light" style="font-weight: bold;"> Pagado </th>
+      <td mat-cell *matCellDef="let item"> {{item.pago.pagado}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>  
+  <p *ngIf="this.deuda !=0" style="color: brown;">{{'DEUDA DE TODOS LOS JUGADORES: '+this.deuda + '€'}}</p>
+
 </div>

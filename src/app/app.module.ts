@@ -52,6 +52,7 @@ import { ForgottenPasswordComponent } from './shared/forgotten-password/forgotte
 import { PersonalInfoComponent } from './shared/personal-info/personal-info.component';
 import { ValidatePlayersComponent } from './administrator/validate-players/validate-players.component';
 import { YesNoPipe } from './shared/yes-no.pipe';
+import { ResetPasswordComponent } from './shared/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { YesNoPipe } from './shared/yes-no.pipe';
     ForgottenPasswordComponent,
     PersonalInfoComponent,
     ValidatePlayersComponent,
-    YesNoPipe
+    YesNoPipe,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
