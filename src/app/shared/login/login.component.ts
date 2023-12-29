@@ -5,10 +5,10 @@ import { Router } from "@angular/router";
 import { ActivatedRoute, Params } from '@angular/router';
 
 // Servicio
-import { SelectService } from 'src/app/services/select.service'; 
+import { SelectService } from 'src/app/services/select.service';
 
 // Model new-player
-import { NewPlayer } from 'src/app/models/new-player'; 
+import { NewPlayer } from 'src/app/models/new-player';
 
 @Component({
   selector: 'app-login',
@@ -19,29 +19,29 @@ import { NewPlayer } from 'src/app/models/new-player';
 export class LoginComponent implements OnInit{
 
   public mensaje : String;
-  
+
   formLogin = new FormGroup({
-    username: new FormControl('', [Validators.required]),
+    correo: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
 
-  public buscarUsuario : NewPlayer;
+  public usuario : NewPlayer;
   public arrayBuscarUsuario : Array<NewPlayer> =[];
 
    /*Constructor con el servicio, y la ruta*/
    constructor(private _buscarUsuario : SelectService, public router: Router) {
   }
-  
-  ngOnInit() { 
+
+  ngOnInit() {
     this.read();
   }
 
-   /*Leemos todos los usuarios*/ 
+   /*Leemos todos los usuarios*/
    read():void{
     this._buscarUsuario.Read().subscribe({
       next :usuarios=>{
         console.log("Read", usuarios.data);
-        this.meterUsuarios(usuarios.data);    
+        this.meterUsuarios(usuarios.data);
       },
       error : error=>{
         console.log("Read Error", error);
@@ -51,39 +51,47 @@ export class LoginComponent implements OnInit{
 
   submit() {
     this.mensaje="";
-      // Recogemos los datos
-      const name: string = this.formLogin.controls["username"].value as string;
-      console.log(name);
-      const pass: string = this.formLogin.controls["password"].value as string;
-      console.log(pass);
-      console.log(this.formLogin.valid);
-      // Si el formulario es valido
-      if (this.formLogin.valid) {
-        console.log(this.arrayBuscarUsuario[0].fecha_alta);
-        for (let i = 0; i < this.arrayBuscarUsuario.length; i++) {
-          if (this.arrayBuscarUsuario[i].es_admin == 'SI' && this.arrayBuscarUsuario[i].name == name){
-            const id= this.arrayBuscarUsuario[i].id;
-           console.log("ADMIN");
-           this.router.navigate(['/inicio-administrador/', id]);
-           //this.router.navigate(["/inicio-administrador/this.arrayBuscarUsuario[i].ID_USUARIO"]);
+    // Recogemos los datos
+    const correo: string = this.formLogin.controls["correo"].value as string;
+    console.log(name);
+    const pass: string = this.formLogin.controls["password"].value as string;
+    console.log(pass);
+    console.log(this.formLogin.valid);
+    // Si el formulario es valido
+    if (this.formLogin.valid) {
+      this._buscarUsuario.Login({'email': correo, 'password': pass}).subscribe({
+        next :user=>{
+          console.log("Read", user.data);
+          this.usuario = user.data;
+
+          if (this.usuario) {
+            if (this.usuario.es_admin === 'SI') {
+              console.log("ADMIN");
+              this.router.navigate(['/inicio-administrador/', this.usuario.id]);
+            } else if (this.usuario.fecha_alta === null || this.usuario.fecha_alta === undefined) {
+              this.mensaje = "Tu solicitud no está validada por un administrador";
+            } else if (this.usuario.fecha_baja != null) {
+              this.mensaje = "El usuario introducido esta dado de baja, pongase en contacto con el administrador"
+            } else if (this.usuario.es_admin === 'NO') {
+              console.log("JUGADOR");
+              this.router.navigate(['/inicio-jugador/', this.usuario.id]);
+            }
+          } else {
+            this.mensaje = "No se encontraron datos del usuario";
           }
-          if (this.arrayBuscarUsuario[i].es_admin == 'NO' && this.arrayBuscarUsuario[i].name == name && this.arrayBuscarUsuario[i].fecha_alta){
-            // if (this.arrayBuscarUsuario[i].ES_ADMIN == false && this.arrayBuscarUsuario[i].NAME == name && this.arrayBuscarUsuario[i].PASSWORD == pass && this.arrayBuscarUsuario[i].FECHA_ALTA){
 
-            const id= this.arrayBuscarUsuario[i].id;
-            console.log("JUGADOR");
-            console.log(this.arrayBuscarUsuario[i].password);
-            this.router.navigate(['/inicio-jugador/', id]);
-           } 
-
-           if(!this.arrayBuscarUsuario[i].fecha_alta){
-            this.mensaje="Tu solicitud no esta validada por un administrador";
-           }
+        },
+        error : error=>{
+          console.log("Read Error", error);
         }
-      }
-      else{
-        console.log("No valido");
-      }
+        });
+      console.log(this.usuario);
+
+    }
+    else{
+      console.log("No valido");
+    }
+
   }
 
   meterUsuarios(usuarios: any){

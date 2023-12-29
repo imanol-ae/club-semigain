@@ -4,7 +4,7 @@ import { SearchReserve } from 'src/app/models/search-reserve';
 import { Installation } from 'src/app/models/installation';
 
 // Servicio
-import { SelectService } from 'src/app/services/select.service'; 
+import { SelectService } from 'src/app/services/select.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { formatDate } from '@angular/common';
 
@@ -25,7 +25,7 @@ export class PersonalDataPlayerComponent implements OnInit {
   public apellidos : string;
 
 
-  constructor(private rutaActiva: ActivatedRoute, private _jugadores : SelectService) { 
+  constructor(private rutaActiva: ActivatedRoute, private _jugadores : SelectService) {
 
   }
 
@@ -47,7 +47,7 @@ export class PersonalDataPlayerComponent implements OnInit {
           console.log("Buscar un jugador", error);
         }
       });
-    
+
   }
 
 }

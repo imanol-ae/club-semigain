@@ -5,7 +5,7 @@
     </div>
 
     <form [formGroup]="newPlayerForm" (ngSubmit)="saveData()" novalidate>
-      <div class="form-row">  
+      <div class="form-row">
         <mat-form-field>
             <mat-label>Nombre</mat-label>
             <input type="text" matInput formControlName="name" [errorStateMatcher]="matcher"
@@ -32,7 +32,7 @@
             </mat-error>
         </mat-form-field>
       </div>
-      <div class="form-row"> 
+      <div class="form-row">
         <mat-form-field class="calendar">
             <mat-label>Fecha de nacimiento:</mat-label>
             <input matInput [matDatepicker]="picker2" formControlName="birthdate" [errorStateMatcher]="matcher" placeholder="Selecciona fecha">
@@ -106,7 +106,7 @@
       </div>
 
 
-      <div class="form-row">
+      <!-- <div class="form-row">
         <mat-form-field class="margin-top">
             <mat-label>Número de socio</mat-label>
             <input type="text" matInput formControlName="membershipId" [errorStateMatcher]="matcher"
@@ -133,7 +133,7 @@
             <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
-      </div>
+      </div> -->
 
       <mat-form-field class="example-full-width">
         <mat-label>Contraseña</mat-label>
@@ -142,9 +142,9 @@
         <mat-error *ngIf="newPlayerForm.get('password1')?.hasError('minlength') && !newPlayerForm.get('password1')?.hasError('required')">
           La contraseña debe contener como mínimo 6 caracteres.
         </mat-error>
-        <mat-error *ngIf="newPlayerForm.get('password1')?.hasError('pattern') && !newPlayerForm.get('password1')?.hasError('required')">
+        <!-- <mat-error *ngIf="newPlayerForm.get('password1')?.hasError('pattern') && !newPlayerForm.get('password1')?.hasError('required')">
           La contraseña debe contener entre 8 y 16 caractéres, y al menos, una letra en minúscula, otra letra en mayúscula, un número y un caracter especial.
-        </mat-error>
+        </mat-error> -->
         <mat-error *ngIf="newPlayerForm.get('password1')?.hasError('matching')">
           Las contraseñas no coinciden.
         </mat-error>
