@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit{
   public mensaje : String;
 
   formLogin = new FormGroup({
-    username: new FormControl('', [Validators.required]),
+    correo: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
 
@@ -52,14 +52,14 @@ export class LoginComponent implements OnInit{
   submit() {
     this.mensaje="";
     // Recogemos los datos
-    const name: string = this.formLogin.controls["username"].value as string;
+    const correo: string = this.formLogin.controls["correo"].value as string;
     console.log(name);
     const pass: string = this.formLogin.controls["password"].value as string;
     console.log(pass);
     console.log(this.formLogin.valid);
     // Si el formulario es valido
     if (this.formLogin.valid) {
-      this._buscarUsuario.Login({'name': name, 'password': pass}).subscribe({
+      this._buscarUsuario.Login({'email': correo, 'password': pass}).subscribe({
         next :user=>{
           console.log("Read", user.data);
           this.usuario = user.data;
