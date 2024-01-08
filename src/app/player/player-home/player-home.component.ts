@@ -20,7 +20,7 @@ export class PlayerHomeComponent implements OnInit {
   constructor(private rutaActiva: ActivatedRoute, private _usuario : SelectService) { 
    // this.rutaActiva.snapshot.paramMap.get('id');
     //console.log(this.id);
-    this.jugador = new NewPlayer(0,'','',this.fecha,'','','','','','','','',this.fecha,'','');
+    this.jugador = new NewPlayer(0,'','','','','','','','','','','',this.fecha,'','');
 
 
   }

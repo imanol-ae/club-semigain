@@ -44,7 +44,7 @@ export class PersonalDataComponent implements OnInit {
 
   constructor(private rutaActiva: ActivatedRoute, private _usuario : SelectService, private _reservas : SelectService) { 
 
-    this.jugador = new NewPlayer(0,'','',this.fecha,'','','','','','','','',this.fecha,'','');
+    this.jugador = new NewPlayer(0,'','','','','','','','','','','',this.fecha,'','');
 
 
   }

@@ -61,7 +61,7 @@ export class NewPlayerComponent implements OnInit {
 
   /*Constructor con el servicio y iniciacios el atributo de la clase reserva*/
   constructor(private _crearUsuario: SelectService) {
-    this.crearUsuario = new NewPlayer(0, '', '', this.fecha, '', '', '', '', '', '', '', '', this.fecha, '', '');
+    this.crearUsuario = new NewPlayer(0, '', '', '', '', '', '', '', '', '', '', '', this.fecha, '', '');
   }
 
   ngOnInit() {
@@ -98,7 +98,7 @@ export class NewPlayerComponent implements OnInit {
     const email: string = this.newPlayerForm.controls["email"].value as string;
     //const membershipId: string = this.newPlayerForm.controls["membershipId"].value as string;
     const date: Date = this.newPlayerForm.controls["date"].value as Date;
-    const birthdate: Date = this.newPlayerForm.controls["birthdate"].value as Date;
+    const birthdate: string = this.newPlayerForm.controls["birthdate"].value as string;
     const password1: string = this.newPlayerForm.controls["password1"].value as string;
     const password2: string = this.newPlayerForm.controls["password2"].value as string;
 

@@ -58,7 +58,7 @@ export class AdministratorReservesComponent implements OnInit{
   
   constructor(private rutaActiva: ActivatedRoute, private _reservas : SelectService) { 
     this.rutaActiva.snapshot.paramMap.get('id');
-    this.jugador = new NewPlayer(0,'','',this.fecha,'','','','','','','','',this.fecha,'','');
+    this.jugador = new NewPlayer(0,'','','','','','','','','','','',this.fecha,'','');
     this.reservas = new SearchReserve(0,this.fecha,'','',0,0,'',0);
 
   }

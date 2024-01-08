@@ -2,98 +2,114 @@
 <div class="container">
    <!--<img src="{{this.personalImage}}" class="img-fluid rounded-circle profile" alt="" />--> 
 
-    <div class="data-editable">
+    <div class="form-row">
       <h2 class="bg-light p-2 border-top border-bottom">Datos personales</h2>
-      <form #form="ngForm" name="myForm">
-      <table>
-      <tr>
-        <ng-container *ngFor="let item of arrayLabelsPersonales"> 
-            <td>{{item}}</td>
-        </ng-container>
-      </tr>
-      <tr *ngFor="let jugador of arrayJugadores">
-       <!-- <td contenteditable formControlName="nombre">{{jugador.NOMBRE}}</td>
-        <td><input type="text" placeholder="{{jugador.NOMBRE}}" value="q" formControlName="nombre" required></td>
-        <td><input type="text" value="{{jugador.APELLIDOS}}" formControlName="apellidos" required></td>
-        <td><input type="text" value="{{jugador.FECHA_NACIMIENTO}}" formControlName="fecha_nacimiento" required></td>
-        <td><input type="text" value="{{jugador.SEXO}}" formControlName="sexo" required></td>
-        <td><input type="text" value="{{jugador.NUMERO_SOCIO}}" formControlName="numero_socio" required></td>
-        <td><button type="button" class="btn btn-outline-primary" (click)="editar(jugador.ID_USUARIO)" mdbRipple rippleColor="dark" mdbRipple>EDITAR</button></td>-->
+      <form #form="ngForm" name="myForm" [formGroup]="playerEditar">
+        <div class="form-row" *ngFor="let jugador of arrayJugadores">
+          <mat-form-field>
+            <mat-label>Nombre</mat-label>
+            <input matInput  type="text" [(ngModel)]="jugador.name" name="nombre" pattern="[a-zA-Z ]{2,254}"  [ngModelOptions]="{standalone: true}" required #userNombre="ngModel" />
+          </mat-form-field>
+          <div [hidden]="!userNombre.errors?.required" style="color:red; font-size: 0.8em;">
+            El campo no puede estar vacio
+          </div>
+          <div [hidden]="!userNombre.errors?.pattern" style="color:red; font-size: 0.8em;">
+            Nombre incorrecto
+          </div> 
+          <p style="white-space: pre"></p>
+          <mat-form-field>
+              <mat-label>Apellidos</mat-label>
+              <input matInput type="text" [(ngModel)]="jugador.apellidos" pattern="[a-zA-Z ]{2,254}" [ngModelOptions]="{standalone: true}" required #userApellido="ngModel"/>         
+          </mat-form-field>
+          <div [hidden]="!userApellido.errors?.required" style="color:red; font-size: 0.8em;">
+            El campo no puede estar vacio
+          </div>
+          <div [hidden]="!userApellido.errors?.pattern" style="color:red; font-size: 0.8em;">
+            Apellidos incorrectos
+          </div> 
+          <p style="white-space: pre"></p>
+          <mat-form-field>
+                <mat-label>Fecha nacimiento</mat-label>
+                <input matInput type="date" min="this.fecha_prueba" [(ngModel)]="this.fecha_prueba"  [ngModelOptions]="{standalone: true}" required/>          
+          </mat-form-field>
+          <p style="white-space: pre"></p>
+          <mat-form-field>
+            <mat-label>Sexo</mat-label>
+            <input matInput type="text" [(ngModel)]="jugador.sexo"  [ngModelOptions]="{standalone: true}" required  #userSexo="ngModel"/>         
+        </mat-form-field>
+        <div [hidden]="!userSexo.errors?.required" style="color:red; font-size: 0.8em;">
+          El campo no puede estar vacio
+        </div>
+            <p style="white-space: pre; color:green">{{this.mensajePersonales}}</p>
+            <input  type="hidden" [(ngModel)]="jugador.direccion_postal" [ngModelOptions]="{standalone: true}" required />
+            <input  type="hidden" [(ngModel)]="jugador.municipio" [ngModelOptions]="{standalone: true}" required />
+            <input  type="hidden"[(ngModel)]="jugador.provincia" [ngModelOptions]="{standalone: true}" required />
+            <input  type="hidden" [(ngModel)]="jugador.email" [ngModelOptions]="{standalone: true}" required />
+            <input type="hidden" [(ngModel)]="jugador.fecha_alta" [ngModelOptions]="{standalone: true}" required />
+            <input type="hidden" [(ngModel)]="jugador.fecha_baja" [ngModelOptions]="{standalone: true}" required />
+            <input type="hidden" [(ngModel)]="jugador.password" [ngModelOptions]="{standalone: true}" required />
+            <input type="hidden" [(ngModel)]="jugador.es_admin" [ngModelOptions]="{standalone: true}" required />
+            <input type="hidden" [(ngModel)]="jugador.numero_socio" [ngModelOptions]="{standalone: true}" required/>
+           <button type="button" class="btn btn-outline-primary" [disabled]="userNombre.errors?.required||userNombre.errors?.pattern||userApellido.errors?.required||userApellido.errors?.pattern||userSexo.errors?.required" (click)="editarPersonales(jugador.id, jugador.name, jugador.apellidos, this.fecha_prueba, jugador.sexo, jugador.numero_socio, jugador.direccion_postal, jugador.municipio, jugador.provincia, jugador.email, jugador.fecha_alta, jugador.fecha_baja, jugador.password, jugador.es_admin)" mdbRipple rippleColor="dark" mdbRipple>EDITAR</button>
+      </div>
+    </form>
+  </div>
 
-        
-        <!-- <td><input matInput placeholder="{{jugador.NOMBRE}}" value="{{jugador.NOMBRE}}" formControlName="nombre" ></td>
-        <td><input matInput placeholder="{{jugador.APELLIDOS}}" value="{{jugador.APELLIDOS}}" formControlName="apellidos" ></td>
-        <td><input matInput placeholder="{{jugador.FECHA_NACIMIENTO}}" value="{{jugador.FECHA_NACIMIENTO}}" formControlName="fecha_nacimiento" ></td>
-        <td><input matInput placeholder="{{jugador.SEXO}}" value="{{jugador.SEXO}}" formControlName="sexo" ></td>
-        <td><input matInput placeholder="{{jugador.NUMERO_SOCIO}}" value="{{jugador.NUMERO_SOCIO}}" formControlName="numero_socio"></td>
-        <td><button type="button" class="btn btn-outline-primary" (click)="editar(jugador.ID_USUARIO)" mdbRipple rippleColor="dark" mdbRipple>EDITAR</button></td>-->
-
-        <td><input  type="text" [(ngModel)]="jugador.name" name="nombre"  [ngModelOptions]="{standalone: true}" required minlength="4"/></td>
-        <td><input  type="text" [(ngModel)]="jugador.apellidos"  [ngModelOptions]="{standalone: true}" required/></td>
-        <td><input  type="date" min="this.fecha_prueba" [(ngModel)]="this.fecha_prueba"  [ngModelOptions]="{standalone: true}" required/></td>
-        <td><input  type="text" [(ngModel)]="jugador.sexo"  [ngModelOptions]="{standalone: true}" /></td>
-        <td><input name="num_socio"  type="text" [(ngModel)]="jugador.numero_socio" [ngModelOptions]="{standalone: true}" required/>
-        <input  type="hidden" [(ngModel)]="jugador.direccion_postal" [ngModelOptions]="{standalone: true}" required />
-        <input  type="hidden" [(ngModel)]="jugador.municipio" [ngModelOptions]="{standalone: true}" required />
-        <input  type="hidden"[(ngModel)]="jugador.provincia" [ngModelOptions]="{standalone: true}" required />
-        <input  type="hidden" [(ngModel)]="jugador.email" [ngModelOptions]="{standalone: true}" required />
+  <div class="form-row">
+    <h2 class="bg-light p-2 border-top border-bottom">Datos Contacto</h2>
+    <form #form="ngForm" name="myForm" [formGroup]="playerEditar">
+      <div class="form-row" *ngFor="let jugador of arrayJugadores">
+        <mat-form-field>
+          <mat-label>Direccion</mat-label>
+          <input matInput type="text" [(ngModel)]="jugador.direccion_postal" [ngModelOptions]="{standalone: true}" required #userDireccion="ngModel"/>
+        </mat-form-field>
+        <div [hidden]="!userDireccion.errors?.required" style="color:red; font-size: 0.8em;">
+          El campo no puede estar vacio
+        </div>
+        <p style="white-space: pre"></p>
+        <mat-form-field>
+            <mat-label>Municipio</mat-label>
+            <input matInput type="text" [(ngModel)]="jugador.municipio"  [ngModelOptions]="{standalone: true}" maxlength="30" required #userMunicipio="ngModel"/>         
+        </mat-form-field>
+        <div [hidden]="!userMunicipio.errors?.required" style="color:red; font-size: 0.8em;">
+          El campo no puede estar vacio
+        </div>
+        <p style="white-space: pre"></p>
+        <mat-form-field>
+              <mat-label>Provincia</mat-label>
+              <input matInput type="text" min="this.provincia" [(ngModel)]="jugador.provincia"  [ngModelOptions]="{standalone: true}" required #userProvincia="ngModel"/>          
+        </mat-form-field>
+        <div [hidden]="!userProvincia.errors?.required" style="color:red; font-size: 0.8em;">
+          El campo no puede estar vacio
+        </div>
+        <p style="white-space: pre"></p>
+        <mat-form-field>
+          <mat-label>Corre electronico</mat-label>
+          <input matInput type="email" name="email" [(ngModel)]="jugador.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required [ngModelOptions]="{standalone: true}" #userEmail="ngModel"/>
+         </mat-form-field>
+         <div [hidden]="!userEmail.errors?.pattern" style="color:red; font-size: 0.8em;">
+          Correo Electronico incorrecto
+        </div> 
+        <div [hidden]="!userEmail.errors?.required" style="color:red; font-size: 0.8em;">
+          El campo no puede estar vacio
+        </div>
+          <p style="white-space: pre; color:green">{{this.mensajeContacto}}</p>
+          
+          <input  type="hidden" [(ngModel)]="jugador.name"  [ngModelOptions]="{standalone: true}" required minlength="4"/>
+        <input  type="hidden" [(ngModel)]="jugador.apellidos"  [ngModelOptions]="{standalone: true}" required/>
+        <input  type="hidden" [(ngModel)]="jugador.fecha_nacimiento"  [ngModelOptions]="{standalone: true}" required/>
+        <input  type="hidden" [(ngModel)]="jugador.sexo"  [ngModelOptions]="{standalone: true}" />
+        <input  type="hidden" [(ngModel)]="jugador.numero_socio" [ngModelOptions]="{standalone: true}" required />
         <input type="hidden" [(ngModel)]="jugador.fecha_alta" [ngModelOptions]="{standalone: true}" required />
         <input type="hidden" [(ngModel)]="jugador.fecha_baja" [ngModelOptions]="{standalone: true}" required />
         <input type="hidden" [(ngModel)]="jugador.password" [ngModelOptions]="{standalone: true}" required />
         <input type="hidden" [(ngModel)]="jugador.es_admin" [ngModelOptions]="{standalone: true}" required />
-
-        <td><button type="button" class="btn btn-outline-primary" (click)="editar(jugador.id, jugador.name, jugador.apellidos, this.fecha_prueba, jugador.sexo, jugador.numero_socio, jugador.direccion_postal, jugador.municipio, jugador.provincia, jugador.email, jugador.fecha_alta, jugador.fecha_baja, jugador.password, jugador.es_admin)" mdbRipple rippleColor="dark" mdbRipple>EDITAR</button></td>
-  
-      </tr>
-      <p style="white-space: pre">{{this.mensaje}}</p>
-    </table>
-
+         <button type="button" class="btn btn-outline-primary" [disabled]="userEmail.errors?.pattern||userEmail.errors?.required||userMunicipio.errors?.required||userDireccion.errors?.required||userProvincia.errors?.required" (click)="editarContacto(jugador.id, jugador.name, jugador.apellidos, this.fecha_prueba, jugador.sexo, jugador.numero_socio, jugador.direccion_postal, jugador.municipio, jugador.provincia, jugador.email, jugador.fecha_alta, jugador.fecha_baja, jugador.password, jugador.es_admin)" mdbRipple rippleColor="dark" mdbRipple>EDITAR</button>
+    </div>
   </form>
-
-  <div class="data-editable">
-    <h2 class="bg-light p-2 border-top border-bottom">Datos Contacto</h2>
-    <form #form="ngForm">
-    <table>
-    <tr>
-      <ng-container *ngFor="let item of arrayLabelsContacto"> 
-          <td>{{item}}</td>
-      </ng-container>
-    </tr>
-    <tr *ngFor="let jugador of arrayJugadores">
-
-      <input  type="hidden" [(ngModel)]="jugador.name"  [ngModelOptions]="{standalone: true}" required minlength="4"/>
-      <input  type="hidden" [(ngModel)]="jugador.apellidos"  [ngModelOptions]="{standalone: true}" required/>
-      <input  type="hidden" min="jugador.fecha_nacimiento" [(ngModel)]="jugador.fecha_nacimiento"  [ngModelOptions]="{standalone: true}" required/>
-      <input  type="hidden" [(ngModel)]="jugador.sexo"  [ngModelOptions]="{standalone: true}" />
-      <input  type="hidden" [(ngModel)]="jugador.numero_socio" [ngModelOptions]="{standalone: true}" required />
-      <td><input  type="text" [(ngModel)]="jugador.direccion_postal" [ngModelOptions]="{standalone: true}" required /></td>
-      <td><input  type="text" [(ngModel)]="jugador.municipio" [ngModelOptions]="{standalone: true}" required /></td>
-      <td><input  type="text" [(ngModel)]="jugador.provincia" [ngModelOptions]="{standalone: true}" required /></td>
-      <td><input  type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" [(ngModel)]="jugador.email"  ngModel #emailref="ngModel" required [ngModelOptions]="{standalone: true}"  /></td>
-      <input type="hidden" [(ngModel)]="jugador.fecha_alta" [ngModelOptions]="{standalone: true}" required />
-      <input type="hidden" [(ngModel)]="jugador.fecha_baja" [ngModelOptions]="{standalone: true}" required />
-      <input type="hidden" [(ngModel)]="jugador.password" [ngModelOptions]="{standalone: true}" required />
-      <input type="hidden" [(ngModel)]="jugador.es_admin" [ngModelOptions]="{standalone: true}" required />
-
-      
-      <div [hidden]="!emailref.errors?.pattern"><!--mejorable-->
-        Invalid pattern
-      </div> 
-
-      <td><button type="button" class="btn btn-outline-primary" (click)="editar(jugador.id, jugador.name, jugador.apellidos, jugador.fecha_nacimiento, jugador.sexo, jugador.numero_socio, jugador.direccion_postal, jugador.municipio, jugador.provincia, jugador.email, jugador.fecha_alta, jugador.fecha_baja, jugador.password, jugador.es_admin)" mdbRipple rippleColor="dark" mdbRipple>EDITAR</button></td>
-      
-    </tr>
-    
-    <p style="white-space: pre">{{this.mensaje}}</p>
-
-    
-  </table>
-  <p style="white-space: pre">{{this.editado}}</p>
-
-</form>
+</div>
 
 
-
-
-   
+    <div class="data-editable">  
+    </div>
 </div>
