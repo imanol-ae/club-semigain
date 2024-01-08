@@ -85,7 +85,7 @@ export class ValidatePlayersComponent implements OnInit {
 
   meterUsuarios(usuarios: any){
     for (let i = 0; i < usuarios.length; i++) {
-      if(!usuarios[i].fecha_alta){
+      if(!usuarios[i].fecha_alta && usuarios[i].es_admin=='NO'){
         this.arrayBuscarUsuario.push(usuarios[i]);
       }
     }
